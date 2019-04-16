@@ -1,3 +1,40 @@
-<p>
-  register works!
-</p>
+<h1 mat-dialog-title style="text-align: center">Registrarse</h1>
+<form [formGroup]="UserNew" (ngSubmit)="onSubmit()" >
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="Name" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Last name" formControlName="LastName" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="Email" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Gender" formControlName="Gender" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Birth" formControlName="Birthday" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="User" formControlName="User" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Native language" formControlName="NativeLanguage" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Password" formControlName="Password" required>
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput placeholder="Confirm password" formControlName="ConfirmPassword" required>
+  </mat-form-field>
+  <br>
+  <button type="submit" id="register-button">Registrar</button>
+</form>

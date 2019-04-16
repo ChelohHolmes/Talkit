@@ -1,3 +1,13 @@
-<p>
-  login works!
-</p>
+<h1 mat-dialog-title style="text-align: center">Login</h1>
+<form [formGroup]="UserLogin" (ngSubmit)="onSubmit()" >
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="User" formControlName="User" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput placeholder="Password" formControlName="Password" required>
+  </mat-form-field>
+  <br>
+  <button type="submit" id="login-button">Log in</button>
+</form>

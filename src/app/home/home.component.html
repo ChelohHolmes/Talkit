@@ -1,0 +1,28 @@
+<div style="padding-top: 60px">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav class="nav" mode="side" [(opened)]="opened">
+      <app-friends></app-friends>
+      <mat-nav-list>
+        <a mat-list-item href="#">Link 1</a>
+        <a mat-list-item href="#">Link 2</a>
+        <a mat-list-item href="#">Link 3</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="container">
+        <button mat-stroked-button (click)="sidenav.toggle()">Amigos</button>
+        <button mat-stroked-button (click)="onNews()">¿Qué hay de nuevo, viejo?</button>
+        <button mat-stroked-button (click)="onRandom()">Sala aleatoria</button>
+        <button mat-stroked-button (click)="onCustom()">Salas personalizadas</button>
+        <button mat-stroked-button (click)="onTranslator()">Traductor</button>
+      </div>
+        <app-news *ngIf="bMews; else random"></app-news>
+      <ng-template #random>
+        <app-random *ngIf="bRandom; else custom"></app-random>
+      </ng-template>
+      <ng-template #custom>
+        <app-custom *ngIf="bCustom"></app-custom>
+      </ng-template>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

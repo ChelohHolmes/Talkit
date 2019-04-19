@@ -2,12 +2,20 @@
 <form [formGroup]="UserLogin" (ngSubmit)="onSubmit()" >
   <br>
   <mat-form-field>
-    <input matInput placeholder="User" formControlName="User" required>
+    <label>
+      <input matInput placeholder="Usuario" formControlName="User" [(ngModel)]="user">
+    </label>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Password" formControlName="Password" required>
+    <input matInput placeholder="Ingresa tu contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+    <mat-icon matSuffix (click)="hide = !hide">
+      {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-error>Contraseña invalida</mat-error>
   </mat-form-field>
+  <br>
+  <button mat-button (click)="onRecovery()" mat-dialog-close color="default">¿Olvidaste tu contraseña?</button>
+  <br>
   <br>
   <button type="submit" id="login-button">Log in</button>
 </form>

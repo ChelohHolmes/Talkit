@@ -1,4 +1,7 @@
-<app-toolbar></app-toolbar>
+<app-toolbar-user *ngIf="user; else notUser"></app-toolbar-user>
+<ng-template #notUser>
+  <app-toolbar></app-toolbar>
+</ng-template>
 <router-outlet></router-outlet>
 <app-footer></app-footer>
 

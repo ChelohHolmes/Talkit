@@ -2,39 +2,74 @@
 <form [formGroup]="UserNew" (ngSubmit)="onSubmit()" >
   <br>
   <mat-form-field>
-    <input matInput placeholder="Name" formControlName="Name" required>
+    <label>
+      <input matInput placeholder="Nombre" formControlName="Name" required>
+    </label>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Last name" formControlName="LastName" required>
+    <label>
+      <input matInput placeholder="Apellidos" formControlName="LastName" required>
+    </label>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Email" formControlName="Email" required>
+    <label>
+      <input matInput placeholder="Correo electrónico" formControlName="Email" [(ngModel)]="email">
+    </label>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Gender" formControlName="Gender" required>
+    <mat-label>Genero</mat-label>
+    <mat-select formControlName="Gender" required>
+      <mat-option *ngFor="let gender of genders" [value]="gender.value">
+        {{gender.viewValue}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Birth" formControlName="Birthday" required>
+    <label>
+      <input matInput placeholder="Fecha de nacimiento" [matDatepicker]="datePick" formControlName="Birthday" required>
+    </label>
+    <mat-datepicker-toggle matSuffix [for]="datePick"></mat-datepicker-toggle>
+    <mat-datepicker #datePick></mat-datepicker>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="User" formControlName="User" required>
+    <label>
+      <input matInput placeholder="Usuario" formControlName="User" required>
+    </label>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Native language" formControlName="NativeLanguage" required>
+    <mat-label>Lengua materna</mat-label>
+    <mat-select formControlName="NativeLanguage" required>
+      <mat-option *ngFor="let language of languages" [value]="language.value">
+        {{language.viewValue}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Password" formControlName="Password" required>
-  </mat-form-field><br>
-  <mat-form-field>
-    <input matInput placeholder="Confirm password" formControlName="ConfirmPassword" required>
+    <label>
+      <input matInput placeholder="Ingresa tu contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+    </label>
+    <mat-icon matSuffix (click)="hide = !hide">
+      {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-error>Longitud mínima de 8 caracteres, máxima de 128</mat-error>
   </mat-form-field>
   <br>
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Confirma tu contraseña" [type]="hide1 ? 'password' : 'text'" formControlName="ConfirmPassword" [(ngModel)]="confirmpassword">
+      </label>
+      <mat-icon matSuffix (click)="hide1 = !hide1">
+        {{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+  <br>
+  <div *ngIf="!passwordsMatch(UserNew)" class="invalid-feedback">
+    <h2>Error: Las contraseñas no coinciden</h2>
+  </div>
   <button type="submit" id="register-button">Registrar</button>
 </form>

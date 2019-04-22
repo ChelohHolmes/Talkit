@@ -1,0 +1,14 @@
+<div class="content" style="padding-top: 55px">
+    <div class="container">
+      <button mat-stroked-button (click)="onAudio()">Configuración de audio</button>
+      <button mat-stroked-button (click)="onInfo()">Actualizar información</button>
+      <button mat-stroked-button (click)="onPass()">Cambiar contraseña</button>
+    </div>
+    <app-audio *ngIf="bAudio; else random"></app-audio>
+    <ng-template #random>
+      <app-update-info *ngIf="bInfo; else custom"></app-update-info>
+    </ng-template>
+    <ng-template #custom>
+      <app-update-pass *ngIf="bPass"></app-update-pass>
+    </ng-template>
+</div>

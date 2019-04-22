@@ -1,10 +1,12 @@
 <h1 mat-dialog-title style="text-align: center">Recuperar contraseña</h1>
 <form [formGroup]="Recovery" (ngSubmit)="onSubmit()">
 <mat-form-field>
-  <input matInput placeholder="Correo electrónico" formControlName="Email" [(ngModel)]="email">
+  <label>
+    <input matInput placeholder="Correo electrónico" formControlName="Email" [(ngModel)]="email">
+  </label>
   <mat-error>Ingrese un correo valido</mat-error>
 </mat-form-field>
   <br>
   <br>
-  <button type="submit" id="login-button">Enviar</button>
+  <button id="login-button">Enviar</button>
 </form>

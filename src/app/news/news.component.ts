@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-news',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public snackBar: MatSnackBar) {}
 
   ngOnInit() {
   }
 
+  openSnackBar() {
+    this.snackBar.open('¡Celebremos en una sala!', '¡Vamos!', {
+      duration: 2000
+    });
+  }
 }

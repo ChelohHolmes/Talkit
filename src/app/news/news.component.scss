@@ -1,0 +1,36 @@
+mat-card {
+  max-width: 500px;
+  margin: 150px auto;
+}
+
+img{
+  width: 450px;
+  text-align: left;
+}
+
+h3{
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.center{
+  text-align: center;
+}
+
+.Poster-photo {
+  background-image: url(https://cdn.discordapp.com/attachments/304829873468342283/569312683560665105/51157336_363803704416970_4890127137614331904_n.png);
+  background-size: cover;
+}
+
+.background{
+  background-image: url(https://cdn.discordapp.com/attachments/304829873468342283/569228716933382157/Blue-Blur-Background.png);
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 10;
+  position: fixed;
+}

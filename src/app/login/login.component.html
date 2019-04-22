@@ -1,4 +1,4 @@
-<h1 mat-dialog-title style="text-align: center">Login</h1>
+<h1 mat-dialog-title style="text-align: center">Iniciar Sesión</h1>
 <form [formGroup]="UserLogin" (ngSubmit)="onSubmit()" >
   <br>
   <mat-form-field>
@@ -8,14 +8,15 @@
   </mat-form-field>
   <br>
   <mat-form-field>
-    <input matInput placeholder="Ingresa tu contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+    <label>
+      <input matInput placeholder="Ingresa tu contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+    </label>
     <mat-icon matSuffix (click)="hide = !hide">
       {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     <mat-error>Contraseña invalida</mat-error>
   </mat-form-field>
   <br>
   <button mat-button (click)="onRecovery()" mat-dialog-close color="default">¿Olvidaste tu contraseña?</button>
-  <br>
   <br>
   <button type="submit" id="login-button">Log in</button>
 </form>

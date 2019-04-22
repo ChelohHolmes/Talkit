@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {language} from '../register/register.component';
+import {ILanguage} from '../register/register.component';
 
 @Component({
   selector: 'app-random',
@@ -10,7 +10,7 @@ import {language} from '../register/register.component';
 export class RandomComponent implements OnInit {
 
   RandomQueue: FormGroup;
-  languages: language[] = [
+  languages: ILanguage[] = [
     {value: 'Español', viewValue: 'Español'},
     {value: 'Inglés', viewValue: 'English'},
     {value: 'Francés', viewValue: 'Français'},

@@ -1,3 +1,39 @@
-<p>
-  random works!
-</p>
+
+  <div class="background">
+  <mat-card>
+      <h1 class="mat-h1">Buscar sala aleatoria</h1>
+      <form [formGroup]="RandomQueue" (ngSubmit)="onSubmit()">
+        <label id="Chat-type-label">Tipo de chat:
+          &nbsp;
+          <mat-radio-group formControlName="Type" aria-label="Type" required>
+            <mat-radio-button value="Oral">Chat de voz</mat-radio-button>
+            &nbsp;
+            <mat-radio-button value="Escrita">Chat escrito</mat-radio-button>
+          </mat-radio-group>
+        </label>
+        <br>
+        <label id="Chat-language">Tipo de chat:
+          &nbsp;
+          <mat-form-field>
+            <mat-label>Lengua</mat-label>
+            <mat-select formControlName="Language" required>
+              <mat-option *ngFor="let language of languages" [value]="language.value">
+                {{language.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </label>
+        <br>
+        <label id="User-rol">Rol:
+          &nbsp;
+          <mat-radio-group formControlName="Rol" aria-label="Rol" required>
+            <mat-radio-button value="Moderador">Moderador</mat-radio-button>
+            &nbsp;
+            <mat-radio-button value="Participante">Participante</mat-radio-button>
+          </mat-radio-group>
+        </label>
+        <br><br>
+        <button mat-raised-button id="start-queue">Buscar</button>
+      </form>
+    </mat-card>
+  </div>

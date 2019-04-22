@@ -1,3 +1,41 @@
-<p>
-  translator works!
-</p>
+
+<h1 mat-dialog-title style="text-align: center">Traductor</h1>
+<form [formGroup]="Translator" (ngSubmit)="onSubmit()" >
+  <mat-form-field>
+    <mat-label>Lengua</mat-label>
+    <mat-select formControlName="TranslateLanguage" required>
+      <mat-option *ngFor="let language of languages" [value]="language.value">
+        {{language.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;
+  <mat-icon>{{'arrow_forward'}}</mat-icon>
+  &nbsp;&nbsp;
+  <mat-form-field>
+    <mat-label>Lengua</mat-label>
+    <mat-select formControlName="TranslatedLanguage" required>
+      <mat-option *ngFor="let language1 of languages" [value]="language1.value">
+        {{language1.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br><br>
+  <mat-form-field appearance="fill">
+    <label>
+      <textarea matInput formControlName="Translate"></textarea>
+    </label>
+  </mat-form-field>
+  &nbsp;
+  <mat-icon>{{'arrow_forward'}}</mat-icon>
+  &nbsp;
+  <mat-form-field appearance="fill">
+    <label>
+      <textarea matInput disabled value="Traducción"></textarea>
+    </label>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button id="login-button">Traducir</button>
+</form>
+

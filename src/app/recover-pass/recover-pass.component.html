@@ -1,0 +1,38 @@
+<body>
+<div class="background">
+  <div class="container">
+    <br><br><br><br>
+    <div class="text-c">
+      <img width="500" alt="Talkit" src="https://cdn.discordapp.com/attachments/304829873468342283/567816572467544089/Talkit_Azul_Todo.png">
+    </div>
+    <br><br>
+    <div class="text-c">
+      <h1>Recuperar contraseña</h1>
+    </div>
+    <br>
+    <form [formGroup]="UserNew" (ngSubmit)="onSubmit()" >
+    <mat-form-field appearance="fill">
+      <label>
+        <input matInput placeholder="Ingresa tu contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+      </label>
+      <mat-icon matSuffix (click)="hide = !hide">
+        {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-error>ongitud mínima de 8 caracteres, máxima de 128</mat-error>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <label>
+        <input matInput placeholder="Confirma tu contraseña" [type]="hide1 ? 'password' : 'text'" formControlName="ConfirmPassword" [(ngModel)]="confirmpassword">
+      </label>
+      <mat-icon matSuffix (click)="hide1 = !hide1">
+        {{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+    </mat-form-field>
+    <div *ngIf="!passwordsMatch(UserNew)" class="invalid-feedback">
+      <h2>Error: Las contraseñas no coinciden</h2>
+    </div>
+      <br>
+      <button mat-raised-button type="submit" id="register-button">Registrar</button>
+    </form>
+  </div>
+</div>
+</body>

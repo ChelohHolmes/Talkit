@@ -14,7 +14,10 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatOptionModule,
-  MatSelectModule, MatSidenavModule, MatListModule
+  MatSelectModule,
+  MatSidenavModule,
+  MatListModule,
+  MatSnackBarModule, MatRadioModule
 } from '@angular/material';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
@@ -31,6 +34,17 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { RandomComponent } from './random/random.component';
 import { CustomComponent } from './custom/custom.component';
 import { TranslatorComponent } from './translator/translator.component';
+import { RecoverPassComponent } from './recover-pass/recover-pass.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HolaComponent } from './hola/hola.component';
+import { CookiesComponent } from './cookies/cookies.component';
+import { PrivacyPoliciesComponent } from './privacy-policies/privacy-policies.component';
+import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ConfigurationComponent } from './configuration/configuration.component';
+import { UpdateInfoComponent } from './update-info/update-info.component';
+import { UpdatePassComponent } from './update-pass/update-pass.component';
+import { AudioComponent } from './audio/audio.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +61,17 @@ import { TranslatorComponent } from './translator/translator.component';
     ToolbarUserComponent,
     RandomComponent,
     CustomComponent,
-    TranslatorComponent
+    TranslatorComponent,
+    RecoverPassComponent,
+    HolaComponent,
+    CookiesComponent,
+    PrivacyPoliciesComponent,
+    TermsOfUseComponent,
+    EditProfileComponent,
+    ConfigurationComponent,
+    UpdateInfoComponent,
+    UpdatePassComponent,
+    AudioComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +91,10 @@ import { TranslatorComponent } from './translator/translator.component';
     MatSelectModule,
     MatSidenavModule,
     LayoutModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatRadioModule
   ],
   providers: [
     MatDatepickerModule

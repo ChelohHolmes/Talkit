@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor(public snackBar: MatSnackBar) {
+    this.openSnackBar();
+  }
 
   ngOnInit() {
   }
 
+  openSnackBar() {
+    this.snackBar.open('Este sitio web utiliza cookies para mejorar tu experiencia de navegación', 'OK', {
+    });
+  }
 }

@@ -4,7 +4,8 @@
   left: 0;
   bottom: 0;
   height: 5%;
-  background: beige;
+  background: white;
   opacity: 1;
-  background-color: rgba(0,0,0,0);
+  z-index: 998;
+  border: 1px solid darkgrey;
 }

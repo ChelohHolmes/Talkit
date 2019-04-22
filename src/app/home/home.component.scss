@@ -7,10 +7,20 @@
 }
 
 .nav{
-  width: 15%;
+  min-width: 15%;
+  width: auto;
   height: auto;
+  position: fixed;
+  z-index: 50;
+  padding-top: 50px;
 }
 
 button{
   width: 20%;
 }
+
+.content{
+  position: fixed;
+  left: 0;
+  right: 0;
+ }

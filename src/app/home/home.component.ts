@@ -16,7 +16,9 @@ export class HomeComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.onNews();
+    this.bMews = true;
+    this.bRandom = false;
+    this.bCustom = false;
   }
 
   onNews() {

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {RecoveryComponent} from '../recovery/recovery.component';
 import {MatDialog} from '@angular/material';
+import {Router} from '@angular/router';
+import {LoginService} from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,10 @@ import {MatDialog} from '@angular/material';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  private sent: any;
+  private incorrect: boolean;
 
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder) { }
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private http: LoginService, private router: Router) { }
 
   password: string;
   user: string;
@@ -28,15 +32,32 @@ export class LoginComponent implements OnInit {
         Validators.required,
       ]]
     });
+    this.onChanges();
   }
 
   onSubmit() {
-    console.log(this.UserLogin.value);
     const form = JSON.stringify(this.UserLogin.value);
-    console.log(form);
+    this.http.post(form).subscribe(data => {
+      this.sent = data;
+      console.log(this.sent);
+      if (this.sent === 1) {
+        this.incorrect = true;
+      } else {
+        this.router.navigate(['/Home']);
+        console.log('Home');
+        sessionStorage.setItem('user', this.UserLogin.controls.User.value);
+        // return true;
+      }
+    });
   }
 
   onRecovery() {
     this.dialog.open(RecoveryComponent);
+  }
+
+  onChanges(): void {
+    this.UserLogin.valueChanges.subscribe(() => {
+      this.incorrect = false;
+    });
   }
 }

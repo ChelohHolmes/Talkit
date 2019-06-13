@@ -18,5 +18,8 @@
   <br>
   <button mat-button (click)="onRecovery()" mat-dialog-close color="default">¿Olvidaste tu contraseña?</button>
   <br>
+  <div *ngIf="incorrect">
+    <h2>Error: usuario o contraseña incorrecta</h2>
+  </div>
   <button type="submit" id="login-button">Log in</button>
 </form>

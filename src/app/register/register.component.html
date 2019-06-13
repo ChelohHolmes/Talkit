@@ -1,5 +1,5 @@
 <h1 mat-dialog-title style="text-align: center">Registrarse</h1>
-<form [formGroup]="UserNew" (ngSubmit)="onSubmit()" >
+<form [formGroup]="UserNew" (ngSubmit)="onSubmit()">
   <br>
   <mat-form-field>
     <label>
@@ -17,6 +17,7 @@
     <label>
       <input matInput placeholder="Correo electrónico" formControlName="Email" [(ngModel)]="email">
     </label>
+    <mat-error>Ingresa un correo valido</mat-error>
   </mat-form-field>
   <br>
   <mat-form-field>
@@ -62,14 +63,17 @@
   <br>
     <mat-form-field>
       <label>
-        <input matInput placeholder="Confirma tu contraseña" [type]="hide1 ? 'password' : 'text'" formControlName="ConfirmPassword" [(ngModel)]="confirmpassword">
+        <input matInput placeholder="Confirma tu contraseña" [type]="hide1 ? 'password' : 'text'" formControlName="ConfirmPassword" [(ngModel)]="confirmPassword">
       </label>
       <mat-icon matSuffix (click)="hide1 = !hide1">
         {{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
   <br>
-  <div *ngIf="!passwordsMatch(UserNew)" class="invalid-feedback">
+  <div *ngIf="!this.passwordsMatch(UserNew)" class="invalid-feedback">
     <h2>Error: Las contraseñas no coinciden</h2>
   </div>
-  <button type="submit" id="register-button">Registrar</button>
+  <div *ngIf="used" class="invalid-feedback">
+    <h2>Error: usuario utilizado</h2>
+  </div>
+  <button type="submit" id="register-button" [disabled]="!UserNew.valid">Registrar</button>
 </form>

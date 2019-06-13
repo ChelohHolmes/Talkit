@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import {RegisterService} from '../services/register.service';
+import {Router} from '@angular/router';
 
 
 export interface IGender {
@@ -20,8 +22,10 @@ export interface ILanguage {
 
 export class RegisterComponent implements OnInit {
 
+  constructor(private formBuilder: FormBuilder, private http: RegisterService, private router: Router) { }
+
   password: string;
-  confirmpassword: string;
+  confirmPassword: string;
   email: string;
   hide = true;
   hide1 = true;
@@ -44,20 +48,20 @@ export class RegisterComponent implements OnInit {
     {value: 'Japonés', viewValue: '日本語'},
     {value: 'Coreano', viewValue: '한국어'}
   ];
-
-  constructor(private formBuilder: FormBuilder) { }
+  private sent: any;
 
   UserNew: FormGroup;
+  used = false;
+  match: boolean;
 
   ngOnInit() {
-
     this.UserNew = this.formBuilder.group({
       Password: [this.password, [
         Validators.required,
         Validators.minLength(8),
         Validators.maxLength(128),
       ]],
-      ConfirmPassword: [this.confirmpassword, [
+      ConfirmPassword: [this.confirmPassword, [
         Validators.required
       ]],
       Email: [this.email, [
@@ -71,23 +75,42 @@ export class RegisterComponent implements OnInit {
       User: new FormControl(),
       NativeLanguage: new FormControl(),
     });
+
+    this.onChanges();
   }
 
   onSubmit() {
-    console.log(this.UserNew.value);
+    this.used = false;
     const form = JSON.stringify(this.UserNew.value);
-    console.log(form);
+    this.match = this.passwordsMatch(this.UserNew);
+    if (this.match) {
+      this.http.post(form).subscribe(data => {
+        this.sent = data;
+        // console.log(this.sent);
+        if (this.sent === 1) {
+          this.used = true;
+        } else {
+          this.router.navigate(['/Home']);
+          // console.log('Home');
+        }
+      });
+      if (this.used === false) {
+        // Cerrar dialog
+        sessionStorage.setItem('user', this.UserNew.controls.User.value);
+      }
+    }
+  }
+
+  onChanges(): void {
+    this.UserNew.valueChanges.subscribe(() => {
+      this.used = false;
+    });
   }
 
   private passwordsMatch = (formP: FormGroup): boolean => {
-    if (formP.controls['Password'].touched && formP.controls['ConfirmPassword'].touched) {
-      if (formP.value.Password === formP.value.ConfirmPassword) {
-        return true;
-      } else {
-        return false;
-      }
+    if (formP.controls.Password.touched && formP.controls.ConfirmPassword.touched) {
+      return formP.value.Password === formP.value.ConfirmPassword;
     }
     return true;
   }
-
 }

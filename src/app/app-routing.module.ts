@@ -24,12 +24,12 @@ const routes: Routes = [
   { path: 'Friends', component: FriendsComponent },
   { path: 'Translator', component: TranslatorComponent },
   { path: 'Password_reset', component: RecoverPassComponent },
-  { path: 'Cookies_info', component: CookiesComponent },
-  { path: 'Privacy_policy', component: PrivacyPoliciesComponent },
-  { path: 'Terms_of_use', component: TermsOfUseComponent },
+  { path: 'Cookies-info', component: CookiesComponent },
+  { path: 'Privacy-policy', component: PrivacyPoliciesComponent },
+  { path: 'Terms-of-use', component: TermsOfUseComponent },
   { path: 'Test', component: HolaComponent },
   { path: 'Configuration', component: ConfigurationComponent },
-  { path: 'Update_info', component: UpdateInfoComponent}
+  { path: 'Update-info', component: UpdateInfoComponent}
 ];
 
 @NgModule({

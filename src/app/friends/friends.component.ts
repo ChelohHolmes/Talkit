@@ -25,7 +25,7 @@ export class FriendsComponent implements OnInit {
   ngOnInit() {
     this.data.getFriends().subscribe(data => {
       this.users = data;
-      console.log(this.users);
+      // console.log(this.users);
     });
 
     this.hamana = {

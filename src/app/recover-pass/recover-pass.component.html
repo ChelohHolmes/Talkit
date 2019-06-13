@@ -17,12 +17,12 @@
       </label>
       <mat-icon matSuffix (click)="hide = !hide">
         {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      <mat-error>ongitud mínima de 8 caracteres, máxima de 128</mat-error>
+      <mat-error>Longitud mínima de 8 caracteres, máxima de 128</mat-error>
     </mat-form-field>
     <br>
     <mat-form-field appearance="fill">
       <label>
-        <input matInput placeholder="Confirma tu contraseña" [type]="hide1 ? 'password' : 'text'" formControlName="ConfirmPassword" [(ngModel)]="confirmpassword">
+        <input matInput placeholder="Confirma tu contraseña" [type]="hide1 ? 'password' : 'text'" formControlName="ConfirmPassword" [(ngModel)]="confirmPassword">
       </label>
       <mat-icon matSuffix (click)="hide1 = !hide1">
         {{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -31,7 +31,7 @@
       <h2>Error: Las contraseñas no coinciden</h2>
     </div>
       <br>
-      <button mat-raised-button type="submit" id="register-button">Registrar</button>
+      <button mat-raised-button type="submit" id="register-button" [disabled]="!UserNew.valid">Registrar</button>
     </form>
   </div>
 </div>

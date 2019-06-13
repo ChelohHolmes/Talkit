@@ -7,3 +7,23 @@
   z-index: 10;
   position: fixed;
 }
+
+mat-card{
+  width: 500px;
+  margin: 100px auto;
+  height: auto;
+  text-align: center;
+}
+
+h2{
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+  font-weight: bold;
+  font-size: 70%;
+  text-align: center;
+}
+
+.full{
+  width: 465px;
+}

@@ -1,2 +1,46 @@
 <div class="background">
+  <mat-card>
+    <h1 class="mat-h1">Actualizar contraseña</h1>
+    <form [formGroup]="UpdatePassword" (ngSubmit)="onSubmit()">
+      <div>
+        <mat-form-field class="full" appearance="fill">
+          <mat-label>Contraseña nueva</mat-label>
+          <label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="NewPassword" [(ngModel)]="newpassword">
+          </label>
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error>Longitud mínima de 8 caracteres, máxima de 128</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="full" appearance="fill">
+          <mat-label>Repetir contraseña</mat-label>
+          <label>
+            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="RepeatPassword" [(ngModel)]="repeatpassword">
+          </label>
+          <mat-icon matSuffix (click)="hide1 = !hide1">
+            {{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+        <br>
+        <div *ngIf="!passwordsMatch(UpdatePassword)" class="invalid-feedback">
+          <h2>Error: Las contraseñas no coinciden</h2>
+        </div>
+      </div>
+      <div>
+        <mat-form-field class="full" appearance="fill">
+          <mat-label>Contraseña vieja</mat-label>
+          <label>
+            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="OldPassword" [(ngModel)]="oldpassword">
+          </label>
+          <mat-icon matSuffix (click)="hide2 = !hide2">
+            {{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error>Contraseña invalida</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-raised-button>Actualizar</button>
+      </div>
+    </form>
+  </mat-card>
 </div>

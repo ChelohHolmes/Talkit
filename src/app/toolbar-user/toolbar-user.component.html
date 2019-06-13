@@ -1,10 +1,12 @@
 <mat-toolbar class="header" color="primary">
-  <div class="container" routerLink="/">
+  <div class="container" routerLink="Home">
     <img alt="Angular Logo" src="https://cdn.discordapp.com/attachments/304829873468342283/567863692885229568/pic.png">
     <span class="logo">&nbsp;Talkit!</span>
   </div>
   <span class="big-space"></span>
   <p class="mat-h3" style="padding-top: 20px">Bienvenido </p>
-  <a mat-button (click)="onUser()">{{user.user}}</a>
-  <p class="mat-h3" style="padding-top: 20px">Tienes {{user.puntos}} puntos</p>
+  <a mat-button routerLink="Configuration">{{user}}</a>
+  <p class="mat-h3" style="padding-top: 20px">Tienes {{points}} puntos</p>
+  <span class="space"></span>
+  <a mat-flat-button (click)="onCS()" color="accent">Cerrar sesión</a>
 </mat-toolbar>

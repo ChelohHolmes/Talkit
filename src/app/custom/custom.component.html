@@ -1,3 +1,117 @@
-<p>
-  custom works!
-</p>
+<div class="background">
+  <mat-card>
+  <div class="container">
+    <form [formGroup]="Search" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Creador de la sala" formControlName="Creator">
+        </label>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>Tema</mat-label>
+        <mat-select formControlName="Topics">
+          <mat-option *ngFor="let tema of Temas" [value]="tema.value">
+            {{tema.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Idioma</mat-label>
+        <mat-select formControlName="Languages">
+          <mat-option *ngFor="let idioma of languages" [value]="idioma.value">
+            {{idioma.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Nivel</mat-label>
+        <mat-select formControlName="Level">
+          <mat-option *ngFor="let nivel of Niveles" [value]="nivel.value">
+            {{nivel.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Chat</mat-label>
+        <mat-select formControlName="Chats">
+          <mat-option *ngFor="let chat of Chats" [value]="chat.value">
+            {{chat.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-stroked-button type="submit">Filtrar</button>
+    </form>
+  </div>
+  <div class="table">
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.position}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="creator">
+        <th mat-header-cell *matHeaderCellDef>Creador</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.creator}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="privacy">
+        <th mat-header-cell *matHeaderCellDef>Privacidad</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.privacy}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="chat">
+        <th mat-header-cell *matHeaderCellDef>Chat</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.chat}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="topic">
+        <th mat-header-cell *matHeaderCellDef>Tema</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.topic}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="language">
+        <th mat-header-cell *matHeaderCellDef>Idioma</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.language}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="participants">
+        <th mat-header-cell *matHeaderCellDef>Participantes</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.participants}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="moderator">
+        <th mat-header-cell *matHeaderCellDef>Moderador</th>
+        <td mat-cell *matCellDef="let hamana">
+          <mat-checkbox
+            [(ngModel)]="hamana.moderator"
+            [disabled]="true">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="level">
+        <th mat-header-cell *matHeaderCellDef>Nivel</th>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.level}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="kicking">
+        <th mat-header-cell *matHeaderCellDef>Expulsión</th>
+        <td mat-cell *matCellDef="let hamana">
+          <mat-checkbox
+            [(ngModel)]="hamana.kicking"
+            [disabled]="true">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  </mat-card>
+</div>

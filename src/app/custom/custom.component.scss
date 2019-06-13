@@ -1,0 +1,65 @@
+body{
+  text-align: center;
+}
+
+table{
+  width: 95%;
+}
+
+mat-card{
+  width: 80%;
+  height: auto;
+  margin: 200px auto;
+  text-align: center;
+}
+
+label{
+  font-weight: bold;
+}
+
+mat-radio-group{
+  font-weight: normal;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+button{
+  font-size: 15px;
+  border-radius: 10px 10px 10px 10px;
+  padding-left: 20px;
+}
+
+.background{
+  background-image: url(https://cdn.discordapp.com/attachments/304829873468342283/569228716933382157/Blue-Blur-Background.png);
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 10;
+  position: fixed;
+}
+
+.container{
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+  left: 0;
+  right: 0;
+}
+
+.table{
+  padding-top: 1%;
+  padding-bottom: 1%;
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+mat-form-field{
+  padding-left: 10px;
+}

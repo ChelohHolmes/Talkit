@@ -1,0 +1,74 @@
+body{
+  text-align: center;
+}
+
+mat-card{
+  width: 500px;
+  margin:  25px auto;
+  height: 650px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+textarea{
+  resize: none;
+  height: 50px;
+}
+
+.half{
+  width: 225px;
+}
+
+.between{
+  width: 350px;
+}
+
+.full{
+  width: 465px;
+}
+
+mat-radio-group{
+  font-weight: normal;
+}
+
+button{
+  font-size: 15px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+.background{
+  background-image: url(https://cdn.discordapp.com/attachments/304829873468342283/569228716933382157/Blue-Blur-Background.png);
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 10;
+  position: fixed;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.center{
+  text-align: center;
+  padding-left: 40px;
+}
+
+h2{
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 70%;
+  text-align: center;
+}
+
+.bien{
+  color: deepskyblue;
+}
+
+.mal{
+  color: red;
+}

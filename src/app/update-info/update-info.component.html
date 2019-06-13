@@ -1,0 +1,91 @@
+<div class="background">
+  <mat-card>
+    <h1 class="mat-h1">Actualizar información</h1>
+    <form [formGroup]="NewInfo" (ngSubmit)="onSubmit()">
+      <div class="center">
+        <img class="profile-picture" src="https://cdn.discordapp.com/attachments/304829873468342283/569397550206025738/profil-pic_dummy.png" alt="Profile Picture">
+        <button mat-icon-button (click)="fileInput.click()">
+          <mat-icon aria-label="add">add</mat-icon>
+        </button>
+      </div>
+      <div>
+        <input
+          style="display: none"
+          type="file" (change)="onFileChanged($event)"
+          #fileInput>
+      </div>
+      <div>
+        <mat-form-field class="half" appearance="fill">
+          <mat-label>Nombre(s)</mat-label>
+          <label>
+            <input matInput formControlName="Name">
+          </label>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field class="half" appearance="fill">
+          <mat-label>Apellido(s)</mat-label>
+          <label>
+            <input matInput formControlName="Lastname" >
+          </label>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="full" appearance="fill">
+          <mat-label>Correo</mat-label>
+          <label>
+            <input matInput formControlName="Email" [(ngModel)]="updateemail">
+          </label>
+          <mat-error>Ingresa un correo valido</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="half" appearance="fill">
+          <mat-label>Lengua materna</mat-label>
+          <mat-select formControlName="NativeLanguage" >
+            <mat-option *ngFor="let language of languages" [value]="language.value">
+              {{language.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field class="half" appearance="fill">
+          <mat-label>Genero</mat-label >
+          <mat-select formControlName="Gender" >
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">
+              {{gender.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="full" appearance="fill">
+          <mat-label>Descripción</mat-label>
+          <label>
+            <textarea matInput formControlName="Description" ></textarea>
+          </label>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="between" appearance="fill">
+          <mat-label>Contraseña</mat-label>
+          <label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+          </label>
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error>Contraseña no valida</mat-error>
+        </mat-form-field>
+      </div>
+      <div *ngIf="incorrect" class="mal">
+        <h2>Error: contraseña incorrecta</h2>
+      </div>
+      <div *ngIf="correct" class="bien">
+        <h2>Información actualizada</h2>
+      </div>
+      <div>
+        <button mat-raised-button [disabled]="!NewInfo.valid">Actualizar</button>
+      </div>
+    </form>
+    <br>
+  </mat-card>
+</div>

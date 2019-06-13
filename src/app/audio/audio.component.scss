@@ -7,3 +7,25 @@
   z-index: 10;
   position: fixed;
 }
+
+.content{
+  text-align: center;
+  padding-top: 25px;
+}
+
+mat-card{
+  width: 400px;
+  margin: 100px auto;
+}
+
+mat-form-field{
+  width: 50%;
+}
+
+mat-slider{
+  width: 50%;
+}
+
+.mat-h3{
+  padding-top: 4%;
+}

@@ -1,2 +1,29 @@
 <div class="background">
+  <div class="content">
+    <mat-card>
+      <mat-card-content>
+        <h1 class="mat-h1">Configuración</h1>
+        <p class="mat-h3">Dispositivo de entrada</p>
+        <mat-form-field>
+          <mat-select [(value)]="selectedE">
+            <mat-option *ngFor="let disp of dispositivosE" [value]="disp.value">
+              {{ disp.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <p class="mat-h3">Dispositivo de salida</p>
+        <mat-form-field>
+          <mat-select [(value)]="selectedS">
+            <mat-option *ngFor="let disp of dispositivosS" [value]="disp.value">
+              {{ disp.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br>
+        <p class="mat-h3">Volumen de salida</p>
+        <mat-slider value="100"></mat-slider>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

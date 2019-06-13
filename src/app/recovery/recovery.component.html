@@ -8,5 +8,5 @@
 </mat-form-field>
   <br>
   <br>
-  <button id="login-button">Enviar</button>
+  <button id="login-button" [disabled]="!Recovery.valid">Enviar</button>
 </form>

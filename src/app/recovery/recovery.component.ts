@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {RecoverService} from '../services/recover.service';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-recovery',
@@ -9,8 +12,9 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 export class RecoveryComponent implements OnInit {
   email: string;
   Recovery: FormGroup;
+  private sent: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private http: RecoverService, private router: Router, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.Recovery = this.formBuilder.group({
@@ -22,9 +26,17 @@ export class RecoveryComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.Recovery.value);
     const form = JSON.stringify(this.Recovery.value);
     console.log(form);
+    this.http.post(form).subscribe(data => {
+      this.sent = data;
+      console.log(this.sent);
+      if (this.sent === 0) {
+        localStorage.setItem('Email', this.Recovery.controls.Email.value);
+        this.snackBar.open('Correo enviado.', 'OK', {
+        });
+        console.log('Saved');
+      }
+    });
   }
-
 }

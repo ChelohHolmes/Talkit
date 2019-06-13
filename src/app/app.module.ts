@@ -17,7 +17,9 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatListModule,
-  MatSnackBarModule, MatRadioModule
+  MatSnackBarModule,
+  MatRadioModule,
+  MatSliderModule, MatCheckboxModule,
 } from '@angular/material';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
@@ -45,6 +47,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { UpdateInfoComponent } from './update-info/update-info.component';
 import { UpdatePassComponent } from './update-pass/update-pass.component';
 import { AudioComponent } from './audio/audio.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -71,7 +74,7 @@ import { AudioComponent } from './audio/audio.component';
     ConfigurationComponent,
     UpdateInfoComponent,
     UpdatePassComponent,
-    AudioComponent
+    AudioComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +97,10 @@ import { AudioComponent } from './audio/audio.component';
     MatListModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSliderModule,
+    MatTableModule,
+    MatCheckboxModule,
   ],
   providers: [
     MatDatepickerModule

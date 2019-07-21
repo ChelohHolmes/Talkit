@@ -14,6 +14,7 @@ import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { PrivacyPoliciesComponent } from './privacy-policies/privacy-policies.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { UpdateInfoComponent } from './update-info/update-info.component';
+import {VerifiedComponent} from './verified/verified.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -29,7 +30,8 @@ const routes: Routes = [
   { path: 'Terms-of-use', component: TermsOfUseComponent },
   { path: 'Test', component: HolaComponent },
   { path: 'Configuration', component: ConfigurationComponent },
-  { path: 'Update-info', component: UpdateInfoComponent}
+  { path: 'Verified', component: VerifiedComponent },
+  { path: 'Update-info', component: UpdateInfoComponent }
 ];
 
 @NgModule({

@@ -2,15 +2,10 @@
   <mat-card>
   <div class="container">
     <form [formGroup]="Search" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-        <label>
-          <input matInput placeholder="Creador de la sala" formControlName="Creator">
-        </label>
-      </mat-form-field>
 
       <mat-form-field class="field">
         <mat-label>Tema</mat-label>
-        <mat-select formControlName="Topics">
+        <mat-select formControlName="Topics" [(ngModel)]="initial1" required>
           <mat-option *ngFor="let tema of Temas" [value]="tema.value">
             {{tema.viewValue}}
           </mat-option>
@@ -19,7 +14,7 @@
 
       <mat-form-field>
         <mat-label>Idioma</mat-label>
-        <mat-select formControlName="Languages">
+        <mat-select formControlName="Languages" [(ngModel)]="initial2" required>
           <mat-option *ngFor="let idioma of languages" [value]="idioma.value">
             {{idioma.viewValue}}
           </mat-option>
@@ -28,7 +23,7 @@
 
       <mat-form-field>
         <mat-label>Nivel</mat-label>
-        <mat-select formControlName="Level">
+        <mat-select formControlName="Level" [(ngModel)]="initial3" required>
           <mat-option *ngFor="let nivel of Niveles" [value]="nivel.value">
             {{nivel.viewValue}}
           </mat-option>
@@ -37,58 +32,54 @@
 
       <mat-form-field>
         <mat-label>Chat</mat-label>
-        <mat-select formControlName="Chats">
+        <mat-select formControlName="Chats" [(ngModel)]="initial4" required>
           <mat-option *ngFor="let chat of Chats" [value]="chat.value">
             {{chat.viewValue}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button mat-stroked-button type="submit">Filtrar</button>
+      <button mat-stroked-button type="submit" style="padding-left: 18px;" [disabled]="!Search.valid">Filtrar</button>
     </form>
   </div>
+
   <div class="table">
-    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+    <table mat-table [dataSource]="sent" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.position}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="creator">
-        <th mat-header-cell *matHeaderCellDef>Creador</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.creator}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.no_salap}} </td>
       </ng-container>
 
       <ng-container matColumnDef="privacy">
         <th mat-header-cell *matHeaderCellDef>Privacidad</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.privacy}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.privacidad}} </td>
       </ng-container>
 
       <ng-container matColumnDef="chat">
         <th mat-header-cell *matHeaderCellDef>Chat</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.chat}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.tipo_conv}} </td>
       </ng-container>
 
       <ng-container matColumnDef="topic">
         <th mat-header-cell *matHeaderCellDef>Tema</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.topic}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.tema}} </td>
       </ng-container>
 
       <ng-container matColumnDef="language">
         <th mat-header-cell *matHeaderCellDef>Idioma</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.language}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.lengua}} </td>
       </ng-container>
 
       <ng-container matColumnDef="participants">
         <th mat-header-cell *matHeaderCellDef>Participantes</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.participants}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.participantes_cant}} </td>
       </ng-container>
 
       <ng-container matColumnDef="moderator">
         <th mat-header-cell *matHeaderCellDef>Moderador</th>
-        <td mat-cell *matCellDef="let hamana">
+        <td mat-cell *matCellDef="let i = index">
           <mat-checkbox
-            [(ngModel)]="hamana.moderator"
+            [(ngModel)]="moderator[i]"
             [disabled]="true">
           </mat-checkbox>
         </td>
@@ -96,16 +87,23 @@
 
       <ng-container matColumnDef="level">
         <th mat-header-cell *matHeaderCellDef>Nivel</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.level}} </td>
+        <td mat-cell *matCellDef="let hamana"> {{hamana.nivel}} </td>
       </ng-container>
 
       <ng-container matColumnDef="kicking">
-        <th mat-header-cell *matHeaderCellDef>Expulsión</th>
-        <td mat-cell *matCellDef="let hamana">
+        <th mat-header-cell *matHeaderCellDef>Cambio de tema</th>
+        <td mat-cell *matCellDef="let i = index">
           <mat-checkbox
-            [(ngModel)]="hamana.kicking"
+            [(ngModel)]="changeSubject[i]"
             [disabled]="true">
           </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="button">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let i = index">
+          <button (click)="onClick(i)">entrar</button>
         </td>
       </ng-container>
 
@@ -113,5 +111,11 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
+
+  <br>
+  <div>
+    <button (click)="onCreate()">Crear sala</button>
+  </div>
+
   </mat-card>
 </div>

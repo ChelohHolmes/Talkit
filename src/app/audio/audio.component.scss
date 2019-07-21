@@ -15,7 +15,7 @@
 
 mat-card{
   width: 400px;
-  margin: 100px auto;
+  margin: 1% auto;
 }
 
 mat-form-field{
@@ -28,4 +28,25 @@ mat-slider{
 
 .mat-h3{
   padding-top: 4%;
+}
+
+.smaller {
+  font-size: smaller;
+  text-align: end;
+}
+
+#Conectado {
+  color: green;
+}
+
+#Ocupado {
+  color: red;
+}
+
+#Ausente {
+  color: darkorange;
+}
+
+#Desconectado {
+  color: darkgrey;
 }

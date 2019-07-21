@@ -1,0 +1,55 @@
+.container {
+  background: #ffffff;
+  padding:0;
+  height: auto;
+  display: flex;
+  align-items: baseline;
+  border-radius: 10px 10px 10px 10px;
+  -webkit-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 0 13px -1px rgba(0,0,0,0.7);
+  box-shadow: 1px 0 13px -1px rgba(0,0,0,0.7);
+  margin: 10px;
+}
+
+mat-form-field, a{
+  font-size: 20px;
+  width: 300px;
+  margin-left: 20px;
+}
+
+mat-icon{
+  margin-right: 20px;
+}
+
+img{
+  width: 150px;
+  height: 150px;
+  border-radius:150px;
+  margin-top: 20px;
+  margin-left: 75px;
+  margin-right: 75px;
+}
+
+button{
+  background: #ffffff;
+  width: 350px;
+  height: 50px;
+  //margin: 20px 75px;
+  font-size: 20px;
+  border-radius: 10px 10px 10px 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+mat-card{
+  margin: 5px;
+}
+
+h2{
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+  font-weight: bold;
+  font-size: 70%;
+  text-align: center;
+}

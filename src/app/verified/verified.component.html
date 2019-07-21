@@ -1,0 +1,13 @@
+<body>
+<div class="background">
+  <div class="container">
+    <br><br><br><br>
+    <div class="text-c">
+      <h2 *ngIf="verified; else notVerified">Su usuario ha sido verificado</h2>
+      <ng-template #notVerified>
+        <h2>Ha habido un problema con la verificación</h2>
+      </ng-template>
+    </div>
+  </div>
+</div>
+</body>

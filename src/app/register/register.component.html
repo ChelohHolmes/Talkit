@@ -22,7 +22,7 @@
   <br>
   <mat-form-field>
     <mat-label>Genero</mat-label>
-    <mat-select formControlName="Gender" required>
+      <mat-select formControlName="Gender" required>
       <mat-option *ngFor="let gender of genders" [value]="gender.value">
         {{gender.viewValue}}
       </mat-option>
@@ -73,7 +73,7 @@
     <h2>Error: Las contraseñas no coinciden</h2>
   </div>
   <div *ngIf="used" class="invalid-feedback">
-    <h2>Error: usuario utilizado</h2>
+    <h2>Error: usuario o correo utilizado</h2>
   </div>
   <button type="submit" id="register-button" [disabled]="!UserNew.valid">Registrar</button>
 </form>

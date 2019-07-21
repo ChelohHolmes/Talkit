@@ -2,27 +2,42 @@
   <div class="content">
     <mat-card>
       <mat-card-content>
-        <h1 class="mat-h1">Configuración</h1>
-        <p class="mat-h3">Dispositivo de entrada</p>
-        <mat-form-field>
-          <mat-select [(value)]="selectedE">
-            <mat-option *ngFor="let disp of dispositivosE" [value]="disp.value">
-              {{ disp.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br>
-        <p class="mat-h3">Dispositivo de salida</p>
-        <mat-form-field>
-          <mat-select [(value)]="selectedS">
-            <mat-option *ngFor="let disp of dispositivosS" [value]="disp.value">
-              {{ disp.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <br>
-        <p class="mat-h3">Volumen de salida</p>
-        <mat-slider value="100"></mat-slider>
+        <form [formGroup]="config" (ngSubmit)="onSubmit()">
+          <h1 class="mat-h1">Configuración</h1>
+          <p class="mat-h3">Estado</p>
+          <mat-form-field>
+            <mat-select formControlName="estado" [(ngModel)]="estado">
+              <mat-option *ngFor="let est of estados" [value]="est.value">
+                {{ est.viewValue }}
+<!--                <mat-icon id="{{est.value}}" style="font-size: smaller">radio_button_checked</mat-icon>-->
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <p class="mat-h3">Dispositivo de entrada</p>
+          <mat-form-field>
+            <mat-select formControlName="dispE" [(ngModel)]="selectedE">
+              <mat-option *ngFor="let disp of dispositivosE" [value]="disp.value">
+                {{ disp.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <p class="mat-h3">Dispositivo de salida</p>
+          <mat-form-field>
+            <mat-select formControlName="dispS" [(ngModel)]="selectedS">
+              <mat-option *ngFor="let disp of dispositivosS" [value]="disp.value">
+                {{ disp.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <br>
+          <p class="mat-h3">Volumen de salida</p>
+          <mat-slider formControlName="volumen" [value]="100">Hola</mat-slider>
+          <br>
+          <p>Nivel: {{nivel}}%</p>
+          <br>
+          <button mat-raised-button>Guardar</button>
+        </form>
       </mat-card-content>
     </mat-card>
   </div>

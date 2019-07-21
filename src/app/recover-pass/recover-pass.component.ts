@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RecoverService} from '../services/recover.service';
 import {MatSnackBar} from '@angular/material';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-recover-pass',
@@ -13,13 +13,17 @@ export class RecoverPassComponent implements OnInit {
   private match: boolean;
   private sent: any;
 
-  constructor(private formBuilder: FormBuilder, private http: RecoverService, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+              private http: RecoverService,
+              private snackBar: MatSnackBar,
+              private route: ActivatedRoute,
+              private router: Router) { }
   UserNew: FormGroup;
   password: string;
   confirmPassword: string;
   hide = true;
   hide1 = true;
-  private email: string;
+  private token: string;
 
   ngOnInit() {
 
@@ -36,23 +40,27 @@ export class RecoverPassComponent implements OnInit {
   }
 
   onSubmit() {
-    this.UserNew.value.Email = this.email;
+    this.route.queryParams.subscribe(params => {
+      this.token = params.token;
+    });
+    this.UserNew.value.Token = this.token;
     const form = JSON.stringify(this.UserNew.value);
     // console.log(this.UserNew.value);
     this.match = this.passwordsMatch(this.UserNew);
     console.log(form);
     if (this.match) {
-      this.email = localStorage.getItem('Email');
+      // this.email = localStorage.getItem('Email');
       this.http.posts(form).subscribe(data => {
         this.sent = data;
         console.log(this.sent);
         if (this.sent === 1) {
-          this.snackBar.open('Contraseña cambiada.', 'OK', {
+          const snackBarRef = this.snackBar.open('Contraseña cambiada.', 'OK');
+          snackBarRef.onAction().subscribe(() => {
+            this.router.navigate(['/']);
           });
-          localStorage.removeItem('Email');
+          // localStorage.removeItem('Email');
         } else {
-          this.snackBar.open('Error.', 'OK', {
-          });
+          this.snackBar.open('Error.', 'OK');
         }
       });
     }

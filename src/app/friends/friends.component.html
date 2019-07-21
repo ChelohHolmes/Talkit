@@ -1,43 +1,14 @@
+<div class="container">
+  <button mat-stroked-button (click)="onAdded()">Amigos</button>
+  <button mat-stroked-button (click)="onRequests()">Solicitudes</button>
+  <button mat-stroked-button (click)="onBlocked()">Bloqueados</button>
+</div>
 <div style="padding-bottom: 50px">
-  <h1>Amigos</h1>
-
-  <ul>
-    <li>
-      <img [src]="hamana.avatar" [alt]="hamana.name">
-      <p>{{hamana.name}} <mat-icon class="random">radio_button_checked</mat-icon></p>
-    </li>
-    <li>
-      <img [src]="hamana2.avatar" [alt]="hamana2.name">
-      <p>{{hamana2.name}} <mat-icon class="custom">radio_button_checked</mat-icon></p>
-    </li>
-    <li>
-      <img [src]="hamana3.avatar" [alt]="hamana3.name">
-      <p>{{hamana3.name}} <mat-icon class="online">radio_button_checked</mat-icon></p>
-    </li>
-    <li>
-      <img [src]="hamana4.avatar" [alt]="hamana4.name">
-      <p>{{hamana4.name}} <mat-icon class="busy">radio_button_checked</mat-icon></p>
-    </li>
-    <li>
-      <img [src]="hamana5.avatar" [alt]="hamana5.name">
-      <p>{{hamana5.name}} <mat-icon class="away">radio_button_checked</mat-icon></p>
-    </li>
-    <li>
-      <img [src]="hamana6.avatar" [alt]="hamana6.name">
-      <p>{{hamana6.name}} <mat-icon class="offline">radio_button_checked</mat-icon></p>
-    </li>
-  </ul>
-
-  <form [formGroup]="addFriend" (ngSubmit)="onSubmitAddFriend()">
-    <div class="center">
-      <mat-form-field>
-        <label>
-          <input matInput placeholder="Agregar amigo" formControlName="user">
-        </label>
-      </mat-form-field>
-      <button mat-icon-button>
-        <mat-icon aria-label="add">add</mat-icon>
-      </button>
-    </div>
-  </form>
+  <app-added *ngIf="bAdded; else requests"></app-added>
+  <ng-template #requests>
+    <app-requests *ngIf="bRequests; else blocked"></app-requests>
+  </ng-template>
+  <ng-template #blocked>
+    <app-blocked *ngIf="bBlocked"></app-blocked>
+  </ng-template>
 </div>

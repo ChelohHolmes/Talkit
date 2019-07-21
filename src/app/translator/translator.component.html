@@ -29,15 +29,17 @@
   </mat-form-field>
   &nbsp;
   <mat-icon>{{'arrow_forward'}}</mat-icon>
+
+<!--  <p>{{this.sent}}</p>-->
   &nbsp;
   <mat-form-field appearance="fill">
     <label>
-      <textarea matInput disabled value="Traducción"></textarea>
+      <textarea matInput disabled>{{this.sent}}</textarea>
     </label>
   </mat-form-field>
   <br>
   <div class="center">
-  <button mat-raised-button id="login-button">Traducir</button>
+  <button mat-raised-button id="login-button" [disabled]="!Translator.valid">Traducir</button>
   </div>
 </form>
 

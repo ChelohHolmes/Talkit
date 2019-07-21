@@ -6,11 +6,31 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class UserService {
-  private url = '/EditUser.php';
+  private urlSEU = '/ShowEditUser.php';
+  private urlEU = '/EditUser.php';
+  private urlNP = '/NewPassword.php';
+  private urlSEP = '/ShowEditPreferences.php';
+  private urlEP = '/EditPreferences.php';
 
   constructor(private http: HttpClient) { }
 
-  post(form) {
-    return this.http.post<any>(environment.serverUrl + this.url, form);
+  postSEU(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlSEU, form);
+  }
+
+  postEU(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlEU, form);
+  }
+
+  postNP(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlNP, form);
+  }
+
+  postSEP(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlSEP, form);
+  }
+
+  postEP(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlEP, form);
   }
 }

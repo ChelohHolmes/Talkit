@@ -7,10 +7,15 @@ import {HttpClient} from '@angular/common/http';
 })
 export class RegisterService {
   private url = '/register.php';
+  private urls = '/Verification.php';
 
   constructor(private http: HttpClient) { }
 
   post(form) {
     return this.http.post<any>(environment.serverUrl + this.url, form);
+  }
+
+  posts(form) {
+    return this.http.post<any>(environment.serverUrl + this.urls, form);
   }
 }

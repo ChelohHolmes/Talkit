@@ -33,7 +33,7 @@
           </mat-radio-group>
         </label>
         <br><br>
-        <button mat-raised-button id="start-queue">Buscar</button>
+        <button mat-raised-button id="start-queue" [disabled]="!RandomQueue.valid">Buscar</button>
       </form>
     </mat-card>
   </div>

@@ -1,0 +1,28 @@
+
+mat-form-field, a {
+  font-size: 15px;
+  width: 250px;
+  margin-left: 20px;
+}
+
+#register-button {
+  background: #ffffff;
+  width: 150px;
+  height: 50px;
+  margin: 20px 75px;
+  font-size: 20px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+mat-card {
+  margin: 5px;
+}
+
+h2 {
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  color: red;
+  font-weight: bold;
+  font-size: 70%;
+  text-align: center;
+}

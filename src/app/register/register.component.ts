@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import {RegisterService} from '../services/register.service';
-import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material';
 
 
-export interface IGender {
-  value: string;
-  viewValue: string;
-}
-
-export interface ILanguage {
+export interface ISelect {
   value: string;
   viewValue: string;
 }
@@ -22,21 +17,22 @@ export interface ILanguage {
 
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private http: RegisterService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private http: RegisterService, public snackBar: MatSnackBar) { }
 
   password: string;
   confirmPassword: string;
   email: string;
+  user: string;
   hide = true;
   hide1 = true;
 
-  genders: IGender[] = [
+  genders: ISelect[] = [
     {value: 'Masculino', viewValue: 'Masculino'},
     {value: 'Femenino', viewValue: 'Femenino'},
     {value: 'No binario', viewValue: 'No binario'}
   ];
 
-  languages: ILanguage[] = [
+  languages: ISelect[] = [
     {value: 'Español', viewValue: 'Español'},
     {value: 'Inglés', viewValue: 'English'},
     {value: 'Francés', viewValue: 'Français'},
@@ -72,7 +68,10 @@ export class RegisterComponent implements OnInit {
       LastName: new FormControl(),
       Gender: new FormControl(),
       Birthday: new FormControl(),
-      User: new FormControl(),
+      User: [this.user, [
+        Validators.required,
+        Validators.minLength(4)
+      ]],
       NativeLanguage: new FormControl(),
     });
 
@@ -90,13 +89,23 @@ export class RegisterComponent implements OnInit {
         if (this.sent === 1) {
           this.used = true;
         } else {
-          this.router.navigate(['/Home']);
+          this.http.posts(form).subscribe(dats => {
+            this.sent = dats;
+            console.log(this.sent);
+            if (this.sent) {
+              this.snackBar.open('Error al enviar correo', 'OK', {});
+            } else {
+              this.snackBar.open('Correo de verificación enviado', 'OK', {});
+              // localStorage.setItem('register', this.UserNew.controls.Email.value);
+            }
+          });
+          // this.router.navigate(['/Home']);
           // console.log('Home');
         }
       });
       if (this.used === false) {
         // Cerrar dialog
-        sessionStorage.setItem('user', this.UserNew.controls.User.value);
+        // sessionStorage.setItem('user', this.UserNew.controls.User.value);
       }
     }
   }

@@ -1,0 +1,15 @@
+<h1>Bloqueos</h1>
+<ul *ngFor="let blocks of blocked">
+  <li *ngIf="blocks.relacion == 'Bloqueo'">
+    <img [src]="blocks.foto_perfil" [alt]="blocks.username">
+    <p>
+      {{blocks.username}}
+      <span style="padding-left: 100px">
+        <button mat-icon-button (click)="Unblock(blocks.id_usuario_recibe)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </span>
+    </p>
+  </li>
+</ul>
+<p *ngIf="blocked == false">No cuenta con bloqueos</p>

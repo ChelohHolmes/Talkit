@@ -14,7 +14,7 @@ export class RecoveryComponent implements OnInit {
   Recovery: FormGroup;
   private sent: any;
 
-  constructor(private formBuilder: FormBuilder, private http: RecoverService, private router: Router, public snackBar: MatSnackBar) { }
+  constructor(private formBuilder: FormBuilder, private http: RecoverService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.Recovery = this.formBuilder.group({
@@ -27,15 +27,14 @@ export class RecoveryComponent implements OnInit {
 
   onSubmit() {
     const form = JSON.stringify(this.Recovery.value);
-    console.log(form);
+    // console.log(form);
     this.http.post(form).subscribe(data => {
       this.sent = data;
-      console.log(this.sent);
+      // console.log(this.sent);
       if (this.sent === 0) {
-        localStorage.setItem('Email', this.Recovery.controls.Email.value);
-        this.snackBar.open('Correo enviado.', 'OK', {
-        });
-        console.log('Saved');
+        // localStorage.setItem('Email', this.Recovery.controls.Email.value);
+        this.snackBar.open('Correo enviado.', 'OK');
+        // console.log('Saved');
       }
     });
   }

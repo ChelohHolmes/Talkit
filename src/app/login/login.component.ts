@@ -39,12 +39,12 @@ export class LoginComponent implements OnInit {
     const form = JSON.stringify(this.UserLogin.value);
     this.http.post(form).subscribe(data => {
       this.sent = data;
-      console.log(this.sent);
+      // console.log(this.sent);
       if (this.sent === 1) {
         this.incorrect = true;
       } else {
         this.router.navigate(['/Home']);
-        console.log('Home');
+        // console.log('Home');
         sessionStorage.setItem('user', this.UserLogin.controls.User.value);
         // return true;
       }

@@ -21,12 +21,6 @@ export class HomeComponent implements OnInit {
     this.bCustom = false;
   }
 
-  onNews() {
-    this.bMews = true;
-    this.bRandom = false;
-    this.bCustom = false;
-  }
-
   onRandom() {
     this.bMews = false;
     this.bRandom = true;

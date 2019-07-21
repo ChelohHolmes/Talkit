@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IGender, ILanguage} from '../register/register.component';
+import {ISelect} from '../register/register.component';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../services/user.service';
 
@@ -12,14 +12,21 @@ export class UpdateInfoComponent implements OnInit {
   private sent: any;
   private incorrect: boolean;
   private correct: boolean;
-
-  constructor(private formBuilder: FormBuilder, private http: UserService) { }
+  private info: any;
   NewInfo: FormGroup;
   email: string;
   password: string;
   hide = true;
+  defName: string;
+  defLastName: string;
+  defEmail: string;
+  defLanguage: string;
+  defGender: string;
+  defDescription: string;
 
-  languages: ILanguage[] = [
+  constructor(private formBuilder: FormBuilder, private http: UserService) { }
+
+  languages: ISelect[] = [
     {value: 'Español', viewValue: 'Español'},
     {value: 'Inglés', viewValue: 'English'},
     {value: 'Francés', viewValue: 'Français'},
@@ -32,14 +39,13 @@ export class UpdateInfoComponent implements OnInit {
     {value: 'Coreano', viewValue: '한국어'}
   ];
 
-  genders: IGender[] = [
+  genders: ISelect[] = [
     {value: 'Masculino', viewValue: 'Masculino'},
     {value: 'Femenino', viewValue: 'Femenino'},
     {value: 'No binario', viewValue: 'No binario'}
   ];
 
   selectedFile: File;
-  updateemail: any;
 
   ngOnInit() {
     this.NewInfo = this.formBuilder.group({
@@ -52,18 +58,28 @@ export class UpdateInfoComponent implements OnInit {
         Validators.maxLength(128),
       ]],
       Name: new FormControl(),
-      Lastname: new FormControl(),
+      LastName: new FormControl(),
       Gender: new FormControl(),
       NativeLanguage: new FormControl(),
       Description: new FormControl()
     });
     this.onChanges();
+    this.http.postSEU(sessionStorage.getItem('user')).subscribe(data => {
+      this.info = data;
+      this.defName = this.info[0].nombres;
+      this.defLastName = this.info[0].apellidos;
+      this.defEmail = this.info[0].correo;
+      this.defLanguage = this.info[0].lengua_mater;
+      this.defGender = this.info[0].sexo;
+      this.defDescription = this.info[0].intereses;
+    });
   }
 
   onSubmit() {
-    this.NewInfo.value.User = sessionStorage.getItem('user');
+    this.NewInfo.value.User = sessionStorage.getItem('username');
     const form = JSON.stringify(this.NewInfo.value);
-    this.http.post(form).subscribe(data => {
+    console.log(form);
+    this.http.postEU(form).subscribe(data => {
       this.sent = data;
       console.log(this.sent);
       if (this.sent === 1) {

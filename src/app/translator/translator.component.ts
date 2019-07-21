@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
-import { ILanguage } from '../register/register.component';
+import { ISelect } from '../register/register.component';
+import {TranslationService} from '../services/translation.service';
 
 @Component({
   selector: 'app-translator',
@@ -10,20 +11,23 @@ import { ILanguage } from '../register/register.component';
 export class TranslatorComponent implements OnInit {
 
   Translator: FormGroup;
-  languages: ILanguage[] = [
-    {value: 'Español', viewValue: 'Español'},
-    {value: 'Inglés', viewValue: 'English'},
-    {value: 'Francés', viewValue: 'Français'},
-    {value: 'Alemán', viewValue: 'Deutsch'},
-    {value: 'Italiano', viewValue: 'Italiano'},
-    {value: 'Portugués', viewValue: 'Português'},
-    {value: 'Ruso', viewValue: 'русский'},
-    {value: 'Chino', viewValue: '中国'},
-    {value: 'Japonés', viewValue: '日本語'},
-    {value: 'Coreano', viewValue: '한국어'}
+  languages: ISelect[] = [
+    {value: 'es', viewValue: 'Español'},
+    {value: 'en', viewValue: 'English'},
+    {value: 'fr', viewValue: 'Français'},
+    {value: 'de', viewValue: 'Deutsch'},
+    {value: 'it', viewValue: 'Italiano'},
+    {value: 'pt', viewValue: 'Português'},
+    {value: 'ru', viewValue: 'русский'},
+    {value: 'zh', viewValue: '中国'},
+    {value: 'ja', viewValue: '日本語'},
+    {value: 'ko', viewValue: '한국어'}
   ];
+  private sent: string;
 
-  constructor() { }
+  constructor(private http: TranslationService) {
+    this.sent = 'Traducción';
+  }
 
   ngOnInit() {
     this.Translator = new FormGroup({
@@ -34,8 +38,11 @@ export class TranslatorComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.Translator.value);
     const form = JSON.stringify(this.Translator.value);
-    console.log(form);
+    // console.log(form);
+    this.http.post(form).subscribe(data => {
+      this.sent = data;
+      // console.log(this.sent);
+    });
   }
 }

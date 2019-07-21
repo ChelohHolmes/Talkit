@@ -1,0 +1,121 @@
+<h1 mat-dialog-title style="text-align: center">Crear sala</h1>
+<form [formGroup]="NewCustom">
+  <mat-form-field>
+    <mat-label>Tema</mat-label>
+    <mat-select formControlName="Topic" required>
+      <mat-option *ngFor="let topic of types" [value]="topic.value">
+        {{topic.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)="onChangeTopic()">Cambiar</button>
+  <div *ngIf="topicSelected === 'fijo'">
+    <mat-form-field>
+      <mat-label>Elige un tema</mat-label>
+      <mat-select formControlName="Topics">
+        <mat-option *ngFor="let topics of topics" [value]="topics.value">
+          {{topics.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="noTopic">
+    <h2>Error: debe elegir un tema</h2>
+  </div>
+  <div *ngIf="topicSelected === 'libre'">
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Tema libre" formControlName="FreeTopic">
+      </label>
+    </mat-form-field>
+  </div>
+  <div *ngIf="noFreeTopic">
+    <h2>Error: debe definir un tema</h2>
+  </div>
+  <br>
+  <mat-form-field>
+  <mat-label>Tipo de chat</mat-label>
+  <mat-select formControlName="ChatType" required>
+    <mat-option *ngFor="let type of chatTypes" [value]="type.value">
+      {{type.viewValue}}
+    </mat-option>
+  </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Moderador</mat-label>
+    <mat-select formControlName="Moderator" required>
+      <mat-option *ngFor="let moderator of moderator" [value]="moderator.value">
+        {{moderator.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)="onChangeType()">Cambiar</button>
+  <br>
+  <mat-form-field>
+    <mat-label>Participantes</mat-label>
+    <mat-select formControlName="Participants" required>
+      <mat-option *ngFor="let participant of participants" [value]="participant.value">
+        {{participant.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="errorParticipants">
+    <h2>Error: una sala libre no puede tener 11 participantes</h2>
+  </div>
+  <br>
+  <mat-form-field>
+    <mat-label>Lenguaje</mat-label>
+    <mat-select formControlName="Language" required>
+      <mat-option *ngFor="let language of languages" [value]="language.value">
+        {{language.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Nivel</mat-label>
+    <mat-select formControlName="Level" required>
+      <mat-option *ngFor="let level of levels" [value]="level.value">
+        {{level.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+<!--  <br>-->
+<!--  <mat-form-field>-->
+<!--    <mat-label>Reglas</mat-label>-->
+<!--    <mat-checkbox *ngFor="let rule of rules" [formControlName]="rule.viewValue">-->
+<!--      {{rule.viewValue}}-->
+<!--    </mat-checkbox>-->
+<!--  </mat-form-field>-->
+  <br>
+  <mat-form-field>
+    <label>
+      <input matInput placeholder="Descripción" formControlName="Description">
+    </label>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Privacidad</mat-label>
+    <mat-select formControlName="Privacy" required>
+      <mat-option *ngFor="let privacy of privacy" [value]="privacy.value">
+        {{privacy.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)="onChangePrivacy()">Cambiar</button>
+  <div *ngIf="privacySelected === 'Privada'">
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Ingresa la contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+      </label>
+      <mat-icon matSuffix (click)="hide = !hide">
+        {{hide ? 'visibility_off' : 'visibility'}}
+      </mat-icon>
+      <mat-error>Longitud mínima de 4 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <br>
+  <button type="submit" id="register-button" [disabled]="!NewCustom.valid" (click)="onSubmit()">Crear</button>
+</form>
+

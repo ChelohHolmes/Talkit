@@ -1,0 +1,51 @@
+<h1>Amigos</h1>
+
+<ul *ngFor="let friend of friends">
+  <li *ngIf="friend.relacion == 'Amigos'">
+    <img [src]="friend.foto_perfil" [alt]="friend.username">
+    <p>
+      {{friend.username}}
+      <mat-icon  id="{{friend.estado}}" style="font-size: smaller;" title="{{friend.estado}}">radio_button_checked</mat-icon>
+      <br>
+      <button mat-icon-button (click)="Message()">
+        <mat-icon>chat</mat-icon>
+      </button>
+      <button mat-icon-button (click)="Block(friend.id_usuario_recibe)">
+        <mat-icon>block</mat-icon>
+      </button>
+      <button mat-icon-button (click)="Remove(friend.id_usuario_recibe)">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </p>
+  </li>
+</ul>
+
+<br>
+<form [formGroup]="addFriend" (ngSubmit)="onSubmitAddFriend()">
+  <div class="center">
+    <mat-form-field>
+      <label>
+        <input matInput placeholder="Agregar amigo" formControlName="username" #add required>
+      </label>
+    </mat-form-field>
+    <button mat-icon-button (click)="clear(add)" [disabled]="!addFriend.valid">
+      <mat-icon aria-label="add">add</mat-icon>
+    </button>
+  </div>
+</form>
+
+<br>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Solicitudes pendientes
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ul *ngFor="let friend of friends">
+    <li *ngIf="friend.relacion == 'Solicitud'">
+      <img [src]="friend.foto_perfil" [alt]="friend.username">
+      <p>{{friend.username}}</p>
+    </li>
+  </ul>
+</mat-expansion-panel>
+

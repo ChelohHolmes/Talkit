@@ -28,7 +28,6 @@ h1 {
 button{
   font-size: 15px;
   border-radius: 10px 10px 10px 10px;
-  padding-left: 20px;
 }
 
 .background{
@@ -49,7 +48,7 @@ button{
   right: 0;
 }
 
-.table{
+.table {
   padding-top: 1%;
   padding-bottom: 1%;
   display: flex;
@@ -58,8 +57,10 @@ button{
   left: 0;
   right: 0;
   text-align: center;
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
 }
 
-mat-form-field{
+mat-form-field {
   padding-left: 10px;
 }

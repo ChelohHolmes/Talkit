@@ -6,7 +6,7 @@
         <mat-form-field class="full" appearance="fill">
           <mat-label>Contraseña nueva</mat-label>
           <label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="NewPassword" [(ngModel)]="newpassword">
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="NewPassword" [(ngModel)]="newPassword">
           </label>
           <mat-icon matSuffix (click)="hide = !hide">
             {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -17,21 +17,22 @@
         <mat-form-field class="full" appearance="fill">
           <mat-label>Repetir contraseña</mat-label>
           <label>
-            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="RepeatPassword" [(ngModel)]="repeatpassword">
+            <input matInput [type]="hide1 ? 'password' : 'text'" formControlName="RepeatPassword" [(ngModel)]="repeatPassword">
           </label>
           <mat-icon matSuffix (click)="hide1 = !hide1">
             {{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
         <br>
-        <div *ngIf="!passwordsMatch(UpdatePassword)" class="invalid-feedback">
+        <div *ngIf="!passwordsMatch(UpdatePassword)" class="h2">
           <h2>Error: Las contraseñas no coinciden</h2>
         </div>
+        <br>
       </div>
       <div>
         <mat-form-field class="full" appearance="fill">
           <mat-label>Contraseña vieja</mat-label>
           <label>
-            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="OldPassword" [(ngModel)]="oldpassword">
+            <input matInput [type]="hide2 ? 'password' : 'text'" formControlName="OldPassword" [(ngModel)]="oldPassword">
           </label>
           <mat-icon matSuffix (click)="hide2 = !hide2">
             {{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -39,7 +40,14 @@
         </mat-form-field>
       </div>
       <div>
-        <button mat-raised-button>Actualizar</button>
+        <button mat-raised-button [disabled]="!UpdatePassword.valid">Actualizar</button>
+      </div>
+      <br>
+      <div *ngIf="incorrect" class="h2">
+        <h2>Error: Contraseña incorrecta</h2>
+      </div>
+      <div *ngIf="correct" class="lel">
+        <h2>Contraseña cambiada</h2>
       </div>
     </form>
   </mat-card>

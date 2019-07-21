@@ -16,7 +16,12 @@ export class IndexComponent implements OnInit {
   }
 
   openSnackBar() {
-    this.snackBar.open('Este sitio web utiliza cookies para mejorar tu experiencia de navegación', 'OK', {
-    });
-  }
+    const cookies = localStorage.getItem('cookies');
+    if (!cookies) {
+      const snackBarRef = this.snackBar.open('Este sitio web utiliza cookies para mejorar tu experiencia de navegación', 'OK', {});
+      snackBarRef.onAction().subscribe(() => {
+        localStorage.setItem('cookies', '1');
+      });
+    }
+    }
 }

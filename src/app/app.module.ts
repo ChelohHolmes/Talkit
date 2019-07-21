@@ -19,7 +19,7 @@ import {
   MatListModule,
   MatSnackBarModule,
   MatRadioModule,
-  MatSliderModule, MatCheckboxModule,
+  MatSliderModule, MatCheckboxModule, MatExpansionModule,
 } from '@angular/material';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
@@ -48,6 +48,12 @@ import { UpdateInfoComponent } from './update-info/update-info.component';
 import { UpdatePassComponent } from './update-pass/update-pass.component';
 import { AudioComponent } from './audio/audio.component';
 import {MatTableModule} from '@angular/material/table';
+import { VerifiedComponent } from './verified/verified.component';
+import { RequestsComponent } from './friends/requests/requests.component';
+import { BlockedComponent } from './friends/blocked/blocked.component';
+import { AddedComponent } from './friends/added/added.component';
+import { CustomPassComponent } from './custom-pass/custom-pass.component';
+import { CustomCreateComponent } from './custom-create/custom-create.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +81,13 @@ import {MatTableModule} from '@angular/material/table';
     UpdateInfoComponent,
     UpdatePassComponent,
     AudioComponent,
+    VerifiedComponent,
+    RequestsComponent,
+    AddedComponent,
+    BlockedComponent,
+    AddedComponent,
+    CustomPassComponent,
+    CustomCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,11 +114,12 @@ import {MatTableModule} from '@angular/material/table';
     MatSliderModule,
     MatTableModule,
     MatCheckboxModule,
+    MatExpansionModule,
   ],
   providers: [
     MatDatepickerModule
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, RegisterComponent]
+  entryComponents: [LoginComponent, RegisterComponent, CustomPassComponent, CustomCreateComponent]
 })
 export class AppModule { }

@@ -1,0 +1,18 @@
+<h1>Solicitudes</h1>
+<ul *ngFor="let request of requests">
+  <li *ngIf="request.relacion == 'Solicitud'">
+    <img [src]="request.foto_perfil" [alt]="request.username">
+    <p>
+      {{request.username}}
+      <span style="padding-left: 15px">
+        <button mat-icon-button (click)="Accept(request.id_usuario_envia)">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button (click)="No(request.id_usuario_envia)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </span>
+    </p>
+  </li>
+</ul>
+<p *ngIf="requests == false">No cuenta con solicitudes</p>

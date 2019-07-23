@@ -55,6 +55,7 @@ import { AddedComponent } from './friends/added/added.component';
 import { CustomPassComponent } from './custom-pass/custom-pass.component';
 import { CustomCreateComponent } from './custom-create/custom-create.component';
 import { ChatComponent } from './chat/chat.component';
+import { VoiceRoomComponent } from './voice-room/voice-room.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { ChatComponent } from './chat/chat.component';
     CustomPassComponent,
     CustomCreateComponent,
     ChatComponent,
+    VoiceRoomComponent,
   ],
   imports: [
     BrowserModule,

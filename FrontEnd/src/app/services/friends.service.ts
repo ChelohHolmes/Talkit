@@ -15,6 +15,7 @@ export class FriendsService {
   private urlU = '/FriendU.php';
   private urlBK = '/FriendBK.php';
   private urlRE = '/FriendRE.php';
+  private urlC = '/FriendC.php';
 
   constructor(private http: HttpClient) { }
 
@@ -52,5 +53,9 @@ export class FriendsService {
 
   postRE(form) {
     return this.http.post<any>(environment.serverUrl + this.urlRE, form);
+  }
+
+  postC(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlC, form);
   }
 }

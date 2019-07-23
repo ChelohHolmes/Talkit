@@ -15,6 +15,7 @@ import { PrivacyPoliciesComponent } from './privacy-policies/privacy-policies.co
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { UpdateInfoComponent } from './update-info/update-info.component';
 import {VerifiedComponent} from './verified/verified.component';
+import {ChatComponent} from './chat/chat.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'Test', component: HolaComponent },
   { path: 'Configuration', component: ConfigurationComponent },
   { path: 'Verified', component: VerifiedComponent },
-  { path: 'Update-info', component: UpdateInfoComponent }
+  { path: 'Update-info', component: UpdateInfoComponent },
+  { path: 'chat', component: ChatComponent }
 ];
 
 @NgModule({

@@ -54,6 +54,7 @@ import { BlockedComponent } from './friends/blocked/blocked.component';
 import { AddedComponent } from './friends/added/added.component';
 import { CustomPassComponent } from './custom-pass/custom-pass.component';
 import { CustomCreateComponent } from './custom-create/custom-create.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { CustomCreateComponent } from './custom-create/custom-create.component';
     AddedComponent,
     CustomPassComponent,
     CustomCreateComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

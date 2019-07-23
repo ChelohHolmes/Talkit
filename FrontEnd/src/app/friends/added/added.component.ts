@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {FriendsService} from '../../services/friends.service';
 import {MatSnackBar} from '@angular/material';
+import {Md5} from 'ts-md5';
 
 @Component({
   selector: 'app-added',
@@ -23,7 +24,7 @@ export class AddedComponent implements OnInit {
     // console.log(user);
     this.http.posts(this.user).subscribe(data => {
       this.friends = data;
-      // console.log(this.friends);
+      console.log(this.friends);
     });
 
     this.addFriend = new FormGroup({
@@ -78,7 +79,9 @@ export class AddedComponent implements OnInit {
     });
   }
 
-  Message() {
-    window.open('http://localhost:4200');
+  Message(index) {
+    // console.log(index);
+    const id = Md5.hashStr(this.friends[index].id_usuario_recibe);
+    window.open('http://localhost:4200/chat?i=' + id);
   }
 }

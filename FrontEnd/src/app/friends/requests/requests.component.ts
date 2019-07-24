@@ -15,7 +15,7 @@ export class RequestsComponent implements OnInit {
 
   ngOnInit() {
     this.user = sessionStorage.getItem('user');
-    this.http.postR(this.user).subscribe(data => {
+    this.http.postRequests(this.user).subscribe(data => {
       this.requests = data;
     });
   }
@@ -23,7 +23,7 @@ export class RequestsComponent implements OnInit {
   Accept(id) {
     const form = JSON.stringify({user: this.user, id} );
     // console.log(form);
-    this.http.postA(form).subscribe(data => {
+    this.http.postAccept(form).subscribe(data => {
       if (data) {
         this.snack.open('Usuario aceptado', 'OK');
       } else {
@@ -34,7 +34,7 @@ export class RequestsComponent implements OnInit {
 
   No(id) {
     const form = JSON.stringify({user: this.user, id} );
-    this.http.postN(form).subscribe(data => {
+    this.http.postNoAccept(form).subscribe(data => {
       if (data) {
         this.snack.open('Solicitud rechazada', 'OK');
       } else {

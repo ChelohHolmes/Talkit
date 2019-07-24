@@ -6,56 +6,56 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class FriendsService {
-  private url = '/AddFriends.php';
-  private urls = '/Friends.php';
-  private urlA = '/FriendA.php';
-  private urlN = '/FriendN.php';
-  private urlR = '/FriendR.php';
-  private urlB = '/FriendB.php';
-  private urlU = '/FriendU.php';
-  private urlBK = '/FriendBK.php';
-  private urlRE = '/FriendRE.php';
-  private urlC = '/FriendC.php';
+  private urlAddFriends = '/AddFriends.php';
+  private urlShowFriends = '/FriendShow.php';
+  private urlAccept = '/FriendAccept.php';
+  private urlNoAccept = '/FriendNoAccept.php';
+  private urlRequests = '/FriendRequests.php';
+  private urlBlocked = '/FriendBlocked.php';
+  private urlUnblock = '/FriendUnblock.php';
+  private urlBlock = '/FriendBlock.php';
+  private urlRemove = '/FriendRemove.php';
+  private urlChat = '/FriendChat.php';
 
   constructor(private http: HttpClient) { }
 
-  post(form) {
-    return this.http.post<any>(environment.serverUrl + this.url, form);
+  postAddFriends(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlAddFriends, form);
   }
 
-  posts(form) {
-    return this.http.post<any>(environment.serverUrl + this.urls, form);
+  postShowFriends(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlShowFriends, form);
   }
 
-  postA(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlA, form);
+  postAccept(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlAccept, form);
   }
 
-  postN(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlN, form);
+  postNoAccept(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlNoAccept, form);
   }
 
-  postR(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlR, form);
+  postRequests(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlRequests, form);
   }
 
-  postB(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlB, form);
+  postBlocked(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlBlocked, form);
   }
 
-  postU(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlU, form);
+  postUnblock(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlUnblock, form);
   }
 
-  postBK(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlBK, form);
+  postBlock(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlBlock, form);
   }
 
-  postRE(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlRE, form);
+  postRemove(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlRemove, form);
   }
 
-  postC(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlC, form);
+  postChat(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlChat, form);
   }
 }

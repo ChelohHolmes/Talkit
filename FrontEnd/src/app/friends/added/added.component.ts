@@ -22,7 +22,7 @@ export class AddedComponent implements OnInit {
   ngOnInit() {
     this.user = sessionStorage.getItem('user');
     // console.log(user);
-    this.http.posts(this.user).subscribe(data => {
+    this.http.postShowFriends(this.user).subscribe(data => {
       this.friends = data;
       console.log(this.friends);
     });
@@ -40,7 +40,7 @@ export class AddedComponent implements OnInit {
     this.addFriend.value.user = sessionStorage.getItem('user');
     const form = JSON.stringify(this.addFriend.value);
     console.log(form);
-    this.http.post(form).subscribe(data => {
+    this.http.postAddFriends(form).subscribe(data => {
       this.sent = data;
       console.log(this.sent);
       if (this.sent === 0) {
@@ -58,7 +58,7 @@ export class AddedComponent implements OnInit {
   Block(id) {
     const form = JSON.stringify({user: this.user, id} );
     // console.log(form);
-    this.http.postBK(form).subscribe(data => {
+    this.http.postBlock(form).subscribe(data => {
       if (data) {
         this.snack.open('Usuario bloqueado', 'OK');
       } else {
@@ -70,7 +70,7 @@ export class AddedComponent implements OnInit {
   Remove(id) {
     const form = JSON.stringify({user: this.user, id} );
     // console.log(form);
-    this.http.postRE(form).subscribe(data => {
+    this.http.postRemove(form).subscribe(data => {
       if (data) {
         this.snack.open('Usuario eliminado', 'OK');
       } else {

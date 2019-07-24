@@ -20,7 +20,7 @@ export class ChatComponent implements OnInit {
       this.id = params.i;
     });
     const form = JSON.stringify({u: this.user, i: this.id});
-    this.http.postC(form).subscribe(data => {
+    this.http.postChat(form).subscribe(data => {
       this.friends = data;
       console.log(this.friends);
     });

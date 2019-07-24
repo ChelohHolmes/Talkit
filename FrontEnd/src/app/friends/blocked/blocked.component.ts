@@ -15,7 +15,7 @@ export class BlockedComponent implements OnInit {
 
   ngOnInit() {
     this.user = sessionStorage.getItem('user');
-    this.http.postB(this.user).subscribe(data => {
+    this.http.postBlocked(this.user).subscribe(data => {
       this.blocked = data;
       // console.log(this.blocked);
     });
@@ -24,7 +24,7 @@ export class BlockedComponent implements OnInit {
   Unblock(id) {
     const form = JSON.stringify({user: this.user, id} );
     // console.log(form);
-    this.http.postU(form).subscribe(data => {
+    this.http.postUnblock(form).subscribe(data => {
       if (data) {
         this.snack.open('Usuario desbloqueado', 'OK');
       } else {

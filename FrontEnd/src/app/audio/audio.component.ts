@@ -24,11 +24,17 @@ export class AudioComponent implements OnInit {
     {value: 'Desconectado', viewValue: 'Desconectado'}
   ];
 
+  idiomas: Dispositivos[] = [
+    {value: 'Inglés', viewValue: 'English'},
+    {value: 'Español', viewValue: 'Español'}
+  ];
+
   dispositivosE: Dispositivos[];
   dispositivosS: Dispositivos[];
   config: FormGroup;
   nivel: any;
   estado: any;
+  idioma: any;
 
   constructor(private snackBar: MatSnackBar, private http: UserService) { }
 
@@ -37,14 +43,17 @@ export class AudioComponent implements OnInit {
       estado: new FormControl(),
       dispE: new FormControl(),
       dispS: new FormControl(),
+      idioma: new FormControl(),
       volumen: new FormControl()
     });
     this.http.postSEP(sessionStorage.getItem('user')).subscribe(data => {
       this.nivel = data[0].volumen;
+      this.idioma = data[0].idioma;
       this.estado = data[0].estado;
       this.selectedE = data[0].entrada;
       this.selectedS = data[0].salida;
     });
+    console.log(this.idioma);
     navigator.mediaDevices.enumerateDevices()
       .then(devices => {
         devices.forEach(device => {

@@ -1,0 +1,94 @@
+* {
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+}
+
+.add-icon{
+  position: absolute;
+  top: 5%;
+  right: 0;
+}
+
+.add-icon mat-icon{
+  color: #009933;
+  font-weight: 700;
+}
+
+.button-group{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 250px;
+  margin-left: 250px;
+}
+
+.centered{
+  text-align: center;
+}
+
+.container{
+  margin: 90px 200px 90px 200px;
+}
+
+.inline-block{
+  display: inline-block;
+  position: relative;
+}
+
+.mb-20{
+  margin-bottom: 40px !important;
+}
+
+.mt-50{
+  margin-top: 90px !important;
+}
+
+.mic-icon{
+  position: absolute;
+  right: 46%;
+  bottom: -15%;
+}
+
+.mic-icon mat-icon{
+  font-size:35px;
+}
+
+.moderator-image{
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.moderator-title{
+  font-weight: 700;
+}
+
+.participant-image{
+  margin: 30px 30px 0px 30px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.report-icon{
+  position: absolute;
+  top: 5%;
+  right: 15%;
+}
+
+.report-icon mat-icon{
+  color: #990000;
+  font-weight: 600;
+}
+
+.to-the-left{
+  position: absolute;
+  width: 250px;
+  right: 150%;
+  top: 40%;
+}
+
+.to-the-left h3{
+  font-weight: 100;
+}

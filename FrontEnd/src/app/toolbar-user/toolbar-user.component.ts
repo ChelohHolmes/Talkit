@@ -2,6 +2,8 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {ToolbarService} from '../services/toolbar.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import spanish from '../language/string_es.json';
+import english from '../language/string_en.json';
 
 @Component({
   selector: 'app-toolbar-user',
@@ -11,8 +13,10 @@ import {MatSnackBar} from '@angular/material';
 export class ToolbarUserComponent implements OnInit {
   user: any;
   points: any;
+  strings: any;
 
-  constructor(private http: ToolbarService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(private http: ToolbarService, private router: Router, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
     // window.prompt('hola', 'lol');
@@ -22,6 +26,17 @@ export class ToolbarUserComponent implements OnInit {
       this.points = data;
       // console.log(this.points);
     });
+    this.http.postSEP(sessionStorage.getItem('user')).subscribe(data => {
+      // console.log(data[0].lengua_mater);
+      if (data[0].idioma === 'Español') {
+        this.strings = spanish;
+      } else {
+        this.strings = english;
+      }
+      console.log(this.strings.hi);
+      console.log(data[0].idioma);
+    });
+    // console.log(spanish.hi);
   }
 
   @HostListener('window:onbeforeunload')

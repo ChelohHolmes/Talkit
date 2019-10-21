@@ -16,6 +16,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { UpdateInfoComponent } from './update-info/update-info.component';
 import {VerifiedComponent} from './verified/verified.component';
 import {ChatComponent} from './chat/chat.component';
+import {VoiceRoomComponent} from './voice-room/voice-room.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [
   { path: 'Configuration', component: ConfigurationComponent },
   { path: 'Verified', component: VerifiedComponent },
   { path: 'Update-info', component: UpdateInfoComponent },
-  { path: 'chat', component: ChatComponent }
+  { path: 'chat', component: ChatComponent },
+  { path: 'voice', component: VoiceRoomComponent }
 ];
 
 @NgModule({

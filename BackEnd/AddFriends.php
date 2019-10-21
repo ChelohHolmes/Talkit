@@ -20,7 +20,7 @@ else {
     $idR = pg_fetch_result($res, 0, 0 );
     $res = pg_query($dataB, $queryGS);
     $idS = pg_fetch_result($res, 0, 0 );
-    $query = "INSERT into public.amigos (id_usuario_envia, id_usuario_recibe, relacion) values ($idS, $idR, 'Solicitud')";
+    $query = "INSERT into public.amigos (id_usuario_envia, id_usuario_recibe, relacion, chat) values ($idS, $idR, 'Solicitud', DEFAULT)";
     $res = pg_query($dataB, $query);
     echo 1;
 }

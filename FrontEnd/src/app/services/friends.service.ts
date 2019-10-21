@@ -58,4 +58,8 @@ export class FriendsService {
   postChat(form) {
     return this.http.post<any>(environment.serverUrl + this.urlChat, form);
   }
+
+  postId(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlChat, form);
+  }
 }

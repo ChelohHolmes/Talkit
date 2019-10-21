@@ -4,9 +4,9 @@
     <span class="logo">&nbsp;Talkit!</span>
   </div>
   <span class="big-space"></span>
-  <p class="mat-h3" style="padding-top: 20px">Bienvenido </p>
+  <p class="mat-h3" style="padding-top: 20px">{{strings.hi}}</p>
   <a mat-button routerLink="Configuration">{{user}}</a>
-  <p class="mat-h3" style="padding-top: 20px">Tienes {{points}} puntos</p>
+  <p class="mat-h3" style="padding-top: 20px">{{this.strings.got}}{{points}}{{this.strings.points}}</p>
   <span class="space"></span>
   <a mat-flat-button (click)="onCS()" color="accent">Cerrar sesión</a>
 </mat-toolbar>

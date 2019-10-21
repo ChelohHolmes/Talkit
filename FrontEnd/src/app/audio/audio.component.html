@@ -13,24 +13,35 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <p class="mat-h3">Dispositivo de entrada</p>
+          <div>
+            <p class="mat-h3">Dispositivo de entrada</p>
+            <mat-form-field class="half">
+              <mat-select formControlName="dispE" [(ngModel)]="selectedE">
+                <mat-option *ngFor="let disp of dispositivosE" [value]="disp.value">
+                  {{ disp.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!--          <br>-->
+            <p class="mat-h3">Dispositivo de salida</p>
+            <mat-form-field class="half">
+              <mat-select formControlName="dispS" [(ngModel)]="selectedS">
+                <mat-option *ngFor="let disp of dispositivosS" [value]="disp.value">
+                  {{ disp.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+<!--          <br>-->
+          <p class="mat-h3">Idioma</p>
           <mat-form-field>
-            <mat-select formControlName="dispE" [(ngModel)]="selectedE">
-              <mat-option *ngFor="let disp of dispositivosE" [value]="disp.value">
-                {{ disp.viewValue }}
+            <mat-select formControlName="idioma" [(ngModel)]="idioma">
+              <mat-option *ngFor="let idm of idiomas" [value]="idm.value">
+                {{ idm.viewValue }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <br>
-          <p class="mat-h3">Dispositivo de salida</p>
-          <mat-form-field>
-            <mat-select formControlName="dispS" [(ngModel)]="selectedS">
-              <mat-option *ngFor="let disp of dispositivosS" [value]="disp.value">
-                {{ disp.viewValue }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <br>
+<!--          <br>-->
           <p class="mat-h3">Volumen de salida</p>
           <mat-slider formControlName="volumen" [value]="100">Hola</mat-slider>
           <br>

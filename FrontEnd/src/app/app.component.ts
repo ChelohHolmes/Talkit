@@ -1,4 +1,5 @@
 import {AfterContentChecked, Component} from '@angular/core';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import {AfterContentChecked, Component} from '@angular/core';
 export class AppComponent implements AfterContentChecked {
   title = 'Talkit';
   public user = false;
+
+  constructor(private http: UserService) { }
 
   OnInit() {
     this.onChanges();
@@ -24,7 +27,6 @@ export class AppComponent implements AfterContentChecked {
     } catch (e) {
       console.log('Error');
     }
-
   }
 
   private onChanges() {

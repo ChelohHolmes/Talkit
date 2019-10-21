@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class ToolbarService {
   private urlP = '/ShowPoints.php';
   private urlD = '/Disconnect.php';
+  private urlSEP = '/ShowEditPreferences.php';
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +18,9 @@ export class ToolbarService {
 
   postD(form) {
     return this.http.post<any>(environment.serverUrl + this.urlD, form);
+  }
+
+  postSEP(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlSEP, form);
   }
 }

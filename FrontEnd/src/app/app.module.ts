@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -47,7 +46,7 @@ import { ConfigurationComponent } from './configuration/configuration.component'
 import { UpdateInfoComponent } from './update-info/update-info.component';
 import { UpdatePassComponent } from './update-pass/update-pass.component';
 import { AudioComponent } from './audio/audio.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { VerifiedComponent } from './verified/verified.component';
 import { RequestsComponent } from './friends/requests/requests.component';
 import { BlockedComponent } from './friends/blocked/blocked.component';
@@ -56,6 +55,12 @@ import { CustomPassComponent } from './custom-pass/custom-pass.component';
 import { CustomCreateComponent } from './custom-create/custom-create.component';
 import { ChatComponent } from './chat/chat.component';
 import { VoiceRoomComponent } from './voice-room/voice-room.component';
+import { LobbyComponent } from './lobby/lobby.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { FaqComponent } from './faq/faq.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
+
+const config: SocketIoConfig = { url: 'http://localhost:1112', options: {} };
 
 @NgModule({
   declarations: [
@@ -92,6 +97,9 @@ import { VoiceRoomComponent } from './voice-room/voice-room.component';
     CustomCreateComponent,
     ChatComponent,
     VoiceRoomComponent,
+    LobbyComponent,
+    FaqComponent,
+    ConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -119,11 +127,12 @@ import { VoiceRoomComponent } from './voice-room/voice-room.component';
     MatTableModule,
     MatCheckboxModule,
     MatExpansionModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
-    MatDatepickerModule
+    MatDatepickerModule,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent, RegisterComponent, CustomPassComponent, CustomCreateComponent]
+  entryComponents: [LoginComponent, RegisterComponent, CustomPassComponent, CustomCreateComponent, ConfirmationComponent]
 })
 export class AppModule { }

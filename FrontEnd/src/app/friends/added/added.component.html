@@ -1,4 +1,4 @@
-<h1>Amigos</h1>
+<h1>{{this.strings.UsersAdded[0].Title}}</h1>
 
 <ul *ngFor="let friend of friends; let i = index">
   <li *ngIf="friend.relacion == 'Amigos'">
@@ -25,7 +25,7 @@
   <div class="center">
     <mat-form-field>
       <label>
-        <input matInput placeholder="Agregar amigo" formControlName="username" #add required>
+        <input matInput placeholder="{{this.strings.UsersAdded[0].Add}}" formControlName="username" #add required>
       </label>
     </mat-form-field>
     <button mat-icon-button (click)="clear(add)" [disabled]="!addFriend.valid">
@@ -38,7 +38,7 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      Solicitudes pendientes
+      {{this.strings.UsersAdded[0].Title2}}
     </mat-panel-title>
   </mat-expansion-panel-header>
   <ul *ngFor="let friend of friends">
@@ -48,4 +48,3 @@
     </li>
   </ul>
 </mat-expansion-panel>
-

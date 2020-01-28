@@ -1,5 +1,6 @@
 import {AfterContentChecked, Component} from '@angular/core';
 import {UserService} from './services/user.service';
+import {ChatService} from './services/chat.service';
 
 @Component({
   selector: 'app-root',

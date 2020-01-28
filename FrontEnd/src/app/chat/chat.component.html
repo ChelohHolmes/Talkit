@@ -1,6 +1,21 @@
-<div class="container">
+<div class="container centered">
   <mat-toolbar>
     <img [src]="friends[0].foto_perfil" [alt]="friends[0].username">
     <p style="padding-left: 1%">{{friends[0].username}}</p>
   </mat-toolbar>
+  <div>
+    <div class="chat-window">
+      <div class="messages" *ngFor="let msg of messages">
+        <p><strong>{{msg.user}}:</strong> {{msg.message}}</p>
+      </div>
+    </div>
+    <form [formGroup]="Message" (ngSubmit)="sendMessage()">
+      <mat-form-field>
+        <label>
+          <input matInput placeholder="Mensaje" formControlName="Message" [(ngModel)]="message" autocomplete="off">
+        </label>
+      </mat-form-field>
+      <button mat-stroked-button type="submit" [disabled]="!message">Send</button>
+    </form>
+  </div>
 </div>

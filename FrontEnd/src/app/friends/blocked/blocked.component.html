@@ -1,4 +1,4 @@
-<h1>Bloqueos</h1>
+<h1>{{this.strings.UsersBlocked[0].Title}}</h1>
 <ul *ngFor="let blocks of blocked">
   <li *ngIf="blocks.relacion == 'Bloqueo'">
     <img [src]="blocks.foto_perfil" [alt]="blocks.username">
@@ -12,4 +12,4 @@
     </p>
   </li>
 </ul>
-<p *ngIf="blocked == false">No cuenta con bloqueos</p>
+<p *ngIf="blocked == false">{{this.strings.UsersBlocked[0].NoBlocks}}</p>

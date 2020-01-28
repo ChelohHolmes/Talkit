@@ -27,7 +27,7 @@ if ($valor == false) {
         $res = pg_query($dataB, $queryPoints);
         $points = pg_fetch_result($res, 0, 0);
         $points = $points - 2;
-        $queryPoints = "UPDATE public.usuario SET puntos = ". $points ." WHERE id_usuario = ". $id;
+        $queryPoints = "UPDATE public.usuario SET puntos = ". $points .", estado = 'Privada' WHERE id_usuario = ". $id;
         $res = pg_query($dataB, $queryPoints);
         echo 1; //Correcto
     }

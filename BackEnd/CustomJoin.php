@@ -13,7 +13,7 @@ $queryPoints = "SELECT puntos from public.usuario WHERE username = '". $data['us
 $res = pg_query($dataB, $queryPoints);
 $points = pg_fetch_result($res, 0, 0);
 $points = $points - 1;
-$queryPoints = "UPDATE public.usuario SET puntos = ". $points ." WHERE id_usuario = ". $id;
+$queryPoints = "UPDATE public.usuario SET puntos = ". $points .", estado = 'Privada' WHERE id_usuario = ". $id;
 try {
     $res = pg_query($dataB, $queryPoints);
     $res = pg_query($dataB, $query);

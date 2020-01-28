@@ -1,0 +1,6 @@
+<h1 mat-dialog-title>{{strings.Confirmation[0].Title}}</h1>
+<p>{{strings.Confirmation[0].Confirmation}}</p>
+<div mat-dialog-actions>
+  <button mat-button (click)="onDismiss()">{{strings.Confirmation[0].No}}</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()">{{strings.Confirmation[0].Yes}}</button>
+</div>

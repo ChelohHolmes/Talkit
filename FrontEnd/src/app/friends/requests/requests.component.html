@@ -1,6 +1,6 @@
-<h1>Solicitudes</h1>
+<h1>{{this.strings.UsersRequests[0].Title}}</h1>
 <ul *ngFor="let request of requests">
-  <li *ngIf="request.relacion == 'Solicitud'">
+  <li *ngIf="request.relacion === 'Solicitud'">
     <img [src]="request.foto_perfil" [alt]="request.username">
     <p>
       {{request.username}}
@@ -15,4 +15,4 @@
     </p>
   </li>
 </ul>
-<p *ngIf="requests == false">No cuenta con solicitudes</p>
+<p *ngIf="!requests">{{this.strings.UsersRequests[0].NoRequests}}</p>

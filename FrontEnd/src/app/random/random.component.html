@@ -1,21 +1,21 @@
 
   <div class="background">
   <mat-card>
-      <h1 class="mat-h1">Buscar sala aleatoria</h1>
+      <h1 class="mat-h1">{{this.strings.RandomLobby[0].Title}}</h1>
       <form [formGroup]="RandomQueue" (ngSubmit)="onSubmit()">
-        <label id="Chat-type-label">Tipo de chat:
+        <label id="Chat-type-label">{{this.strings.RandomLobby[0].ChatType}}
           &nbsp;
           <mat-radio-group formControlName="Type" aria-label="Type" required>
-            <mat-radio-button value="Oral">Chat de voz</mat-radio-button>
+            <mat-radio-button value="Oral">{{this.strings.RandomLobby[0].Voice}}</mat-radio-button>
             &nbsp;
-            <mat-radio-button value="Escrita">Chat escrito</mat-radio-button>
+            <mat-radio-button value="Escrita">{{this.strings.RandomLobby[0].Text}}</mat-radio-button>
           </mat-radio-group>
         </label>
         <br>
-        <label id="Chat-language">Tipo de chat:
+        <label id="Chat-language">{{this.strings.RandomLobby[0].Language}}
           &nbsp;
           <mat-form-field>
-            <mat-label>Lengua</mat-label>
+            <mat-label>{{this.strings.RandomLobby[0].LanguageLabel}}</mat-label>
             <mat-select formControlName="Language" required>
               <mat-option *ngFor="let language of languages" [value]="language.value">
                 {{language.viewValue}}
@@ -24,16 +24,21 @@
           </mat-form-field>
         </label>
         <br>
-        <label id="User-rol">Rol:
+        <label id="User-rol">{{this.strings.RandomLobby[0].Role}}
           &nbsp;
           <mat-radio-group formControlName="Rol" aria-label="Rol" required>
-            <mat-radio-button value="Moderador">Moderador</mat-radio-button>
+            <mat-radio-button value="Moderador">{{this.strings.RandomLobby[0].Moderator}}</mat-radio-button>
             &nbsp;
-            <mat-radio-button value="Participante">Participante</mat-radio-button>
+            <mat-radio-button value="Participante">{{this.strings.RandomLobby[0].Participant}}</mat-radio-button>
           </mat-radio-group>
         </label>
         <br><br>
-        <button mat-raised-button id="start-queue" [disabled]="!RandomQueue.valid">Buscar</button>
+        <button mat-raised-button id="start-queue" color="primary" [disabled]="!RandomQueue.valid || !user">{{this.strings.RandomLobby[0].Search}}</button>
       </form>
+    <div *ngIf="play">
+      <p *ngIf="searching">Esperando usuarios para abrir sala.</p>
+      <p>Tiempo: {{this.showMinutes}}:{{this.showSeconds}}</p>
+      <button mat-raised-button (click)="pauseTimer()">Stop waiting</button>
+    </div>
     </mat-card>
   </div>

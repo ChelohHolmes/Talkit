@@ -4,7 +4,7 @@
     <form [formGroup]="Search" (ngSubmit)="onSubmit()">
 
       <mat-form-field class="field">
-        <mat-label>Tema</mat-label>
+        <mat-label>{{this.strings.Custom[0].Topic}}</mat-label>
         <mat-select formControlName="Topics" [(ngModel)]="initial1" required>
           <mat-option *ngFor="let tema of Temas" [value]="tema.value">
             {{tema.viewValue}}
@@ -13,7 +13,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Idioma</mat-label>
+        <mat-label>{{this.strings.Custom[0].Language}}</mat-label>
         <mat-select formControlName="Languages" [(ngModel)]="initial2" required>
           <mat-option *ngFor="let idioma of languages" [value]="idioma.value">
             {{idioma.viewValue}}
@@ -22,7 +22,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Nivel</mat-label>
+        <mat-label>{{this.strings.Custom[0].Level}}</mat-label>
         <mat-select formControlName="Level" [(ngModel)]="initial3" required>
           <mat-option *ngFor="let nivel of Niveles" [value]="nivel.value">
             {{nivel.viewValue}}
@@ -31,7 +31,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Chat</mat-label>
+        <mat-label>{{this.strings.Custom[0].Chat}}</mat-label>
         <mat-select formControlName="Chats" [(ngModel)]="initial4" required>
           <mat-option *ngFor="let chat of Chats" [value]="chat.value">
             {{chat.viewValue}}
@@ -39,7 +39,7 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-stroked-button type="submit" style="padding-left: 18px;" [disabled]="!Search.valid">Filtrar</button>
+      <button mat-stroked-button type="submit" style="padding-left: 18px;" [disabled]="!Search.valid">{{this.strings.Custom[0].Filter}}</button>
     </form>
   </div>
 
@@ -51,32 +51,32 @@
       </ng-container>
 
       <ng-container matColumnDef="privacy">
-        <th mat-header-cell *matHeaderCellDef>Privacidad</th>
-        <td mat-cell *matCellDef="let hamana"> {{hamana.privacidad}} </td>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Privacy}}</th>
+        <td mat-cell *matCellDef="let hamana"><mat-icon>{{hamana.privacy}}</mat-icon></td>
       </ng-container>
 
       <ng-container matColumnDef="chat">
-        <th mat-header-cell *matHeaderCellDef>Chat</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Chat}}</th>
         <td mat-cell *matCellDef="let hamana"> {{hamana.tipo_conv}} </td>
       </ng-container>
 
       <ng-container matColumnDef="topic">
-        <th mat-header-cell *matHeaderCellDef>Tema</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Topic}}</th>
         <td mat-cell *matCellDef="let hamana"> {{hamana.tema}} </td>
       </ng-container>
 
       <ng-container matColumnDef="language">
-        <th mat-header-cell *matHeaderCellDef>Idioma</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Topic}}</th>
         <td mat-cell *matCellDef="let hamana"> {{hamana.lengua}} </td>
       </ng-container>
 
       <ng-container matColumnDef="participants">
-        <th mat-header-cell *matHeaderCellDef>Participantes</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Participants}}</th>
         <td mat-cell *matCellDef="let hamana"> {{hamana.participantes_cant}} </td>
       </ng-container>
 
       <ng-container matColumnDef="moderator">
-        <th mat-header-cell *matHeaderCellDef>Moderador</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Moderator}}</th>
         <td mat-cell *matCellDef="let i = index">
           <mat-checkbox
             [(ngModel)]="moderator[i]"
@@ -86,12 +86,12 @@
       </ng-container>
 
       <ng-container matColumnDef="level">
-        <th mat-header-cell *matHeaderCellDef>Nivel</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Level}}</th>
         <td mat-cell *matCellDef="let hamana"> {{hamana.nivel}} </td>
       </ng-container>
 
       <ng-container matColumnDef="kicking">
-        <th mat-header-cell *matHeaderCellDef>Cambio de tema</th>
+        <th mat-header-cell *matHeaderCellDef>{{this.strings.Custom[0].Change}}</th>
         <td mat-cell *matCellDef="let i = index">
           <mat-checkbox
             [(ngModel)]="changeSubject[i]"
@@ -103,7 +103,7 @@
       <ng-container matColumnDef="button">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let i = index">
-          <button (click)="onClick(i)">entrar</button>
+          <button (click)="onClick(i)">{{this.strings.Custom[0].Join}}</button>
         </td>
       </ng-container>
 
@@ -114,7 +114,7 @@
 
   <br>
   <div>
-    <button (click)="onCreate()">Crear sala</button>
+    <button (click)="onCreate()">{{this.strings.Custom[0].Create}}</button>
   </div>
 
   </mat-card>

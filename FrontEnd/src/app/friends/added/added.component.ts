@@ -3,6 +3,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {FriendsService} from '../../services/friends.service';
 import {MatSnackBar} from '@angular/material';
 import {Md5} from 'ts-md5';
+import spanish from '../../language/string_es.json';
+import english from '../../language/string_en.json';
 
 @Component({
   selector: 'app-added',
@@ -16,16 +18,21 @@ export class AddedComponent implements OnInit {
   private sent: any;
   private friends: any;
   private user: string;
+  strings: any;
 
   constructor(private http: FriendsService, private snack: MatSnackBar) { }
 
   ngOnInit() {
+    if (sessionStorage.getItem('lan') === 'es') {
+      this.strings = spanish;
+    } else {
+      this.strings = english;
+    }
     this.user = sessionStorage.getItem('user');
     // console.log(user);
-    this.http.postShowFriends(this.user).subscribe(data => {
-      this.friends = data;
-      console.log(this.friends);
-    });
+    if (this.user) {
+      this.getData();
+    }
 
     this.addFriend = new FormGroup({
       username: new FormControl()
@@ -33,6 +40,12 @@ export class AddedComponent implements OnInit {
 
     this.searchFriend = new FormGroup({
       friend: new FormControl()
+    });
+  }
+
+  getData() {
+    this.http.postShowFriends(this.user).subscribe(data => {
+      this.friends = data;
     });
   }
 
@@ -81,7 +94,12 @@ export class AddedComponent implements OnInit {
 
   Message(index) {
     // console.log(index);
-    const id = Md5.hashStr(this.friends[index].id_usuario_recibe);
+    const id1 = +this.friends[index].id_usuario_recibe;
+    const id2 = +this.friends[index].id_usuario_envia;
+    const idER = id1 + id2;
+    const ids = idER.toString();
+    const id = Md5.hashStr(ids);
+    sessionStorage.setItem('id', this.friends[index].id_usuario_recibe);
     window.open('http://localhost:4200/chat?i=' + id);
   }
 }

@@ -4,6 +4,7 @@ import {RecoveryComponent} from '../recovery/recovery.component';
 import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {LoginService} from '../services/login.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -13,8 +14,10 @@ import {LoginService} from '../services/login.service';
 export class LoginComponent implements OnInit {
   private sent: any;
   private incorrect: boolean;
+  private isBanned: boolean;
 
-  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private http: LoginService, private router: Router) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private http: LoginService, private router: Router, private dialogRef: MatDialogRef<LoginComponent>) { }
 
   password: string;
   user: string;
@@ -42,10 +45,14 @@ export class LoginComponent implements OnInit {
       // console.log(this.sent);
       if (this.sent === 1) {
         this.incorrect = true;
+      } else if (this.sent === 2) {
+        this.isBanned = true;
       } else {
+        this.dialogRef.close();
         this.router.navigate(['/Home']);
         // console.log('Home');
         sessionStorage.setItem('user', this.UserLogin.controls.User.value);
+        sessionStorage.setItem('connected', '1');
         // return true;
       }
     });

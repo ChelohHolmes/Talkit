@@ -53,3 +53,17 @@ h2{
   font-size: 70%;
   text-align: center;
 }
+
+p {
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 80%;
+}
+
+h3 {
+  @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  font-family: 'Montserrat', sans-serif;
+  color: black;
+  font-size: 80%;
+}

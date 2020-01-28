@@ -4,6 +4,9 @@ import {ISelect} from '../register/register.component';
 import {Router} from '@angular/router';
 import {CustomService} from '../services/custom.service';
 import {MatSnackBar} from '@angular/material';
+import spanish from '../language/string_es.json';
+import english from '../language/string_en.json';
+import {Md5} from 'ts-md5';
 
 @Component({
   selector: 'app-custom-create',
@@ -100,10 +103,16 @@ export class CustomCreateComponent implements OnInit {
     {value: 'Publica', viewValue: 'Sala pública'},
     {value: 'Privada', viewValue: 'Sala privada'}
   ];
+  strings: any;
 
   constructor(private formBuilder: FormBuilder, private http: CustomService, private router: Router, private snack: MatSnackBar) { }
 
   ngOnInit() {
+    if (sessionStorage.getItem('lan') === 'es') {
+      this.strings = spanish;
+    } else {
+      this.strings = english;
+    }
     this.NewCustom = this.formBuilder.group({
       Password: [this.password, [
         Validators.required,
@@ -129,7 +138,6 @@ export class CustomCreateComponent implements OnInit {
   }
 
   onChangeTopic() {
-    // console.log(this.NewCustom.value.Topic);
     this.topicSelected = this.NewCustom.value.Topic;
   }
 
@@ -149,11 +157,9 @@ export class CustomCreateComponent implements OnInit {
       this.password = '';
     }
     const that = this;
-    window.setTimeout(hamana => {
+    window.setTimeout(() => {
       that.privacySelected = that.NewCustom.value.Privacy;
     }, 1);
-    // console.log(this.NewCustom.valid);
-    // console.log(this.NewCustom.value.Password);
   }
 
   onChanges(): void {
@@ -164,15 +170,12 @@ export class CustomCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.NewCustom.value);
     if (this.NewCustom.value.Topic === 'fijo' && this.NewCustom.value.Topics === null) {
       this.noTopic = true;
       this.onChangeTopic();
-      // console.log(this.noTopic);
     } else if (this.NewCustom.value.Topic === 'libre' && this.NewCustom.value.FreeTopic === null) {
       this.noFreeTopic = true;
       this.onChangeTopic();
-      // console.log(this.noFreeTopic);
     } else if (this.NewCustom.value.Moderator === 'false' && this.NewCustom.value.Participants === 11) {
       this.errorParticipants = true;
       this.onChangeType();
@@ -183,9 +186,14 @@ export class CustomCreateComponent implements OnInit {
       this.NewCustom.value.user = sessionStorage.getItem('user');
       const form = JSON.stringify(this.NewCustom.value);
       this.http.postCreate(form).subscribe(data => {
-        // console.log(data);
         if (data) {
-          this.router.navigate(['/']);
+          sessionStorage.setItem('type', this.NewCustom.value.ChatType);
+          sessionStorage.setItem('room', data);
+          sessionStorage.setItem('creator', '1');
+          sessionStorage.setItem('custom', '0');
+          const md5 = new Md5();
+          const lol = md5.appendStr(data).end();
+          this.router.navigate(['/lobby/' + lol]);
         } else {
           this.snack.open('Error al crear sala', 'OK');
         }

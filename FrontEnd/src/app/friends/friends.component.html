@@ -1,14 +1,19 @@
 <div class="container">
-  <button mat-stroked-button (click)="onAdded()">Amigos</button>
-  <button mat-stroked-button (click)="onRequests()">Solicitudes</button>
-  <button mat-stroked-button (click)="onBlocked()">Bloqueados</button>
+  <button mat-stroked-button (click)="onAdded()">{{this.strings.FriendsToolbar[0].Friends}}</button>
+  <button mat-stroked-button (click)="onRequests()">{{this.strings.FriendsToolbar[0].Requests}}</button>
+  <button mat-stroked-button (click)="onBlocked()">{{this.strings.FriendsToolbar[0].Blocked}}</button>
 </div>
 <div style="padding-bottom: 50px">
-  <app-added *ngIf="bAdded; else requests"></app-added>
-  <ng-template #requests>
-    <app-requests *ngIf="bRequests; else blocked"></app-requests>
-  </ng-template>
-  <ng-template #blocked>
-    <app-blocked *ngIf="bBlocked"></app-blocked>
-  </ng-template>
+  <div *ngIf="!user" style="text-align: center">
+    <h3>Inicie sesión</h3>
+  </div>
+  <div *ngIf="user">
+    <app-added *ngIf="bAdded; else requests"></app-added>
+    <ng-template #requests>
+      <app-requests *ngIf="bRequests; else blocked"></app-requests>
+    </ng-template>
+    <ng-template #blocked>
+      <app-blocked *ngIf="bBlocked"></app-blocked>
+    </ng-template>
+  </div>
 </div>

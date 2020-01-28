@@ -6,6 +6,8 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 import {CustomPassComponent} from '../custom-pass/custom-pass.component';
 import {Router} from '@angular/router';
 import {CustomCreateComponent} from '../custom-create/custom-create.component';
+import spanish from '../language/string_es.json';
+import english from '../language/string_en.json';
 
 @Component({
   selector: 'app-custom',
@@ -18,41 +20,17 @@ export class CustomComponent implements OnInit {
   initial2 = 'null';
   initial3 = 'null';
   initial4 = 'null';
+  private sent: any;
+  moderator = [];
+  changeSubject = [];
+  size: number;
+  private points: any;
+  strings: any;
 
-  languages: ISelect[] = [
-    {value: 'null', viewValue: 'Cualquiera'},
-    {value: 'Español', viewValue: 'Español'},
-    {value: 'Inglés', viewValue: 'English'},
-    {value: 'Francés', viewValue: 'Français'},
-    {value: 'Alemán', viewValue: 'Deutsch'},
-    {value: 'Italiano', viewValue: 'Italiano'},
-    {value: 'Portugués', viewValue: 'Português'},
-    {value: 'Ruso', viewValue: 'русский'},
-    {value: 'Chino', viewValue: '中国'},
-    {value: 'Japonés', viewValue: '日本語'},
-    {value: 'Coreano', viewValue: '한국어'}
-  ];
-
-  Temas: ISelect [] = [
-    {value: 'null', viewValue: 'Cualquiera'},
-    {value: 'Viajes', viewValue: 'Viajes'},
-    {value: 'Familia', viewValue: 'Familia'},
-    {value: 'Musica', viewValue: 'Musica'}
-  ];
-
-  Niveles: ISelect [] = [
-    {value: 'null', viewValue: 'Cualquiera'},
-    {value: 'Basico', viewValue: 'Básico'},
-    {value: 'Intermedio', viewValue: 'Intermedio'},
-    {value: 'Avanzado', viewValue: 'Avanzado'}
-  ];
-
-  Chats: ISelect [] = [
-    {value: 'null', viewValue: 'Cualquiera'},
-    {value: 'Escrita', viewValue: 'Escrita'},
-    {value: 'Oral', viewValue: 'Oral'}
-  ];
-
+  languages: ISelect[];
+  Temas: ISelect [];
+  Niveles: ISelect [];
+  Chats: ISelect [];
   Search: FormGroup;
 
   displayedColumns: string[] = [
@@ -67,19 +45,21 @@ export class CustomComponent implements OnInit {
     'privacy',
     'button'
   ];
-  private sent: any;
-  moderator = [];
-  changeSubject = [];
-  size: number;
-  private points: any;
 
   constructor(private formBuilder: FormBuilder,
               private http: CustomService,
               private dialog: MatDialog,
               private router: Router,
-              private snack: MatSnackBar) { }
+              private snack: MatSnackBar,
+  ) { }
 
   ngOnInit() {
+    if (sessionStorage.getItem('lan') === 'es') {
+      this.strings = spanish;
+    } else {
+      this.strings = english;
+    }
+    this.arrays();
     this.Search = this.formBuilder.group(   {
       Topics: new FormControl(),
       Languages: new FormControl(),
@@ -91,15 +71,18 @@ export class CustomComponent implements OnInit {
       // console.log(this.sent);
       this.size = this.sent.length;
       for (let i = 0; i < this.size; i++) {
+        if (this.sent[i].privacidad === 'Privada') {
+          this.sent[i].privacy = 'lock';
+        } else {
+          this.sent[i].privacy = 'lock_open';
+        }
         this.moderator[i] = this.sent[i].moderador === 't';
         this.changeSubject[i] = this.sent[i].cambio_tema === 't';
       }
     });
     this.http.postPoints(sessionStorage.getItem('user')).subscribe(data => {
-      this.points = data;
-      console.log(this.points);
+      this.points = data[0].puntos;
     });
-    console.log('r: ' + sessionStorage.getItem('r'));
   }
 
   onSubmit() {
@@ -110,6 +93,11 @@ export class CustomComponent implements OnInit {
       this.sent = data;
       this.size = this.sent.length;
       for (let i = 0; i < this.size; i++) {
+        if (this.sent[i].privacidad === 'Privada') {
+          this.sent[i].privacy = 'lock';
+        } else {
+          this.sent[i].privacy = 'lock_open';
+        }
         this.moderator[i] = this.sent[i].moderador === 't';
         this.changeSubject[i] = this.sent[i].cambio_tema === 't';
       }
@@ -121,20 +109,19 @@ export class CustomComponent implements OnInit {
     if (this.sent[index].privacidad === 'Privada') {
       if (this.points >= 2) {
         sessionStorage.setItem('r', this.sent[index].no_salap);
-        this.dialog.open(CustomPassComponent);
+        const dialog = this.dialog.open(CustomPassComponent);
+        dialog.afterClosed().subscribe(() => {
+          sessionStorage.removeItem('r');
+        });
       } else {
         this.snack.open('Puntos insuficientes', 'OK');
       }
     } else {
       if (this.points >= 1) {
-        const form = JSON.stringify({user: sessionStorage.getItem('user'), room: this.sent[index].no_salap} );
-        console.log(form);
-        this.http.postJoin(form).subscribe(data => {
-          if (data === 1) {
-            this.router.navigate(['/']);
-          } else {
-            this.snack.open('Hubo un problema al entrar.', 'OK');
-          }
+        sessionStorage.setItem('r', this.sent[index].no_salap);
+        const dialog = this.dialog.open(CustomPassComponent);
+        dialog.afterClosed().subscribe(() => {
+          sessionStorage.removeItem('r');
         });
       } else {
         this.snack.open('Puntos insuficientes', 'OK');
@@ -147,6 +134,52 @@ export class CustomComponent implements OnInit {
       this.dialog.open(CustomCreateComponent);
     } else {
       this.snack.open('Puntos insuficientes', 'OK');
+    }
+  }
+
+  arrays() {
+    this.languages = [
+      {value: 'null', viewValue: this.strings.Topic[0][0]},
+      {value: 'Español', viewValue: 'Español'},
+      {value: 'Inglés', viewValue: 'English'},
+      {value: 'Francés', viewValue: 'Français'},
+      {value: 'Alemán', viewValue: 'Deutsch'},
+      {value: 'Italiano', viewValue: 'Italiano'},
+      {value: 'Portugués', viewValue: 'Português'},
+      {value: 'Ruso', viewValue: 'русский'},
+      {value: 'Chino', viewValue: '中国'},
+      {value: 'Japonés', viewValue: '日本語'},
+      {value: 'Coreano', viewValue: '한국어'}
+    ];
+    // tslint:disable-next-line:forin
+    for (const stringsKey in this.strings.Topic[0]) {
+      if (stringsKey === '0') {
+        this.Temas = [
+          {value: 'null', viewValue: this.strings.Topic[0][stringsKey]},
+        ];
+      } else {
+        this.Temas.push(
+          {value: spanish.Topic[0][stringsKey], viewValue: this.strings.Topic[0][stringsKey]}
+        );
+      }
+    }
+    this.Niveles = [
+      {value: 'null', viewValue: this.strings.Topic[0][0]}
+    ];
+    // tslint:disable-next-line:forin
+    for (const stringsKey in this.strings.Level[0]) {
+      this.Niveles.push(
+        {value: spanish.Level[0][stringsKey], viewValue: this.strings.Level[0][stringsKey]}
+      );
+    }
+    this.Chats = [
+      {value: 'null', viewValue: this.strings.Topic[0][0]}
+    ];
+    // tslint:disable-next-line:forin
+    for (const stringsKey in this.strings.Conversation[0]) {
+      this.Chats.push(
+        {value: spanish.Conversation[0][stringsKey], viewValue: this.strings.Conversation[0][stringsKey]}
+      );
     }
   }
 }

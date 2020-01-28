@@ -14,9 +14,11 @@ import { TermsOfUseComponent } from './terms-of-use/terms-of-use.component';
 import { PrivacyPoliciesComponent } from './privacy-policies/privacy-policies.component';
 import { ConfigurationComponent } from './configuration/configuration.component';
 import { UpdateInfoComponent } from './update-info/update-info.component';
-import {VerifiedComponent} from './verified/verified.component';
-import {ChatComponent} from './chat/chat.component';
-import {VoiceRoomComponent} from './voice-room/voice-room.component';
+import { VerifiedComponent } from './verified/verified.component';
+import { ChatComponent } from './chat/chat.component';
+import { VoiceRoomComponent } from './voice-room/voice-room.component';
+import { LobbyComponent } from "./lobby/lobby.component";
+import { FaqComponent } from "./faq/faq.component";
 
 const routes: Routes = [
   { path: '', component: IndexComponent },
@@ -35,7 +37,9 @@ const routes: Routes = [
   { path: 'Verified', component: VerifiedComponent },
   { path: 'Update-info', component: UpdateInfoComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'voice', component: VoiceRoomComponent }
+  { path: 'voice', component: VoiceRoomComponent },
+  { path: 'lobby/:r', component: LobbyComponent },
+  {path: 'FAQ', component: FaqComponent}
 ];
 
 @NgModule({

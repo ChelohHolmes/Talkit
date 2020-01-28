@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/Talkit</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="talkit@talkit.postgres.database.azure.com" uuid="60f25353-3002-459e-ae05-a3e1e07b3870">
+      <driver-ref>azure.ms</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://talkit.postgres.database.azure.com:1433;database=talkit</jdbc-url>
+    </data-source>
   </component>
 </project>

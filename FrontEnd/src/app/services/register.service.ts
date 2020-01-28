@@ -8,6 +8,7 @@ import {HttpClient} from '@angular/common/http';
 export class RegisterService {
   private url = '/register.php';
   private urls = '/Verification.php';
+  private urlD = '/Delete.php';
 
   constructor(private http: HttpClient) { }
 
@@ -17,5 +18,9 @@ export class RegisterService {
 
   posts(form) {
     return this.http.post<any>(environment.serverUrl + this.urls, form);
+  }
+
+  postD(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlD, form);
   }
 }

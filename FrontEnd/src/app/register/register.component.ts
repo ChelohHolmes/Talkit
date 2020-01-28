@@ -92,8 +92,11 @@ export class RegisterComponent implements OnInit {
           this.http.posts(form).subscribe(dats => {
             this.sent = dats;
             console.log(this.sent);
-            if (this.sent) {
+            if (this.sent !== 0) {
               this.snackBar.open('Error al enviar correo', 'OK', {});
+              this.http.postD(this.user).subscribe(dataD => {
+                console.log(dataD);
+              });
             } else {
               this.snackBar.open('Correo de verificación enviado', 'OK', {});
               // localStorage.setItem('register', this.UserNew.controls.Email.value);

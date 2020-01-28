@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FriendsService} from '../services/friends.service';
 import * as PeerS from 'simple-peer';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {Socket} from 'ngx-socket-io';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-chat',
@@ -21,32 +24,46 @@ export class ChatComponent implements OnInit {
   private onRemoteDataChannel: any;
   private localMessages: string;
   private remoteMessages: string;
+  private messages: any;
+  private message: string;
+  private Message: FormGroup;
 
 
-  constructor(private route: ActivatedRoute, private http: FriendsService) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private route: ActivatedRoute, private http: FriendsService, private formBuilder: FormBuilder, private socket: Socket, private snack: MatSnackBar) { }
 
   ngOnInit() {
+    this.messages = [];
+    this.message = '';
+    this.Message = this.formBuilder.group({Message: this.message});
     this.connected = false;
     this.localMessages = '';
     this.remoteMessages = '';
     // PeerS.on('signal', data => {
     //   this.yours = data;
-      this.route.queryParams.subscribe(params => {
-        this.user = sessionStorage.getItem('user');
-        this.id = params.i;
-      });
-      const form = JSON.stringify({user: this.user, friendId: this.id, connectId: this.yours});
+    //   this.route.queryParams.subscribe(params => {
+    //     this.user = sessionStorage.getItem('user');
+    //     this.id = params.i;
+    //   });
+    this.user = sessionStorage.getItem('user');
+    const id = sessionStorage.getItem('id');
+    sessionStorage.removeItem('id');
+    if (id) {
+      const form = JSON.stringify({user: this.user, friendId: id});
       this.http.postChat(form).subscribe(dataFriends => {
         this.friends = dataFriends;
-        console.log(this.friends);
       });
+    } else {
+      this.snack.open('Intenta despues, pues', 'OK');
+    }
     // });
     // const forms = JSON.stringify({user: this.user, idR: this.friends[0].id_usuario_recibe});
     // this.http.postId(forms).subscribe(data => {
     //   console.log(data);
     // });
-    this.localConnection = new RTCPeerConnection();
-    console.log(this.localConnection);
+    // this.localConnection = new RTCPeerConnection();
+    // console.log(this.localConnection);
+    this.checkMessages();
   }
 
   // disconnect() {
@@ -127,4 +144,14 @@ export class ChatComponent implements OnInit {
   //   textarea.value = '';
   // }
 
+  sendMessage() {
+    this.socket.emit('message', {user: this.user, message: this.message});
+    this.message = '';
+  }
+
+  checkMessages() {
+    this.socket.on('message', data => {
+      this.messages.push(data);
+    });
+  }
 }

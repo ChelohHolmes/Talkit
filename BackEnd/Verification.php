@@ -24,6 +24,10 @@ if ($valor == 0) {
 }
 else {
     $res = pg_query($dataB, $query);
-    mail($data["Email"], $sbj, $msg, $headers);
+    try {
+        mail($data["Email"], $sbj, $msg, $headers);
+    } catch (Exception $e) {
+        echo 1;
+    }
     echo 0;
 }

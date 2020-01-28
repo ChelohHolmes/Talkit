@@ -1,17 +1,33 @@
-<h1 mat-dialog-title style="text-align: center" (window:beforeunload)='doSomething()'>Sala privada</h1>
-<form [formGroup]="CustomPass" (ngSubmit)="onSubmit()">
+<h1 mat-dialog-title style="text-align: center" (window:beforeunload)='doSomething()'>{{this.strings.CustomPass[0].PrivateLobby}}</h1>
+<div *ngIf="description">
+  <h3>{{this.strings.CustomPass[0].Description}}</h3>
+  <p>{{sent[0].descripcion}}</p>
+</div>
+<div *ngIf="rules">
+  <h3>{{this.strings.CustomPass[0].Rules}}</h3>
+  <p>{{this.strings.Rules[0][2]}}</p>
+</div>
+<form *ngIf="isPrivate; else notPrivate" [formGroup]="CustomPass" (ngSubmit)="onSubmit()" autocomplete="new-password">
   <br>
   <mat-form-field>
     <label>
-      <input matInput placeholder="Ingresa tu contraseña" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
+      <input matInput placeholder="{{this.strings.CustomPass[0].PasswordEntry}}" [type]="hide ? 'password' : 'text'" formControlName="Password" [(ngModel)]="password">
     </label>
     <mat-icon matSuffix (click)="hide = !hide">
       {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    <mat-error>Contraseña invalida</mat-error>
+    <mat-error>{{this.strings.CustomPass[0].InvalidPassword}}</mat-error>
   </mat-form-field>
   <br>
   <div *ngIf="incorrect">
-    <h2>Error al ingresar</h2>
+    <h2>{{this.strings.CustomPass[0].Error}}</h2>
   </div>
-  <button type="submit" id="login-button">Ingresar</button>
+  <button type="submit" id="login-button">{{this.strings.CustomPass[0].Join}}</button>
 </form>
+<ng-template #notPrivate>
+  <div *ngIf="isUndefined; else notDefined">
+    <button (click)="join()">{{this.strings.CustomPass[0].Join}}</button>
+  </div>
+  <ng-template #notDefined>
+    <p>Error</p>
+  </ng-template>
+</ng-template>

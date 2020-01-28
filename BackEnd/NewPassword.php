@@ -17,7 +17,7 @@ if ($valor == 0) {
 } else {
     $res = pg_query($dataB, $queryp);
     $pass = pg_fetch_result($res, 0, 0 );
-    if (strcmp($pass, $data['OldPassword']) === 0) {
+    if (strcmp($pass, $data['OldPassword']) == 0 && strcmp($pass, $data['NewPassword']) != 0) {
         $res = pg_query($dataB, $query);
         echo 0; //Correcto
     } else {

@@ -79,16 +79,16 @@ export class UpdateInfoComponent implements OnInit {
     this.NewInfo.value.User = sessionStorage.getItem('username');
     const form = JSON.stringify(this.NewInfo.value);
     console.log(form);
-    this.http.postEU(form).subscribe(data => {
-      this.sent = data;
-      console.log(this.sent);
-      if (this.sent === 1) {
-        this.incorrect = true;
-      } else {
-        this.correct = true;
-        console.log(this.sent);
-      }
-    });
+    // this.http.postEU(form).subscribe(data => {
+    //   this.sent = data;
+    //   console.log(this.sent);
+    //   if (this.sent === 1) {
+    //     this.incorrect = true;
+    //   } else {
+    //     this.correct = true;
+    //     console.log(this.sent);
+    //   }
+    // });
   }
 
   onFileChanged(event) {

@@ -9,6 +9,7 @@ export class ToolbarService {
   private urlP = '/ShowPoints.php';
   private urlD = '/Disconnect.php';
   private urlSEP = '/ShowEditPreferences.php';
+  private urlChange = '/ChangeStatus.php';
 
   constructor(private http: HttpClient) { }
 
@@ -22,5 +23,9 @@ export class ToolbarService {
 
   postSEP(form) {
     return this.http.post<any>(environment.serverUrl + this.urlSEP, form);
+  }
+
+  postChange(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlChange, form);
   }
 }

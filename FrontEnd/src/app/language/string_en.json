@@ -1,5 +1,261 @@
 {
-    "hi": "Welcome ",
-    "got": "You have ",
-    "points": " points"
+  "Audio":[
+    {
+      "Title":"Configuration",
+      "Status":"Status",
+      "Online":"Online",
+      "Busy":"Busy",
+      "Away":"Away",
+      "Disconnected":"Disconnected",
+      "Input":"Input Devices",
+      "Output":"Output Devices",
+      "Languages":"Languages",
+      "Volume":"Output Volume",
+      "Level":"Level",
+      "Save":"Save"
+    }
+  ],
+  "Configuration":[
+    {
+      "Configuration":"Configuration",
+      "Update":"Update information",
+      "Password":"Change password"
+    }
+  ],
+  "Confirmation":[
+    {
+      "Title":"Confirmation",
+      "Confirmation":"Are you sure you want to exit the room?",
+      "No":"No, I want to go back",
+      "Yes":"Yes, I'm sure"
+    }
+  ],
+  "Custom":[
+    {
+      "Topic":"Topic",
+      "Language":"Language",
+      "Level":"Level",
+      "Chat":"Chat",
+      "Filter":"Filter",
+      "Privacy":"Privacy",
+      "Participants":"Participants",
+      "Moderator":"Moderator",
+      "Change":"Topic change",
+      "Join":"join",
+      "Create":"Create lobby"
+    }
+  ],
+  "CustomCreate":[
+    {
+      "Title":"Create lobby",
+      "Topic":"Topic",
+      "Change":"Change",
+      "ChooseTopic":"Choose a topic",
+      "Error1":"Error: you have to choose a topic.",
+      "FreeTopic":"Free topic",
+      "Error2":"Error: you have to define a topic",
+      "ChatType":"Chat type",
+      "Moderator":"Moderator",
+      "Participants":"Participants",
+      "Error3":"Error: a free lobby cannot have 11 participants",
+      "Language":"Language",
+      "Level":"Level",
+      "Description":"Description",
+      "Privacy":"Privacy",
+      "PasswordInput":"Enter a password",
+      "PasswordLength":"Minimum length of 4 characters",
+      "CreateButton":"Create"
+    }
+  ],
+  "CustomPass":[
+    {
+      "PrivateLobby":"Private lobby",
+      "PasswordEntry":"Enter your password",
+      "InvalidPassword":"Invalid password",
+      "Error":"Join failed",
+      "Join":"Join",
+      "Description":"Description:",
+      "Rules":"Rules:"
+    }
+  ],
+  "Footer":[
+    {
+      "FAQ":"FAQ",
+      "Privacy":"Privacy policies",
+      "Terms":"Terms of use"
+    }
+  ],
+  "UsersAdded":[
+    {
+      "Title":"Friends",
+      "Add":"Add as friend",
+      "Title2":"Pending requests"
+    }
+  ],
+  "UsersBlocked":[
+    {
+      "Title":"Blocked",
+      "NoBlocks":"You have no blocked users"
+    }
+  ],
+  "UsersRequests":[
+    {
+      "Title":"Requests",
+      "NoRequests":"You have no friend requests"
+    }
+  ],
+  "FriendsToolbar":[
+    {
+      "Friends":"Friends",
+      "Requests":"Solicitudes",
+      "Blocked":"Bloqueados"
+    }
+  ],
+  "Home":[
+    {
+      "Friends":"Friends",
+      "RandomLobby":"Random lobby",
+      "CustomLobby":"Custom lobby",
+      "Translator":"Translator"
+    }
+  ],
+  "News":[
+    {
+      "Job":"Development team",
+      "Title":"Talkit launch!",
+      "Content1":"Talkit! finally open to all users in languages: Spanish, English, French, Russian, German, Italian, Portuguese, Chinese, Japanese and Korean. Enter to random lobbies to get points and be able to open your own private lobby with the characteristics of your preference!",
+      "Content2":"Remember, the more you participate helping the comunity grow, the closer you will be to be part of our featured users. Good luck!",
+      "Button":"Yay!"
+    }
+  ],
+  "RandomLobby":[
+    {
+      "Title":"Search random lobby",
+      "ChatType":"Chat type:",
+      "Voice":"Voice chat",
+      "Text":"Text chat",
+      "Language":"Language:",
+      "LanguageLabel":"Language",
+      "Role":"Role:",
+      "Moderator":"Moderator",
+      "Participant":"Participant",
+      "Search":"Search"
+    }
+  ],
+  "ToolbarUser":[
+    {
+      "Welcome":"Welcome",
+      "Have":"You have",
+      "Points":"points and",
+      "Votes":"votes",
+      "LogOut":"Log out",
+      "Exit":"Exit room"
+    }
+  ],
+  "Language":[
+    {
+      "en":"English",
+      "es":"Spanish",
+      "fr":"French",
+      "de":"German",
+      "it":"Italian",
+      "pt":"Portuguese",
+      "ru":"Russian",
+      "zh":"Chinese",
+      "ja":"Japanese",
+      "ko":"Korean"
+    }
+  ],
+  "Topic":[
+    {
+      "0":"Any",
+      "1":"Trips",
+      "2":"Experiences",
+      "3":"Habits",
+      "4":"Family",
+      "5":"Education",
+      "6":"Traditions",
+      "7":"Sports",
+      "8":"Small talk",
+      "9":"Videogames",
+      "10":"Technology",
+      "11":"Languages",
+      "12":"Slang",
+      "13":"Schedule",
+      "14":"Movies",
+      "15":"Series",
+      "16":"Top 5's",
+      "17":"Likes and dislikes",
+      "18":"Food",
+      "19":"Drinks",
+      "20":"Hobbies",
+      "21":"Grammar",
+      "22":"Social Media",
+      "23":"Celebrities",
+      "24":"College",
+      "25":"Short-term objectives",
+      "26":"Medium-term objectives",
+      "27":"Long-term objectives",
+      "28":"Economics",
+      "29":"Social life",
+      "30":"Friends",
+      "31":"Climate change",
+      "32":"Ecology",
+      "33":"Fitness",
+      "34":"Business",
+      "35":"Work",
+      "36":"Countries",
+      "37":"General culture",
+      "38":"Pop culture",
+      "39":"Art",
+      "40":"Science",
+      "41":"Dream house",
+      "42":"Dream job",
+      "43":"Describe yourself",
+      "44":"Fashion",
+      "45":"Urban tribes",
+      "46":"Accents",
+      "47":"Love",
+      "48":"Local jokes",
+      "49":"Quizzes",
+      "50":"Cartoons",
+      "51":"Random topic",
+      "52":"Free topic",
+      "53":"Fixed theme"
+    }
+  ],
+  "Rules":[
+    {
+      "1":"Be respectful to all users in the room",
+      "2":"No bad words allowed",
+      "3":"Don't spam the chat",
+      "4":"Must be active",
+      "5":"Respect the topic",
+      "6":"Keep it professional",
+      "7":"Do not discriminate ",
+      "8":"Do not touch controversial topics",
+      "9":"Do not fight",
+      "10":"Do not share/exchange personal information",
+      "11":"None"
+    }
+  ],
+  "Conversation":[
+    {
+      "0":"Oral",
+      "1":"Written"
+    }
+  ],
+  "Level":[
+    {
+      "0":"Basic",
+      "1":"Intermediate",
+      "2":"Advanced"
+    }
+  ],
+  "Privacy":[
+    {
+      "Private":"Private",
+      "Public":"Public"
+    }
+  ]
 }

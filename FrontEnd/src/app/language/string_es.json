@@ -1,5 +1,261 @@
 {
-    "hi": "Bienvenido ",
-    "got": "Tienes ",
-    "points": " puntos"
+  "Audio":[
+    {
+      "Title":"Configuración",
+      "Status":"Estado",
+      "Online":"En línea",
+      "Busy":"Ocupado",
+      "Away":"Ausente",
+      "Disconnected":"Desconectado",
+      "Input":"Dispositivos de entrada",
+      "Output":"Dispositivos de salida",
+      "Languages":"Idiomas",
+      "Volume":"Volumen de salida",
+      "Level":"Nivel",
+      "Save":"Guardar"
+    }
+  ],
+  "Configuration":[
+    {
+      "Configuration":"Configuración",
+      "Update":"Actualizar información",
+      "Password":"Cambiar contraseña"
+    }
+  ],
+  "Confirmation":[
+    {
+      "Title":"Confirmación",
+      "Confirmation":"¿Está seguro de querer salir de la sala?",
+      "No":"No, quiero volver",
+      "Yes":"Sí, estoy seguro"
+    }
+  ],
+  "Custom":[
+    {
+      "Topic":"Tema",
+      "Language":"Idioma",
+      "Level":"Nivel",
+      "Chat":"Chat",
+      "Filter":"Filtrar",
+      "Privacy":"Privacidad",
+      "Participants":"Participantes",
+      "Moderator":"Moderador",
+      "Change":"Cambio de tema",
+      "Join":"unirse",
+      "Create":"Crear sala"
+    }
+  ],
+  "CustomCreate":[
+    {
+      "Title":"Crear sala",
+      "Topic":"Tema",
+      "Change":"Cambiar",
+      "ChooseTopic":"Elige un tema",
+      "Error1":"Error: debe elegir un tema",
+      "FreeTopic":"Tema libre",
+      "Error2":"Error: debe de definir un tema",
+      "ChatType":"Tipo de chat",
+      "Moderator":"Moderador",
+      "Participants":"Participantes",
+      "Error3":"Error: una sala libre no puede tener 11 particpantes",
+      "Language":"Lenguaje",
+      "Level":"Nivel",
+      "Description":"Descripción",
+      "Privacy":"Privacidad",
+      "PasswordInput":"Ingresa la contraseña",
+      "PasswordLength":"Longitud mínima de 4 caracteres",
+      "CreateButton":"Crear"
+    }
+  ],
+  "CustomPass":[
+    {
+      "PrivateLobby":"Sala privadas",
+      "PasswordEntry":"Ingresa tu contraseña",
+      "InvalidPassword":"Contraseña invalida",
+      "Error":"Error al ingresar",
+      "Join":"Ingresar",
+      "Description":"Descripción:",
+      "Rules":"Reglas:"
+    }
+  ],
+  "Footer":[
+    {
+      "FAQ":"FAQ",
+      "Privacy":"Políticas de privacidad",
+      "Terms":"Términos de uso"
+    }
+  ],
+  "UsersAdded":[
+    {
+      "Title":"Amigos",
+      "Add":"Agregar como amigo",
+      "Title2":"Solicitudes pendientes"
+    }
+  ],
+  "UsersBlocked":[
+    {
+      "Title":"Bloqueos",
+      "NoBlocks":"No cuenta con bloqueos"
+    }
+  ],
+  "UsersRequests":[
+    {
+      "Title":"Solicitudes",
+      "NoRequests":"No cuenta con solicitudes"
+    }
+  ],
+  "FriendsToolbar":[
+    {
+      "Friends":"Amigos",
+      "Requests":"Solicitudes",
+      "Blocked":"Bloqueados"
+    }
+  ],
+  "Home":[
+    {
+      "Friends":"Amigos",
+      "RandomLobby":"Sala aleatoria",
+      "CustomLobby":"Sala personalizada",
+      "Translator":"Traductor"
+    }
+  ],
+  "News":[
+    {
+      "Job":"Equipo de desarrollo",
+      "Title":"Lanzamiento de Talkit!",
+      "Content1":"Talkit! por fin abierto para todo publico en los lenguajes: español, inglés, francés, ruso, italiano, portugués, chino, japonés y coreano. ¡Ingresa a salas aleatorias para conseguir y poder abrir tus propias salas privadas con las características de tu preferencia!",
+      "Content2":"Recuerda que entre más participes ayudando a crecer esta comunidad, más cerca estarás de ser un usuario destacado. ¡Suerte!",
+      "Button":"¡Sí!"
+    }
+  ],
+  "RandomLobby":[
+    {
+      "Title":"Buscar sala aleatoria",
+      "ChatType":"Tipo de chat:",
+      "Voice":"Chat de voz",
+      "Text":"Chat escrito",
+      "Language":"Lenguaje:",
+      "LanguageLabel":"Lenguaje",
+      "Role":"Rol:",
+      "Moderator":"Moderador",
+      "Participant":"Participante",
+      "Search":"Buscar"
+    }
+  ],
+  "ToolbarUser":[
+    {
+      "Welcome":"Bienvenido",
+      "Have":"Tienes",
+      "Points":"puntos y",
+      "Votes":"votos",
+      "LogOut":"Cerrar sesión",
+      "Exit":"Salir de sala"
+    }
+  ],
+  "Language":[
+    {
+      "en":"Inglés",
+      "es":"Español",
+      "fr":"Francés",
+      "de":"Alemán",
+      "it":"Italiano",
+      "pt":"Portugués",
+      "ru":"Ruso",
+      "zh":"Chino",
+      "ja":"Japonés",
+      "ko":"Coreano"
+    }
+  ],
+  "Topic":[
+    {
+      "0":"Cualquiera",
+      "1":"Viajes",
+      "2":"Experiencias",
+      "3":"Costumbres",
+      "4":"Familia",
+      "5":"Educación",
+      "6":"Tradiciones",
+      "7":"Deportes",
+      "8":"Charla",
+      "9":"Videojuegos",
+      "10":"Tecnología",
+      "11":"Lenguajes",
+      "12":"Jerga",
+      "13":"Horario",
+      "14":"Peliculas",
+      "15":"Series",
+      "16":"Tops 5",
+      "17":"Gustos y disgustos",
+      "18":"Comida",
+      "19":"Bebidas",
+      "20":"Hobbies",
+      "21":"Gramática",
+      "22":"Redes sociales",
+      "23":"Celebridades",
+      "24":"Universidad",
+      "25":"Objetivos a corto plazo",
+      "26":"Objetivos a mediano plazo",
+      "27":"Objetivos a largo plazo",
+      "28":"Economía",
+      "29":"Vida social",
+      "30":"Amigos",
+      "31":"Cambio climático",
+      "32":"Ecología",
+      "33":"Estado físico",
+      "34":"Negocios",
+      "35":"Trabajo",
+      "36":"Países",
+      "37":"Cultura general",
+      "38":"Cultura pop",
+      "39":"Arte",
+      "40":"Ciencia",
+      "41":"Casa de en sueño",
+      "42":"Trabajo de en sueño",
+      "43":"Descríbete",
+      "44":"Moda",
+      "45":"Tribus urbanas",
+      "46":"Acentos",
+      "47":"Amor",
+      "48":"Chistes locales",
+      "49":"Examenes",
+      "50":"Caricaturas",
+      "51":"Tema aleatorio",
+      "52":"Tema libre",
+      "53":"Tema fijo"
+    }
+  ],
+  "Rules":[
+    {
+      "1":"Se respetuoso con todos los usuarios de la sala",
+      "2":"Prohibido el uso de malas palabras",
+      "3":"No spammear el chat",
+      "4":"Debes mantenerte activo",
+      "5":"Respeta el tema",
+      "6":"Manten ambiente profesional",
+      "7":"No discriminar",
+      "8":"No tocar temas controversiales",
+      "9":"No pelear",
+      "10":"No compartir/intercambiar información profesional",
+      "11":"Ninguna"
+    }
+  ],
+  "Conversation":[
+    {
+      "0":"Oral",
+      "1":"Escrita"
+    }
+  ],
+  "Level":[
+    {
+      "0":"Básico",
+      "1":"Intermedio",
+      "2":"Avanzado"
+    }
+  ],
+  "Privacy":[
+    {
+      "Private":"Privada",
+      "Public":"Pública"
+    }
+  ]
 }

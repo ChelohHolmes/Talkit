@@ -1,12 +1,19 @@
-<mat-toolbar class="header" color="primary">
-  <div class="container" routerLink="Home">
+<mat-toolbar class="header" color="primary" *ngIf="isLoaded | async">
+  <div class="container" routerLink="Home" *ngIf="!inRoom">
+    <img alt="Angular Logo" src="https://cdn.discordapp.com/attachments/304829873468342283/567863692885229568/pic.png">
+    <span class="logo">&nbsp;Talkit!</span>
+  </div>
+  <div class="container" (click)="exit(false, false)" *ngIf="inRoom">
     <img alt="Angular Logo" src="https://cdn.discordapp.com/attachments/304829873468342283/567863692885229568/pic.png">
     <span class="logo">&nbsp;Talkit!</span>
   </div>
   <span class="big-space"></span>
-  <p class="mat-h3" style="padding-top: 20px">{{strings.hi}}</p>
-  <a mat-button routerLink="Configuration">{{user}}</a>
-  <p class="mat-h3" style="padding-top: 20px">{{this.strings.got}}{{points}}{{this.strings.points}}</p>
+  <p class="mat-h3" style="padding-top: 20px">{{this.strings.ToolbarUser[0].Welcome}}</p>
+  <a mat-button routerLink="Configuration" *ngIf="!inRoom && !searching">{{user}}</a>
+  <a mat-button (click)="exit(true, false)" *ngIf="inRoom">{{user}}</a>
+  <a mat-button (click)="exit(true, true)" *ngIf="searching">{{user}}</a>
+  <p class="mat-h3" style="padding-top: 20px">{{this.strings.ToolbarUser[0].Have}} {{points}} {{this.strings.ToolbarUser[0].Points}} {{votes}} {{this.strings.ToolbarUser[0].Votes}}</p>
   <span class="space"></span>
-  <a mat-flat-button (click)="onCS()" color="accent">Cerrar sesión</a>
+  <a mat-flat-button (click)="onCS()" color="accent" *ngIf="!inRoom">{{this.strings.ToolbarUser[0].LogOut}}</a>
+  <a mat-flat-button (click)="exit(false, false)" color="accent" *ngIf="inRoom">{{this.strings.ToolbarUser[0].Exit}}</a>
 </mat-toolbar>

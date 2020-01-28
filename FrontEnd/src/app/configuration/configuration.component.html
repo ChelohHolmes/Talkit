@@ -1,8 +1,8 @@
 <div class="content" style="padding-top: 55px">
     <div class="container">
-      <button mat-stroked-button (click)="onAudio()">Configuración</button>
-      <button mat-stroked-button (click)="onInfo()">Actualizar información</button>
-      <button mat-stroked-button (click)="onPass()">Cambiar contraseña</button>
+      <button mat-stroked-button (click)="onAudio()">{{this.strings.Configuration[0].Configuration}}</button>
+      <button mat-stroked-button (click)="onInfo()">{{this.strings.Configuration[0].Update}}</button>
+      <button mat-stroked-button (click)="onPass()">{{this.strings.Configuration[0].Password}}</button>
     </div>
     <app-audio *ngIf="bAudio; else random"></app-audio>
     <ng-template #random>

@@ -12,6 +12,7 @@ export class CustomService {
   private urlFilter = '/CustomFilter.php';
   private urlPoints = '/ShowPoints.php';
   private urlCreate = '/CustomCreate.php';
+  private urlRules = '/CustomRules.php';
 
   constructor(private http: HttpClient) { }
 
@@ -37,5 +38,9 @@ export class CustomService {
 
   postCreate(form) {
     return this.http.post<any>(environment.serverUrl + this.urlCreate, form);
+  }
+
+  postRules(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlRules, form);
   }
 }

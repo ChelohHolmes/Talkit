@@ -2,10 +2,10 @@
 
 class Database
 {
-    private static $dbName = 'Talkit' ;
-    private static $dbHost = 'localhost' ;
-    private static $dbUsername = 'postgres';
-    private static $dbUserPassword = 'postgres';
+    private static $dbName = 'talkit' ;
+    private static $dbHost = 'talkit.postgres.database.azure.com' ;
+    private static $dbUsername = 'talkitadmin@talkit';
+    private static $dbUserPassword = 'Sofarawaya7x.';
 
     private static $cont  = null;
 

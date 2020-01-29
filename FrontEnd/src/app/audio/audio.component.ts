@@ -53,7 +53,6 @@ export class AudioComponent implements OnInit {
       this.selectedE = data[0].entrada;
       this.selectedS = data[0].salida;
     });
-    console.log(this.idioma);
     navigator.mediaDevices.enumerateDevices()
       .then(devices => {
         devices.forEach(device => {

@@ -23,9 +23,14 @@
   </div>
   <button type="submit" id="login-button">{{this.strings.CustomPass[0].Join}}</button>
 </form>
+<div *ngIf="!incorrect">
+  <button (click)="join(true)" *ngIf="hasMod" [disabled]="mod">Join as mod</button>
+  <button (click)="join(false)">Join as participant</button>
+</div>
 <ng-template #notPrivate>
   <div *ngIf="isUndefined; else notDefined">
-    <button (click)="join()">{{this.strings.CustomPass[0].Join}}</button>
+    <button (click)="join(true)" *ngIf="hasMod" [disabled]="mod">Join as mod</button>
+    <button (click)="join(false)">Join as participant</button>
   </div>
   <ng-template #notDefined>
     <p>Error</p>

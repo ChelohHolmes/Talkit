@@ -2,19 +2,19 @@
 
 <div *ngIf="room; else notRoom">
   <div *ngIf="isLoaded | async">
-    <div class="container" *ngIf="type === 'Oral'; else written">
+    <div class="container">
       <div class="centered" *ngIf="!noTopic">
-        <h1 *ngIf="!isCustom || hasFixedTopic">{{this.strings.Topic[0][topic]}}</h1>
-        <h1 *ngIf="hasFreeTopic">{{freeTopic}}</h1>
+        <h1 *ngIf="!isCustom || randomTopics">{{this.strings.Topic[0][topic]}}</h1>
+        <h1 *ngIf="!randomTopics">{{topic}}</h1>
       </div>
-      <div class="centered mb-20">
+      <div class="centered mb-20" *ngIf="!isCustom || randomTopics">
         <button mat-stroked-button (click)="addVote()" [disabled]="voted">Votar para cambiar</button>
         <p *ngIf="votes">Votos: {{votes}}/{{totalVotes}}</p>
       </div>
       <div class="centered">
         <div class="inline-block centered" *ngFor="let user of users; let i = index">
           <div *ngIf="user !== undefined">
-            <div class="givePoints">
+            <div class="givePoints" *ngIf="!isCustom">
               <button mat-icon-button (click)="givePoints(user.username)">
                 <mat-icon>thumb_up</mat-icon>
               </button>
@@ -38,7 +38,7 @@
             <div>
               <h4>{{user.username}}</h4>
             </div>
-            <div class="mic-icon" *ngIf="mod">
+            <div class="mic-icon" *ngIf="isOral && (mod || hasModerator)">
               <button mat-icon-button *ngIf="isMod && !turn" (click)="startTurn(user.username)">
                 <mat-icon *ngIf="!isAskedUser(user.username); else red">mic</mat-icon>
                 <ng-template #red>
@@ -53,7 +53,7 @@
       <div class="centered">
         <div class="inline-block">
           <div *ngIf="mod">
-            <div *ngIf="!isCustom || !hasModerator">
+            <div *ngIf="isOral && (!isCustom || hasModerator)">
               <div class="to-the-left" *ngIf="!turn && !isMod">
                 <button mat-stroked-button (click)="askTurn()" [disabled]="asked">Pedir turno</button>
               </div>
@@ -67,7 +67,35 @@
                 <div class="mt-50">
                   <h3 class="moderator-title">Moderador: <br> {{mod[0].username}}</h3>
                 </div>
-                <div class="mod-give">
+                <div class="mod-give" *ngIf="!isCustom">
+                  <button mat-icon-button (click)="givePoints(mod[0].username)">
+                    <mat-icon>thumb_up</mat-icon>
+                  </button>
+                </div>
+                <img class="moderator-image" [src]="mod[0].foto_perfil" [alt]="mod[0].username">
+                <div class="mod-report">
+                  <button mat-icon-button (click)="kickMod()" [disabled]="voteKick && votedUser === mod[0].username">
+                    <mat-icon>error_outline</mat-icon>
+                  </button>
+                </div>
+                <div class="mod-add">
+                  <button mat-icon-button (click)="addFriends(mod[0].username)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                <div class="report-icon" style="bottom: 35%">
+                  <br>
+                  <p *ngIf="userVotes && modVote">{{userVotes}}/{{totalVotes}}</p>
+                  <p *ngIf="kicked && modVote">Kicked!</p>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!isOral || hasModerator" class="to-the-left">
+              <div class="centered" *ngIf="isLoaded | async">
+                <div class="mt-50">
+                  <h3 class="moderator-title">Moderador: <br> {{mod[0].username}}</h3>
+                </div>
+                <div class="mod-give" *ngIf="!isCustom">
                   <button mat-icon-button (click)="givePoints(mod[0].username)">
                     <mat-icon>thumb_up</mat-icon>
                   </button>
@@ -91,11 +119,11 @@
               </div>
             </div>
           </div>
-          <div class="centered" *ngIf="!mod">
+          <div class="centered" *ngIf="!mod && !isCustom && !isOral">
             <p>Esperando al modpsds</p>
             <p>Háblenle mientras</p>
           </div>
-          <div class="to-the-right">
+          <div class="to-the-right" *ngIf="isOral">
             <div class="chat-window">
               <div class="messages" *ngFor="let msg of messages">
                 <p><strong>{{msg.user}}:</strong> {{msg.message}}</p>
@@ -110,97 +138,24 @@
               <button mat-stroked-button type="submit" [disabled]="!message">Send</button>
             </form>
           </div>
+          <div class="hamana" *ngIf="!isOral">
+            <div class="chat-window">
+              <div class="messages" *ngFor="let hola of messages">
+                <p><strong>{{hola.user}}:</strong> {{hola.message}}</p>
+              </div>
+            </div>
+            <form [formGroup]="Message" (ngSubmit)="sendMessage()">
+              <mat-form-field>
+                <label>
+                  <input matInput placeholder="Mensaje" formControlName="Message" [(ngModel)]="message" autocomplete="off">
+                </label>
+              </mat-form-field>
+              <button mat-stroked-button type="submit" [disabled]="!message">Send</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-
-    <ng-template #written>
-      <div class="container">
-        <div class="centered" *ngIf="!noTopic">
-          <h1 *ngIf="!isCustom || hasFixedTopic">{{this.strings.Topic[0][topic]}}</h1>
-          <h1 *ngIf="hasFreeTopic">{{freeTopic}}</h1>
-        </div>
-        <div class="centered mb-20">
-          <button mat-stroked-button (click)="addVote()" [disabled]="voted">Votar para cambiar</button>
-          <p *ngIf="votes">Votos: {{votes}}/{{totalVotes}}</p>
-        </div>
-        <div class="centered">
-          <div class="inline-block centered" *ngFor="let user of users; let i = index">
-            <div class="givePoints">
-              <button mat-icon-button (click)="givePoints(user.username)">
-                <mat-icon>thumb_up</mat-icon>
-              </button>
-            </div>
-            <div class="report-icon">
-              <button mat-icon-button (click)="kick(i)" [disabled]="voteKick && votedUser === user.username">
-                <mat-icon>error_outline</mat-icon>
-              </button>
-            </div>
-            <div class="add-icon">
-              <button mat-icon-button (click)="addFriends(user.username)">
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
-            <div class="report-icon">
-              <br>
-              <p *ngIf="userVotes && position === i">{{userVotes}}/{{totalVotes}}</p>
-              <p *ngIf="kicked && position === i">Kicked!</p>
-            </div>
-            <img class="participant-image" [src]="user.foto_perfil" [alt]="user.username">
-            <div>
-              <h4>{{user.username}}</h4>
-            </div>
-          </div>
-        </div>
-        <div class="centered">
-          <div class="inline-block">
-            <div class="to-the-left" *ngIf="!isCustom || !hasModerator">
-              <div>
-                <h3 class="moderator-title">Moderador: <br> {{mod[0].username}}</h3>
-              </div>
-              <div class="centered">
-                <div class="mod-give">
-                  <button mat-icon-button (click)="givePoints(mod[0].username)">
-                    <mat-icon>thumb_up</mat-icon>
-                  </button>
-                </div>
-                <img class="moderator-image" [src]="mod[0].foto_perfil" [alt]="mod[0].username">
-                <div class="mod-report">
-                  <button mat-icon-button (click)="kickMod()" [disabled]="voteKick && votedUser === mod[0].username">
-                    <mat-icon>error_outline</mat-icon>
-                  </button>
-                </div>
-                <div class="mod-add">
-                  <button mat-icon-button (click)="addFriends(mod[0].username)">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </div>
-                <div class="report-icon">
-                  <br>
-                  <p *ngIf="userVotes && modVote">{{userVotes}}/{{totalVotes}}</p>
-                  <p *ngIf="kicked && modVote">Kicked!</p>
-                </div>
-              </div>
-            </div>
-            <div class="hamana">
-              <div class="chat-window">
-                <div class="messages" *ngFor="let hola of messages">
-                  <p><strong>{{hola.user}}:</strong> {{hola.message}}</p>
-                </div>
-              </div>
-              <form [formGroup]="Message" (ngSubmit)="sendMessage()">
-                <mat-form-field>
-                  <label>
-                    <input matInput placeholder="Mensaje" formControlName="Message" [(ngModel)]="message" autocomplete="off">
-                  </label>
-                </mat-form-field>
-                <button mat-stroked-button type="submit" [disabled]="!message">Send</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ng-template>
   </div>
 </div>
 

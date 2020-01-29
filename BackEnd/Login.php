@@ -32,13 +32,30 @@ if ($valor == 0) {
             $date = date('Y-m-d H:i:s');
             if ($banDate > $date) {
                 echo 2;
-            } else {
-                $query = "UPDATE public.usuario set estado = 'Conectado' where username = '". $data["User"] ."'";
+            } else {$query = "SELECT ultimo_login from public.usuario WHERE id_usuario = ". $id;
+                $res = pg_query($dataB, $query);
+                $date = pg_fetch_result($res, 0, 0);
+                $newDate = date('Y-m-d', strtotime($date. ' + 1 days'));
+                $today = date('Y-m-d');
+                if ($today >= $newDate) {
+                    $query = "UPDATE public.usuario set votos = 3 WHERE id_usuario = ". $id;
+                    pg_query($dataB, $query);
+                }
+                $query = "UPDATE public.usuario set estado = 'Conectado', ultimo_login = '". $today ."' where username = '". $data["User"] ."'";
                 $res = pg_query($dataB, $query);
                 echo 0; //Correcto
             }
         } else {
-            $query = "UPDATE public.usuario set estado = 'Conectado' where username = '". $data["User"] ."'";
+            $query = "SELECT ultimo_login from public.usuario WHERE id_usuario = ". $id;
+            $res = pg_query($dataB, $query);
+            $date = pg_fetch_result($res, 0, 0);
+            $newDate = date('Y-m-d', strtotime($date. ' + 1 days'));
+            $today = date('Y-m-d');
+            if ($today >= $newDate) {
+                $query = "UPDATE public.usuario set votos = 3 WHERE id_usuario = ". $id;
+                pg_query($dataB, $query);
+            }
+            $query = "UPDATE public.usuario set estado = 'Conectado', ultimo_login = '". $today ."' where username = '". $data["User"] ."'";
             $res = pg_query($dataB, $query);
             echo 0; //Correcto
         }

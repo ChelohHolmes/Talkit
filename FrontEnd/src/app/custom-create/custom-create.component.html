@@ -81,13 +81,43 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-<!--  <br>-->
-<!--  <mat-form-field>-->
-<!--    <mat-label>Reglas</mat-label>-->
-<!--    <mat-checkbox *ngFor="let rule of rules" [formControlName]="rule.viewValue">-->
-<!--      {{rule.viewValue}}-->
-<!--    </mat-checkbox>-->
-<!--  </mat-form-field>-->
+  <br>
+  <mat-form-field>
+    <mat-label>{{this.strings.CustomCreate[0].Rules}}</mat-label>
+    <mat-select [(value)]="wantRules" formControlName="HasRules">
+      <mat-option *ngFor="let choos of chooseRules" [value]="choos.value">
+        {{choos.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div *ngIf="wantRules">
+    <p>No rules</p>
+<!--    <form [formGroup]="RulesGroup">-->
+<!--      <ng-container formArrayName="rules">-->
+<!--        <div *ngFor="let rule of rules; let i = index">-->
+<!--          <mat-checkbox [formControlName]="i">-->
+<!--            {{rule.viewValue}}-->
+<!--          </mat-checkbox>-->
+<!--        </div>-->
+<!--      </ng-container>-->
+<!--    </form>-->
+<!--    <mat-form-field>-->
+<!--      <mat-selection-list formControlName="Rules">-->
+<!--        <mat-list-option *ngFor="let rule of rules" [value]="rule.value">-->
+<!--          {{rule.viewValue}}-->
+<!--        </mat-list-option>-->
+<!--      </mat-selection-list>-->
+<!--    </mat-form-field>-->
+  </div>
+  <br>
+  <mat-form-field>
+    <mat-label>Join</mat-label>
+    <mat-select formControlName="Join" required>
+      <mat-option *ngFor="let jo of join" [value]="jo.value">
+        {{jo.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <br>
   <mat-form-field>
     <label>

@@ -21,10 +21,17 @@ if ($data['Topic'] == 'aleatorio') {
 } else {
     $topic = 'false';
 }
-$query = "INSERT into public.sala_personalizada (no_salap, lengua, tipo_conv, moderador_estatus, moderador, participantes_cant, cambio_tema, tema, nivel, descripcion, privacidad, status_sp, contrasena) VALUES (DEFAULT, '". $data['Language'] ."', '". $data['ChatType'] ."', false, '". $data['Moderator'] ."', ". $data['Participants'] .", '". $topic ."', '". $data['Topics'] ."', '". $data['Level'] ."', '". $data['Description'] ."', '". $data['Privacy'] ."', DEFAULT, '". $data['Password'] ."') RETURNING no_salap";
-$res = pg_query($dataB, $query);
-$room = pg_fetch_result($res, 0, 0);
-$query = "INSERT INTO public.ingreso_sp (ingreso_sp, rol, creador, estatus_isp, id_usuario, salap) VALUES (DEFAULT, 'Participante', true, DEFAULT, '". $id ."', '". $room ."')";
+if ($data['Join'] == 'Participante') {
+    $query = "INSERT into public.sala_personalizada (no_salap, lengua, tipo_conv, moderador_estatus, moderador, participantes_cant, cambio_tema, tema, nivel, descripcion, privacidad, status_sp, contrasena, participantes) VALUES (DEFAULT, '". $data['Language'] ."', '". $data['ChatType'] ."', false, '". $data['Moderator'] ."', ". $data['Participants'] .", '". $topic ."', '". $data['Topics'] ."', '". $data['Level'] ."', '". $data['Description'] ."', '". $data['Privacy'] ."', DEFAULT, '". $data['Password'] ."', 1) RETURNING no_salap";
+    $res = pg_query($dataB, $query);
+    $room = pg_fetch_result($res, 0, 0);
+    $query = "INSERT INTO public.ingreso_sp (ingreso_sp, rol, creador, estatus_isp, id_usuario, salap) VALUES (DEFAULT, '". $data['Join'] ."', true, DEFAULT, '". $id ."', '". $room ."')";
+} else {
+    $query = "INSERT into public.sala_personalizada (no_salap, lengua, tipo_conv, moderador_estatus, moderador, participantes_cant, cambio_tema, tema, nivel, descripcion, privacidad, status_sp, contrasena, participantes) VALUES (DEFAULT, '". $data['Language'] ."', '". $data['ChatType'] ."', true, '". $data['Moderator'] ."', ". $data['Participants'] .", '". $topic ."', '". $data['Topics'] ."', '". $data['Level'] ."', '". $data['Description'] ."', '". $data['Privacy'] ."', DEFAULT, '". $data['Password'] ."', 1) RETURNING no_salap";
+    $res = pg_query($dataB, $query);
+    $room = pg_fetch_result($res, 0, 0);
+    $query = "INSERT INTO public.ingreso_sp (ingreso_sp, rol, creador, estatus_isp, id_usuario, salap) VALUES (DEFAULT, '". $data['Join'] ."', true, DEFAULT, '". $id ."', '". $room ."')";
+}
 $res = pg_query($dataB, $query);
 $query = "UPDATE public.usuario SET puntos = ". $points .", estado = 'Privada' WHERE id_usuario = ". $id;
 $res = pg_query($dataB, $query);

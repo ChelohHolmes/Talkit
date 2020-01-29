@@ -38,11 +38,14 @@ export class LobbyComponent implements OnInit, OnDestroy {
   private voteKick: boolean;
   private asked: boolean;
   private votedUser: any;
-  private type: any;
+  private isOral: any;
   private isCustom: boolean;
   private modVote: boolean;
   private isLoaded: Promise<boolean>;
   private askedUsers: any;
+  private maxUsers: any;
+  private isCreator: boolean;
+  private randomTopics: boolean;
 
   constructor(private http: RandomService,
               private https: FriendsService,
@@ -88,7 +91,19 @@ export class LobbyComponent implements OnInit, OnDestroy {
     if (!sessionStorage.getItem('kick')) {
       const user = this.user;
       const room = this.room;
-      const form = JSON.stringify({user, room});
+      const creator = this.isCreator;
+      const form = JSON.stringify({user, room, creator});
+      if (this.isCustom) {
+        this.http.postCustomDelete(form).subscribe(data => {
+          if (data) {
+            clearInterval(this.intervals);
+            clearInterval(this.interval);
+            sessionStorage.removeItem('room');
+            sessionStorage.removeItem('type');
+            sessionStorage.removeItem('custom');
+          }
+        });
+      }
       this.http.postExit(form).subscribe(data => {
         if (data) {
           clearInterval(this.intervals);
@@ -107,18 +122,33 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.messages = [];
     this.message = '';
     this.Message = this.formBuilder.group({Message: this.message});
-    this.changeTopic();
     this.votes = 0;
     if (this.room) {
       this.user = sessionStorage.getItem('user');
-      this.type = sessionStorage.getItem('type');
+      this.isOral = sessionStorage.getItem('type') === 'Oral';
       this.getUsers();
     }
     this.checkMessages();
   }
 
   customLobby() {
-    this.checkPreferences();
+    this.isCreator = sessionStorage.getItem('creator') === '1';
+    this.http.postCheck(this.room).subscribe(data => {
+      this.isOral = data[0].tipo_conv === 'Oral';
+      this.maxUsers = data[0].participantes_cant;
+      this.hasModerator = data[0].moderador === 't';
+      if (data[0].tema === 'random') {
+        this.randomTopics = true;
+        this.changeTopic();
+      } else if (isNaN(+data[0].tema)) {
+        this.hasFreeTopic = true;
+        this.topic = data[0].tema;
+      } else {
+        this.hasFixedTopic = true;
+        this.topic = data[0].tema;
+      }
+      this.getUsers();
+    });
   }
 
   setFalse() {
@@ -217,32 +247,62 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.isLoaded = undefined;
     this.users = undefined;
     this.mod = false;
-    this.http.postUsers(this.room).subscribe(data => {
-      for (const user of data) {
-        if (!user.mod) {
-          if (this.users) {
-            this.users.push(user[0]);
+    if (!this.isCustom) {
+      this.http.postUsers(this.room).subscribe(data => {
+        for (const user of data) {
+          if (!user.mod) {
+            if (this.users) {
+              this.users.push(user[0]);
+            } else {
+              this.users = user;
+            }
           } else {
-            this.users = user;
+            this.mod = user.mod;
           }
-        } else {
-          this.mod = user.mod;
         }
-      }
-      if (this.mod && this.mod[0].username === this.user) {
-        this.isMod = true;
-      }
-      // this.totalVotes = this.users.length - 3;
-      this.totalVotes = 2;
-      this.askedUsers = [];
-      this.isLoaded = Promise.resolve(true);
-      if (!this.mod) {
-        // sala libre
-      }
-      if ((this.users.length <= 3 && !this.mod) || (this.users.length <= 1 && this.mod)) {
-        this.deleteRoom();
-      }
-    });
+        if (this.mod && this.mod[0].username === this.user) {
+          this.isMod = true;
+          this.changeTopic();
+        }
+        // this.totalVotes = this.users.length - 1;
+        this.totalVotes = 2;
+        this.askedUsers = [];
+        this.isLoaded = Promise.resolve(true);
+        if (!this.mod) {
+          this.changeTopic();
+          // sala libre
+        }
+        if ((this.users.length <= 3 && !this.mod) || (this.users.length <= 1 && this.mod)) {
+          this.deleteRoom();
+        }
+      });
+    } else {
+      this.http.postCustom(this.room).subscribe(data => {
+        for (const user of data) {
+          if (this.hasModerator) {
+            if (!user.mod) {
+              if (this.users) {
+                this.users.push(user[0]);
+              } else {
+                this.users = user;
+              }
+            } else {
+              this.mod = user.mod;
+            }
+            if (this.mod && this.mod[0].username === this.user) {
+              this.isMod = true;
+              this.changeTopic();
+            }
+          } else {
+            if (this.users) {
+              this.users.push(user[0]);
+            } else {
+              this.users = user;
+            }
+          }
+        }
+      });
+    }
   }
 
   sendMessage() {
@@ -370,12 +430,6 @@ export class LobbyComponent implements OnInit, OnDestroy {
         }
       });
     }
-  }
-
-  checkPreferences() {
-    this.http.postCheck(this.room).subscribe(data => {
-      console.log(data);
-    });
   }
 
   checkUsers() {

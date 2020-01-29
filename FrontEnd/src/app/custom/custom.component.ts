@@ -151,7 +151,7 @@ export class CustomComponent implements OnInit {
       {value: 'Japonés', viewValue: '日本語'},
       {value: 'Coreano', viewValue: '한국어'}
     ];
-    // tslint:disable-next-line:forin
+
     for (const stringsKey in this.strings.Topic[0]) {
       if (stringsKey === '0') {
         this.Temas = [

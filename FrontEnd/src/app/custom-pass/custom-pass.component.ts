@@ -21,8 +21,13 @@ export class CustomPassComponent implements OnInit {
   private isUndefined: boolean;
   private description: boolean;
   private rules: boolean;
+  private currentUsers: number;
+  private maxUsers: number;
+  private hasMod: boolean;
+  private mod: boolean;
+  private joinable: boolean;
+  private type: any;
 
-  // tslint:disable-next-line:max-line-length
   constructor(private formBuilder: FormBuilder, private http: CustomService, private router: Router, private dialogRef: MatDialogRef<CustomPassComponent>, private snack: MatSnackBar) { }
 
   CustomPass: FormGroup;
@@ -51,7 +56,13 @@ export class CustomPassComponent implements OnInit {
       this.isPrivate = this.sent[0].privacidad === 'Privada';
       console.log(this.isPrivate);
       this.description = this.sent[0].descripcion !== 'No';
-      this.rules = this.sent[0].rules !== 'No';
+      // this.rules = this.sent[0].rules !== 'No';
+      this.currentUsers = +this.sent[0].participantes;
+      this.maxUsers = +this.sent[0].participantes_cant;
+      this.hasMod = this.sent[0].moderador === 't';
+      this.mod = this.sent[0].moderador_estatus === 't';
+      this.joinable = this.currentUsers < this.maxUsers;
+      this.type = this.sent[0].tipo_conv;
     });
     this.isUndefined = this.isPrivate === undefined;
     this.onChanges();
@@ -63,20 +74,17 @@ export class CustomPassComponent implements OnInit {
     const form = JSON.stringify(this.CustomPass.value);
     this.http.postPass(form).subscribe(data => {
       this.pass = data;
-      console.log(this.pass);
-      if (this.pass === 0) {
-        this.incorrect = true;
-      } else {
-        this.dialogRef.close();
-        sessionStorage.setItem('room', sessionStorage.getItem('r'));
-        sessionStorage.setItem('custom', '1');
-        const md5 = new Md5();
-        const lol = md5.appendStr(sessionStorage.getItem('room')).end();
-        this.router.navigate(['/lobby/' + lol]);
-        // console.log('Home');
-        sessionStorage.removeItem('r');
-        // sessionStorage.setItem('user', this.UserLogin.controls.User.value);
-      }
+      // console.log(this.pass);
+      this.incorrect = this.pass === 0;
+      // this.dialogRef.close();
+      // sessionStorage.setItem('room', sessionStorage.getItem('r'));
+      // sessionStorage.setItem('custom', '1');
+      // const md5 = new Md5();
+      // const lol = md5.appendStr(sessionStorage.getItem('room')).end();
+      // this.router.navigate(['/lobby/' + lol]);
+      // console.log('Home');
+      // sessionStorage.removeItem('r');
+      // sessionStorage.setItem('user', this.UserLogin.controls.User.value);
     });
   }
 
@@ -86,23 +94,25 @@ export class CustomPassComponent implements OnInit {
     });
   }
 
-  join() {
-    const form = JSON.stringify({user: sessionStorage.getItem('user'), room: sessionStorage.getItem('r')} );
-    this.http.postJoin(form).subscribe(data => {
-      if (data === 1) {
-        // sessionStorage.setItem('type', 'type');
-        sessionStorage.setItem('room', sessionStorage.getItem('r'));
-        sessionStorage.removeItem('r');
-        sessionStorage.setItem('custom', '1');
-        const md5 = new Md5();
-        const lol = md5.appendStr(sessionStorage.getItem('room')).end();
-        console.log('/lobby?r=' + lol);
-        this.dialogRef.close();
-        this.router.navigate(['/lobby/' + lol]);
-      } else {
-        this.snack.open('Hubo un problema al entrar.', 'OK');
-      }
-    });
+  join(asMod) {
+    if (this.joinable) {
+      const form = JSON.stringify({user: sessionStorage.getItem('user'), room: sessionStorage.getItem('r'), mod: asMod} );
+      this.http.postJoin(form).subscribe(data => {
+        if (data === 1) {
+          sessionStorage.setItem('room', sessionStorage.getItem('r'));
+          sessionStorage.removeItem('r');
+          sessionStorage.setItem('custom', '1');
+          sessionStorage.setItem('type', this.type);
+          const md5 = new Md5();
+          const lol = md5.appendStr(sessionStorage.getItem('room')).end();
+          console.log('/lobby?r=' + lol);
+          this.dialogRef.close();
+          this.router.navigate(['/lobby/' + lol]);
+        } else {
+          this.snack.open('Hubo un problema al entrar.', 'OK');
+        }
+      });
+    }
   }
 }
 

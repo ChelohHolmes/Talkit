@@ -3,7 +3,7 @@
     <h1 class="mat-h1">Actualizar información</h1>
     <form [formGroup]="NewInfo" (ngSubmit)="onSubmit()">
       <div class="center">
-        <img class="profile-picture" src="https://cdn.discordapp.com/attachments/304829873468342283/569397550206025738/profil-pic_dummy.png" alt="Profile Picture">
+        <img class="profile-picture" [src]="picture" alt="Profile Picture">
         <button mat-icon-button (click)="fileInput.click()">
           <mat-icon aria-label="add">add</mat-icon>
         </button>
@@ -11,6 +11,7 @@
       <div>
         <input
           style="display: none"
+          accept="image/*"
           type="file" (change)="onFileChanged($event)"
           #fileInput>
       </div>
@@ -83,7 +84,7 @@
         <h2>Información actualizada</h2>
       </div>
       <div>
-        <button mat-raised-button [disabled]="!NewInfo.valid">Actualizar</button>
+        <button mat-raised-button [disabled]="!NewInfo.valid && !password">Actualizar</button>
       </div>
     </form>
     <br>

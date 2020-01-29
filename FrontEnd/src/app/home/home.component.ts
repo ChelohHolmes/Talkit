@@ -20,10 +20,61 @@ export class HomeComponent implements OnInit {
   bCustom: boolean;
   strings: any;
   searching: boolean;
+  pc: any;
 
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: ToolbarService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
+    //   console.log(stream);
+    // },
+    // error => {
+    //   console.log('Error: ' + error);
+    // });
+    // this.pc = new RTCPeerConnection({
+    //   iceServers: [
+    //     { urls: 'stun:stun.services.mozilla.com' },
+    //     { urls: 'stun:stun.l.google.com:19302' }
+    //   ]
+    // });
+    // const iceServers = [
+    //   { url: 'stun:stun1.l.google.com:19302' },
+    //   { url: 'turn:numb.viagenie.ca', credential: 'muazkh', username: 'webrtc@live.com' }
+    // ];
+    //
+    // const sdpConstraints = {
+    //   optional: [],
+    //   mandatory: {
+    //     OfferToReceiveAudio: true,
+    //     OfferToReceiveVideo: false
+    //   }
+    // };
+    //
+    // const DtlsSrtpKeyAgreement = {
+    //   DtlsSrtpKeyAgreement: true
+    // };
+    //
+    // const optional = {
+    //   optional: [DtlsSrtpKeyAgreement]
+    // };
+    //
+    //
+    // const peer = new webkitRTCPeerConnection({
+    //   iceServers,
+    //   optional
+    // });
+    //
+    //
+    // function getAudio(successCallback, errorCallback) {
+    //   navigator.mediaDevices.getUserMedia({
+    //       audio: true,
+    //       video: false
+    //     }
+    //   );
+    //
+    // }
+    //
+    // console.log(this.pc);
     if (sessionStorage.getItem('lan') === 'es') {
       this.strings = spanish;
     } else {

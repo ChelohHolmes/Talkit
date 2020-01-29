@@ -57,6 +57,7 @@
       "ChatType":"Chat type",
       "Moderator":"Moderator",
       "Participants":"Participants",
+      "Rules":"Rules",
       "Error3":"Error: a free lobby cannot have 11 participants",
       "Language":"Language",
       "Level":"Level",

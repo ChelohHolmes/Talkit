@@ -10,9 +10,11 @@ export class RandomService {
   private urls = '/RandomData.php';
   private urlps = '/RandomDelete.php';
   private urlp = '/GivePoints.php';
-  private urlCheck = '/CheckPreferences.php';
   private urlExit = '/RandomDelete.php';
   private urlAddKick = '/AddKick.php';
+  private urlCheck = '/CheckPreferences.php';
+  private urlCustom = '/CustomData.php';
+  private urlCustomDelete = '/CustomDelete.php';
 
   constructor(private http: HttpClient) { }
 
@@ -32,15 +34,23 @@ export class RandomService {
     return this.http.post<any>(environment.serverUrl + this.urlp, form);
   }
 
-  postCheck(form) {
-    return this.http.post<any>(environment.serverUrl + this.urlCheck, form);
-  }
-
   postExit(form) {
     return this.http.post<any>(environment.serverUrl + this.urlExit, form);
   }
 
   postAddKick(form) {
     return this.http.post<any>(environment.serverUrl + this.urlAddKick, form);
+  }
+
+  postCheck(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlCheck, form);
+  }
+
+  postCustom(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlCustom, form);
+  }
+
+  postCustomDelete(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlCustomDelete, form);
   }
 }

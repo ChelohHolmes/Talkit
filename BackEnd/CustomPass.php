@@ -18,17 +18,17 @@ if ($valor == false) {
         echo 0; //No coincide contraseña
     }
     else {
-        $queryUser = "SELECT id_usuario from public.usuario WHERE username = '". $data['user'] ."'";
-        $res = pg_query($dataB, $queryUser);
-        $id = pg_fetch_result($res, 0, 0);
-        $query = "INSERT INTO public.ingreso_sp (ingreso_sp, rol, creador, estatus_isp, id_usuario, salap) VALUES (DEFAULT, 'Participante', false, DEFAULT, '". $id ."', '". $data['room'] ."')";
-        $res = pg_query($dataB, $query);
-        $queryPoints = "SELECT puntos from public.usuario WHERE username = '". $data['user'] ."'";
-        $res = pg_query($dataB, $queryPoints);
-        $points = pg_fetch_result($res, 0, 0);
-        $points = $points - 2;
-        $queryPoints = "UPDATE public.usuario SET puntos = ". $points .", estado = 'Privada' WHERE id_usuario = ". $id;
-        $res = pg_query($dataB, $queryPoints);
+//        $queryUser = "SELECT id_usuario from public.usuario WHERE username = '". $data['user'] ."'";
+//        $res = pg_query($dataB, $queryUser);
+//        $id = pg_fetch_result($res, 0, 0);
+//        $query = "INSERT INTO public.ingreso_sp (ingreso_sp, rol, creador, estatus_isp, id_usuario, salap) VALUES (DEFAULT, 'Participante', false, DEFAULT, '". $id ."', '". $data['room'] ."')";
+//        $res = pg_query($dataB, $query);
+//        $queryPoints = "SELECT puntos from public.usuario WHERE username = '". $data['user'] ."'";
+//        $res = pg_query($dataB, $queryPoints);
+//        $points = pg_fetch_result($res, 0, 0);
+//        $points = $points - 2;
+//        $queryPoints = "UPDATE public.usuario SET puntos = ". $points .", estado = 'Privada' WHERE id_usuario = ". $id;
+//        $res = pg_query($dataB, $queryPoints);
         echo 1; //Correcto
     }
 }

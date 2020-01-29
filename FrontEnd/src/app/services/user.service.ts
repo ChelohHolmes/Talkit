@@ -11,6 +11,7 @@ export class UserService {
   private urlNP = '/NewPassword.php';
   private urlSEP = '/ShowEditPreferences.php';
   private urlEP = '/EditPreferences.php';
+  private urlImage = '/EditImage.php';
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +33,9 @@ export class UserService {
 
   postEP(form) {
     return this.http.post<any>(environment.serverUrl + this.urlEP, form);
+  }
+
+  postImage(form) {
+    return this.http.post<any>(environment.serverUrl + this.urlImage, form);
   }
 }

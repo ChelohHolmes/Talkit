@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ISelect} from '../register/register.component';
 import {Router} from '@angular/router';
 import {CustomService} from '../services/custom.service';
@@ -24,6 +24,7 @@ export class CustomCreateComponent implements OnInit {
   noFreeTopic: boolean;
   errorParticipants: boolean;
   private points: any;
+  strings: any;
 
   types: ISelect[] = [
     {value: 'fijo', viewValue: 'Tema fijo'},
@@ -87,23 +88,22 @@ export class CustomCreateComponent implements OnInit {
     {value: 'Intermedio', viewValue: 'Intermedio'},
     {value: 'Avanzado', viewValue: 'Avanzado'}
   ];
-  rules: ISelect[] = [
-    {value: 'Español', viewValue: 'Español'},
-    {value: 'Inglés', viewValue: 'English'},
-    {value: 'Francés', viewValue: 'Français'},
-    {value: 'Alemán', viewValue: 'Deutsch'},
-    {value: 'Italiano', viewValue: 'Italiano'},
-    {value: 'Portugués', viewValue: 'Português'},
-    {value: 'Ruso', viewValue: 'русский'},
-    {value: 'Chino', viewValue: '中国'},
-    {value: 'Japonés', viewValue: '日本語'},
-    {value: 'Coreano', viewValue: '한국어'}
-  ];
+  rules = [];
   privacy: ISelect[] = [
     {value: 'Publica', viewValue: 'Sala pública'},
     {value: 'Privada', viewValue: 'Sala privada'}
   ];
-  strings: any;
+  join: ISelect[] = [
+    {value: 'Participante', viewValue: 'as participant'},
+    {value: 'Moderador', viewValue: 'as moderator'}
+  ];
+  chooseRules = [
+    {value: false, viewValue: 'No rules'},
+    {value: true, viewValue: 'Choose rules'}
+  ];
+  startRules: any;
+  wantRules: any;
+  private RulesGroup: FormControl;
 
   constructor(private formBuilder: FormBuilder, private http: CustomService, private router: Router, private snack: MatSnackBar) { }
 
@@ -113,6 +113,19 @@ export class CustomCreateComponent implements OnInit {
     } else {
       this.strings = english;
     }
+    // this.wantRules = false;
+    this.rules = [
+      {value: 1, viewValue: this.strings.Rules[0][1]},
+      {value: 2, viewValue: this.strings.Rules[0][2]},
+      {value: 3, viewValue: this.strings.Rules[0][3]},
+      {value: 4, viewValue: this.strings.Rules[0][4]},
+      {value: 5, viewValue: this.strings.Rules[0][5]},
+      {value: 6, viewValue: this.strings.Rules[0][6]},
+      {value: 7, viewValue: this.strings.Rules[0][7]},
+      {value: 8, viewValue: this.strings.Rules[0][8]},
+      {value: 9, viewValue: this.strings.Rules[0][9]},
+      {value: 10, viewValue: this.strings.Rules[0][10]}
+    ];
     this.NewCustom = this.formBuilder.group({
       Password: [this.password, [
         Validators.required,
@@ -126,10 +139,16 @@ export class CustomCreateComponent implements OnInit {
       Language: new FormControl(),
       Participants: new FormControl(),
       Level: new FormControl(),
-      // Rules: new FormControl(),
+      HasRules: new FormControl(),
       Description: new FormControl(),
       Privacy: new FormControl(),
+      Join: new FormControl(),
     });
+    // this.RulesGroup = new FormControl(this.formBuilder.group({
+    //   rules: this.formBuilder.array([])
+    // }));
+    // const formArray = this.RulesGroup.get('rules') as FormArray;
+    // this.rules.forEach(x => formArray.push(new FormControl(false)));
     this.participants = this.participantsY;
     this.onChanges();
     this.http.postPoints(sessionStorage.getItem('user')).subscribe(data => {

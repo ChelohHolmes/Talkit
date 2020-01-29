@@ -23,6 +23,8 @@ export class UpdateInfoComponent implements OnInit {
   defLanguage: string;
   defGender: string;
   defDescription: string;
+  selectedFile: any;
+  private picture: any;
 
   constructor(private formBuilder: FormBuilder, private http: UserService) { }
 
@@ -44,8 +46,6 @@ export class UpdateInfoComponent implements OnInit {
     {value: 'Femenino', viewValue: 'Femenino'},
     {value: 'No binario', viewValue: 'No binario'}
   ];
-
-  selectedFile: File;
 
   ngOnInit() {
     this.NewInfo = this.formBuilder.group({
@@ -72,27 +72,39 @@ export class UpdateInfoComponent implements OnInit {
       this.defLanguage = this.info[0].lengua_mater;
       this.defGender = this.info[0].sexo;
       this.defDescription = this.info[0].intereses;
+      this.picture = this.info[0].foto_perfil;
     });
   }
 
   onSubmit() {
-    this.NewInfo.value.User = sessionStorage.getItem('username');
+    this.NewInfo.value.User = sessionStorage.getItem('user');
     const form = JSON.stringify(this.NewInfo.value);
     console.log(form);
-    // this.http.postEU(form).subscribe(data => {
-    //   this.sent = data;
-    //   console.log(this.sent);
-    //   if (this.sent === 1) {
-    //     this.incorrect = true;
-    //   } else {
-    //     this.correct = true;
-    //     console.log(this.sent);
-    //   }
-    // });
+    this.http.postEU(form).subscribe(data => {
+      this.sent = data;
+      if (this.sent === 1) {
+        this.incorrect = true;
+      } else {
+        this.correct = true;
+      }
+    });
   }
 
   onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = () => {
+      this.selectedFile = reader.result;
+      const user = sessionStorage.getItem('user');
+      const file = this.selectedFile;
+      const form = JSON.stringify({user, file});
+      console.log(form);
+      this.http.postImage(form).subscribe(data => {
+        if (data) {
+          this.picture = this.selectedFile;
+        }
+      });
+    };
   }
 
   onChanges(): void {

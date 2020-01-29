@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     {value: 'ja', viewValue: '日本語'},
     {value: 'ko', viewValue: '한국어'}
   ];
-  private sent: any;
+  sent: any;
 
   UserNew: FormGroup;
   used = false;
@@ -119,7 +119,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  private passwordsMatch = (formP: FormGroup): boolean => {
+  passwordsMatch = (formP: FormGroup): boolean => {
     if (formP.controls.Password.touched && formP.controls.ConfirmPassword.touched) {
       return formP.value.Password === formP.value.ConfirmPassword;
     }

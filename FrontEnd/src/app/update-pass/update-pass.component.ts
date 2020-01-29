@@ -16,9 +16,9 @@ export class UpdatePassComponent implements OnInit {
   repeatPassword: string;
   oldPassword: string;
   UpdatePassword: FormGroup;
-  private sent: any;
-  private incorrect: boolean;
-  private correct: boolean;
+  sent: any;
+  incorrect: boolean;
+  correct: boolean;
   constructor(private formBuilder: FormBuilder, private http: UserService) { }
 
   ngOnInit() {
@@ -67,7 +67,7 @@ export class UpdatePassComponent implements OnInit {
     });
   }
 
-  private passwordsMatch = (formP: FormGroup): boolean => {
+  passwordsMatch = (formP: FormGroup): boolean => {
     if (formP.controls.NewPassword.touched && formP.controls.RepeatPassword.touched) {
       return formP.value.NewPassword === formP.value.RepeatPassword;
     }

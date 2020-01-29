@@ -25,8 +25,8 @@ export class AudioComponent implements OnInit {
   ];
 
   idiomas: Dispositivos[] = [
-    {value: 'Inglés', viewValue: 'English'},
-    {value: 'Español', viewValue: 'Español'}
+    {value: 'en', viewValue: 'English'},
+    {value: 'es', viewValue: 'Español'}
   ];
 
   dispositivosE: Dispositivos[];

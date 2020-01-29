@@ -29,16 +29,16 @@ export class RandomComponent implements OnInit, OnDestroy {
     {value: 'Coreano', viewValue: '한국어'}
   ];
   strings: any;
-  private numUsers: number;
-  private isMod: boolean;
-  private seconds = 0;
-  private interval;
-  private play: boolean;
-  private minutes = 0;
-  private showSeconds: string;
-  private showMinutes: string;
-  private user: string;
-  private searching: boolean;
+  numUsers: number;
+  isMod: boolean;
+  seconds = 0;
+  interval;
+  play: boolean;
+  minutes = 0;
+  showSeconds: string;
+  showMinutes: string;
+  user: string;
+  searching: boolean;
   constructor(private http: RandomService, private snack: MatSnackBar, private router: Router) { }
 
   ngOnInit() {

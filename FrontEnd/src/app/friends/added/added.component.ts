@@ -15,9 +15,9 @@ export class AddedComponent implements OnInit {
 
   addFriend: FormGroup;
   searchFriend: FormGroup;
-  private sent: any;
-  private friends: any;
-  private user: string;
+  sent: any;
+  friends: any;
+  user: string;
   strings: any;
 
   constructor(private http: FriendsService, private snack: MatSnackBar) { }

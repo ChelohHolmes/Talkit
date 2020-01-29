@@ -12,7 +12,7 @@ import {MatSnackBar} from '@angular/material';
 export class RecoveryComponent implements OnInit {
   email: string;
   Recovery: FormGroup;
-  private sent: any;
+  sent: any;
 
   constructor(private formBuilder: FormBuilder, private http: RecoverService, public snackBar: MatSnackBar) { }
 

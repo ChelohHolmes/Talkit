@@ -15,37 +15,37 @@ import spanish from '../language/string_es.json';
   styleUrls: ['./lobby.component.scss']
 })
 export class LobbyComponent implements OnInit, OnDestroy {
-  private users: any;
-  private mod: any;
-  private userTalking: any;
-  private user: string;
-  private isMod: boolean;
-  private turn: boolean;
-  private showSeconds: string;
-  private seconds: number;
-  private minutes: number;
-  private interval;
-  private intervals;
-  private room: string;
-  private totalVotes: number;
-  private votes: number;
-  private userVotes: number;
-  private position: number;
-  private kicked: boolean;
-  private voted: boolean;
-  private topic: any;
-  private strings: any;
-  private voteKick: boolean;
-  private asked: boolean;
-  private votedUser: any;
-  private isOral: any;
-  private isCustom: boolean;
-  private modVote: boolean;
-  private isLoaded: Promise<boolean>;
-  private askedUsers: any;
-  private maxUsers: any;
-  private isCreator: boolean;
-  private randomTopics: boolean;
+  users: any;
+  mod: any;
+  userTalking: any;
+  user: string;
+  isMod: boolean;
+  turn: boolean;
+  showSeconds: string;
+  seconds: number;
+  minutes: number;
+  interval;
+  intervals;
+  room: string;
+  totalVotes: number;
+  votes: number;
+  userVotes: number;
+  position: number;
+  kicked: boolean;
+  voted: boolean;
+  topic: any;
+  strings: any;
+  voteKick: boolean;
+  asked: boolean;
+  votedUser: any;
+  isOral: any;
+  isCustom: boolean;
+  modVote: boolean;
+  isLoaded: Promise<boolean>;
+  askedUsers: any;
+  maxUsers: any;
+  isCreator: boolean;
+  randomTopics: boolean;
 
   constructor(private http: RandomService,
               private https: FriendsService,

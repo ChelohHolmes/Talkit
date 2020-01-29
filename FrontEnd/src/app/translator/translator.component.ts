@@ -23,7 +23,7 @@ export class TranslatorComponent implements OnInit {
     {value: 'ja', viewValue: '日本語'},
     {value: 'ko', viewValue: '한국어'}
   ];
-  private sent: string;
+  sent: string;
 
   constructor(private http: TranslationService) {
     this.sent = 'Traducción';

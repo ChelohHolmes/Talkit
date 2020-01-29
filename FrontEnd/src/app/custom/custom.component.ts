@@ -20,11 +20,11 @@ export class CustomComponent implements OnInit {
   initial2 = 'null';
   initial3 = 'null';
   initial4 = 'null';
-  private sent: any;
+  sent: any;
   moderator = [];
   changeSubject = [];
   size: number;
-  private points: any;
+  points: any;
   strings: any;
 
   languages: ISelect[];

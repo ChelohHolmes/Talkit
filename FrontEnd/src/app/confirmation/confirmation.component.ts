@@ -9,7 +9,7 @@ import english from '../language/string_en.json';
   styleUrls: ['./confirmation.component.scss']
 })
 export class ConfirmationComponent implements OnInit {
-  private strings: any;
+  strings: any;
 
   constructor(private dialogRef: MatDialogRef<ConfirmationComponent>) { }
 

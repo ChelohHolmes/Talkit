@@ -10,8 +10,8 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./recover-pass.component.scss']
 })
 export class RecoverPassComponent implements OnInit {
-  private match: boolean;
-  private sent: any;
+  match: boolean;
+  sent: any;
 
   constructor(private formBuilder: FormBuilder,
               private http: RecoverService,
@@ -23,7 +23,7 @@ export class RecoverPassComponent implements OnInit {
   confirmPassword: string;
   hide = true;
   hide1 = true;
-  private token: string;
+  token: string;
 
   ngOnInit() {
 
@@ -67,7 +67,7 @@ export class RecoverPassComponent implements OnInit {
 
   }
 
-  private passwordsMatch = (formp: FormGroup): boolean => {
+  passwordsMatch = (formp: FormGroup): boolean => {
     if (formp.controls.Password.touched && formp.controls.ConfirmPassword.touched) {
       return formp.value.Password === formp.value.ConfirmPassword;
     }

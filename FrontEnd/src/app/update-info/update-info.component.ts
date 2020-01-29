@@ -9,10 +9,10 @@ import {UserService} from '../services/user.service';
   styleUrls: ['./update-info.component.scss']
 })
 export class UpdateInfoComponent implements OnInit {
-  private sent: any;
-  private incorrect: boolean;
-  private correct: boolean;
-  private info: any;
+  sent: any;
+  incorrect: boolean;
+  correct: boolean;
+  info: any;
   NewInfo: FormGroup;
   email: string;
   password: string;
@@ -24,7 +24,7 @@ export class UpdateInfoComponent implements OnInit {
   defGender: string;
   defDescription: string;
   selectedFile: any;
-  private picture: any;
+  picture: any;
 
   constructor(private formBuilder: FormBuilder, private http: UserService) { }
 

@@ -12,21 +12,21 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  private user: any;
-  private friends: any;
-  private id: any;
-  private yours: any;
-  private localConnection: RTCPeerConnection;
-  private remoteConnection: RTCPeerConnection;
-  private localChannel: RTCDataChannel;
-  private connected: boolean;
-  private onLocalMessageReceived: any;
-  private onRemoteDataChannel: any;
-  private localMessages: string;
-  private remoteMessages: string;
-  private messages: any;
-  private message: string;
-  private Message: FormGroup;
+  user: any;
+  friends: any;
+  id: any;
+  yours: any;
+  localConnection: RTCPeerConnection;
+  remoteConnection: RTCPeerConnection;
+  localChannel: RTCDataChannel;
+  connected: boolean;
+  onLocalMessageReceived: any;
+  onRemoteDataChannel: any;
+  localMessages: string;
+  remoteMessages: string;
+  messages: any;
+  message: string;
+  Message: FormGroup;
 
 
   // tslint:disable-next-line:max-line-length

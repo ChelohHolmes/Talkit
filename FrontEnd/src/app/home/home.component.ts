@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
     //   optional
     // });
     //
-    //
     // function getAudio(successCallback, errorCallback) {
     //   navigator.mediaDevices.getUserMedia({
     //       audio: true,

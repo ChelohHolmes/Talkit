@@ -14,19 +14,19 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./custom-pass.component.scss']
 })
 export class CustomPassComponent implements OnInit {
-  private pass: any;
-  private sent: any;
+  pass: any;
+  sent: any;
   strings: any;
   isPrivate: any;
-  private isUndefined: boolean;
-  private description: boolean;
-  private rules: boolean;
-  private currentUsers: number;
-  private maxUsers: number;
-  private hasMod: boolean;
-  private mod: boolean;
-  private joinable: boolean;
-  private type: any;
+  isUndefined: boolean;
+  description: boolean;
+  rules: boolean;
+  currentUsers: number;
+  maxUsers: number;
+  hasMod: boolean;
+  mod: boolean;
+  joinable: boolean;
+  type: any;
 
   constructor(private formBuilder: FormBuilder, private http: CustomService, private router: Router, private dialogRef: MatDialogRef<CustomPassComponent>, private snack: MatSnackBar) { }
 
@@ -88,7 +88,7 @@ export class CustomPassComponent implements OnInit {
     });
   }
 
-  private onChanges() {
+  onChanges() {
     this.CustomPass.valueChanges.subscribe(() => {
       this.incorrect = false;
     });

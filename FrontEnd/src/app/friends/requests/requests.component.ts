@@ -10,8 +10,8 @@ import english from '../../language/string_en.json';
   styleUrls: ['./requests.component.scss']
 })
 export class RequestsComponent implements OnInit {
-  private requests: any;
-  private user: string;
+  requests: any;
+  user: string;
   strings: any;
 
   constructor(private http: FriendsService, private snack: MatSnackBar) { }

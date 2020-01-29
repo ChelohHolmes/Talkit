@@ -10,8 +10,8 @@ import english from '../../language/string_en.json';
   styleUrls: ['./blocked.component.scss']
 })
 export class BlockedComponent implements OnInit {
-  private blocked: any;
-  private user: string;
+  blocked: any;
+  user: string;
   strings: any;
 
   constructor(private http: FriendsService, private snack: MatSnackBar) { }

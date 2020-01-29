@@ -12,9 +12,9 @@ import {MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private sent: any;
-  private incorrect: boolean;
-  private isBanned: boolean;
+  sent: any;
+  incorrect: boolean;
+  isBanned: boolean;
 
   // tslint:disable-next-line:max-line-length
   constructor(public dialog: MatDialog, private formBuilder: FormBuilder, private http: LoginService, private router: Router, private dialogRef: MatDialogRef<LoginComponent>) { }

@@ -20,7 +20,7 @@ export class ToolbarUserComponent implements OnInit {
   inRoom: boolean;
   searching: boolean;
   isLoaded: Promise<boolean>;
-  private interval;
+  interval;
 
   constructor(private http: ToolbarService, private router: Router, private snackBar: MatSnackBar, private dialog: MatDialog) {
   }

@@ -45,3 +45,7 @@ testem.log
 Thumbs.db
 /.floo
 /.flooignore
+/FrontEnd/composer.json
+/FrontEnd/composer.lock
+/FrontEnd/vendor/
+/BackEnd/.idea/

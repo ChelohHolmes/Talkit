@@ -27,6 +27,9 @@ $io->on('connection', function($socket)use($io) {
     $socket->on('askTurn', function($data)use($io) {
         $io->emit('askTurn', $data);
     });
+    $socket->on('offer', function($data)use($io) {
+        $io->emit('offer', $data);
+    });
     $socket->on('broadcast', function($data)use($io, $socket) {
         $socket->broadcast->emit('broadcast', $data);
     });

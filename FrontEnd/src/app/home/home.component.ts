@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslatorComponent} from '../translator/translator.component';
 import {MatDialog} from '@angular/material';
 import spanish from '../language/string_es.json';
@@ -7,6 +7,8 @@ import {ConfirmationComponent} from '../confirmation/confirmation.component';
 import {ToolbarService} from '../services/toolbar.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
+import {Socket} from 'ngx-socket-io';
+import * as wss from 'socket.io-stream';
 
 @Component({
   selector: 'app-home',
@@ -21,59 +23,25 @@ export class HomeComponent implements OnInit {
   strings: any;
   searching: boolean;
   pc: any;
+  @ViewChild('audio') audioElement: any;
+  audio: any;
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: ToolbarService, private route: ActivatedRoute) { }
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: ToolbarService, private route: ActivatedRoute, private ws: Socket) { }
 
   ngOnInit() {
-    // navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(stream => {
-    //   console.log(stream);
-    // },
-    // error => {
-    //   console.log('Error: ' + error);
-    // });
-    // this.pc = new RTCPeerConnection({
-    //   iceServers: [
-    //     { urls: 'stun:stun.services.mozilla.com' },
-    //     { urls: 'stun:stun.l.google.com:19302' }
-    //   ]
-    // });
-    // const iceServers = [
-    //   { url: 'stun:stun1.l.google.com:19302' },
-    //   { url: 'turn:numb.viagenie.ca', credential: 'muazkh', username: 'webrtc@live.com' }
-    // ];
-    //
-    // const sdpConstraints = {
-    //   optional: [],
-    //   mandatory: {
-    //     OfferToReceiveAudio: true,
-    //     OfferToReceiveVideo: false
-    //   }
-    // };
-    //
-    // const DtlsSrtpKeyAgreement = {
-    //   DtlsSrtpKeyAgreement: true
-    // };
-    //
-    // const optional = {
-    //   optional: [DtlsSrtpKeyAgreement]
-    // };
-    //
-    //
-    // const peer = new webkitRTCPeerConnection({
-    //   iceServers,
-    //   optional
-    // });
-    //
-    // function getAudio(successCallback, errorCallback) {
-    //   navigator.mediaDevices.getUserMedia({
-    //       audio: true,
-    //       video: false
-    //     }
-    //   );
-    //
-    // }
-    //
-    // console.log(this.pc);
+    this.audio = this.audioElement.nativeElement;
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+      // this.audio.srcObject = stream;
+      console.log(stream);
+      this.ws.emit('message', stream);
+      this.ws.on('message', streams => {
+        console.log(streams);
+        // this.audio.srcObject = streams;
+      });
+    }).catch(error => {
+      console.log('Error: ' + error);
+    });
+
     if (sessionStorage.getItem('lan') === 'es') {
       this.strings = spanish;
     } else {

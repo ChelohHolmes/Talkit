@@ -23,13 +23,13 @@ export class HomeComponent implements OnInit {
   strings: any;
   searching: boolean;
   pc: any;
-  @ViewChild('audio') audioElement: any;
+  // @ViewChild('audio') audioElement: any;
   audio: any;
 
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: ToolbarService, private route: ActivatedRoute, private ws: Socket) { }
 
   ngOnInit() {
-    this.audio = this.audioElement.nativeElement;
+    // this.audio = this.audioElement.nativeElement;
     navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
       // this.audio.srcObject = stream;
       console.log(stream);

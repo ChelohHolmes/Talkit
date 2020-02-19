@@ -2,7 +2,7 @@ import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ISelect} from '../register/register.component';
 import {RandomService} from '../services/random.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import spanish from '../language/string_es.json';
 import english from '../language/string_en.json';

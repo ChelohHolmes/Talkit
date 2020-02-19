@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FriendsService} from '../../services/friends.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import spanish from '../../language/string_es.json';
 import english from '../../language/string_en.json';
 

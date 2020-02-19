@@ -3,7 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {ISelect} from '../register/register.component';
 import {Router} from '@angular/router';
 import {CustomService} from '../services/custom.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import spanish from '../language/string_es.json';
 import english from '../language/string_en.json';
 import {Md5} from 'ts-md5';

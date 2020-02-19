@@ -1,7 +1,7 @@
 import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {ToolbarService} from '../services/toolbar.service';
 import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import spanish from '../language/string_es.json';
 import english from '../language/string_en.json';
 import {MatDialog} from '@angular/material/dialog';

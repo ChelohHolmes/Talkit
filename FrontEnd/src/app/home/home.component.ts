@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TranslatorComponent} from '../translator/translator.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import spanish from '../language/string_es.json';
 import english from '../language/string_en.json';
 import {ConfirmationComponent} from '../confirmation/confirmation.component';

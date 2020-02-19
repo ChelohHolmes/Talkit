@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {FriendsService} from '../../services/friends.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Md5} from 'ts-md5';
 import spanish from '../../language/string_es.json';
 import english from '../../language/string_en.json';

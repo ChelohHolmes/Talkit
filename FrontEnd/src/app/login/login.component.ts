@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {RecoveryComponent} from '../recovery/recovery.component';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {LoginService} from '../services/login.service';
 import {MatDialogRef} from '@angular/material/dialog';

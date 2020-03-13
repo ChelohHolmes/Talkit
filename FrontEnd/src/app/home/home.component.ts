@@ -9,6 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
 import {Socket} from 'ngx-socket-io';
 import * as wss from 'socket.io-stream';
+import * as RecordRTC from 'recordrtc';
 
 @Component({
   selector: 'app-home',
@@ -23,21 +24,49 @@ export class HomeComponent implements OnInit {
   strings: any;
   searching: boolean;
   pc: any;
-  // @ViewChild('audio') audioElement: any;
+  @ViewChild('audio', {static: true}) audioElement: any;
   audio: any;
+  recorder: any;
+  interval: any;
 
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: ToolbarService, private route: ActivatedRoute, private ws: Socket) { }
 
   ngOnInit() {
-    // this.audio = this.audioElement.nativeElement;
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+    this.audio = this.audioElement.nativeElement;
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(async stream => {
       // this.audio.srcObject = stream;
-      console.log(stream);
-      this.ws.emit('message', stream);
-      this.ws.on('message', streams => {
-        console.log(streams);
-        // this.audio.srcObject = streams;
+      // console.log(stream);
+      // this.ws.emit('message', stream);
+      // this.ws.on('message', streams => {
+      //   console.log(streams);
+      //   this.audio.srcObject = streams;
+      // });
+      this.recorder = new RecordRTC.StereoAudioRecorder(stream, {
+        type: 'audio',
+        mimeType: 'audio/webm'
       });
+      this.recorder.record();
+      // setTimeout(() => {
+      //   console.log('recording');
+      // }, 5000);
+      // sleep(5000);
+      const sleep = m => new Promise(r => setTimeout(r, m));
+      await sleep(3000);
+
+      this.recorder.stop(blob => {
+        console.log(blob);
+        // const blob = this.recorder.getBlob();
+        // this.audio.src = URL.createObjectURL(blob);
+        this.ws.emit('message', blob);
+        this.ws.on('message', streams => {
+          console.log(streams);
+          this.audio.src = URL.createObjectURL(blob);
+        });
+      });
+      // this.recorder.stop(blob => {
+      //   console.log(blob);
+      // });
+
     }).catch(error => {
       console.log('Error: ' + error);
     });

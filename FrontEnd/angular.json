@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "Talkit"
+  "defaultProject": "Talkit",
+  "cli": {
+    "analytics": "5b80fe8c-1571-45fc-b365-5ef331222cf1"
+  }
 }

@@ -2,10 +2,15 @@
 
 class Database
 {
-    private static $dbName = 'talkit' ;
-    private static $dbHost = 'talkit.postgres.database.azure.com' ;
-    private static $dbUsername = 'talkitadmin@talkit';
-    private static $dbUserPassword = 'Sofarawaya7x.';
+//    private static $dbName = 'talkit' ;
+//    private static $dbHost = 'talkit.postgres.database.azure.com' ;
+//    private static $dbUsername = 'talkitadmin@talkit';
+//    private static $dbUserPassword = 'Sofarawaya7x.';
+
+    private static $dbName = 'Talkit' ;
+    private static $dbHost = 'localhost';
+    private static $dbUsername = 'postgres';
+    private static $dbUserPassword = 'admin';
 
     private static $cont  = null;
 
@@ -20,6 +25,7 @@ class Database
             }
             catch(PDOException $e)
             {
+//                echo "help";
                 die($e->getMessage());
             }
         }

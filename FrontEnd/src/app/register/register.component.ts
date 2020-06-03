@@ -85,31 +85,32 @@ export class RegisterComponent implements OnInit {
     if (this.match) {
       this.http.post(form).subscribe(data => {
         this.sent = data;
-        // console.log(this.sent);
+        console.log(this.sent);
         if (this.sent === 1) {
           this.used = true;
         } else {
-          this.http.posts(form).subscribe(dats => {
-            this.sent = dats;
-            console.log(this.sent);
-            if (this.sent !== 0) {
-              this.snackBar.open('Error al enviar correo', 'OK', {});
-              this.http.postD(this.user).subscribe(dataD => {
-                console.log(dataD);
-              });
-            } else {
-              this.snackBar.open('Correo de verificación enviado', 'OK', {});
-              // localStorage.setItem('register', this.UserNew.controls.Email.value);
-            }
-          });
+          // this.http.posts(form).subscribe(dats => {
+          //   this.sent = dats;
+          //   console.log(this.sent);
+          //   if (this.sent !== 0) {
+          //     this.snackBar.open('Error al enviar correo', 'OK', {});
+          //     this.http.postD(this.user).subscribe(dataD => {
+          //       console.log(dataD);
+          //     });
+          //   } else {
+          //     this.snackBar.open('Correo de verificación enviado', 'OK', {});
+          //     // localStorage.setItem('register', this.UserNew.controls.Email.value);
+          //   }
+          // });
           // this.router.navigate(['/Home']);
-          // console.log('Home');
+          console.log('Home');
+          sessionStorage.setItem('user', this.UserNew.controls.User.value);
         }
       });
-      if (this.used === false) {
-        // Cerrar dialog
-        // sessionStorage.setItem('user', this.UserNew.controls.User.value);
-      }
+      // if (this.used === false) {
+      //   // Cerrar dialog
+      //   sessionStorage.setItem('user', this.UserNew.controls.User.value);
+      // }
     }
   }
 

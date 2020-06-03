@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class RegisterService {
-  private url = '/register.php';
+  private url = '/Register.php';
   private urls = '/Verification.php';
   private urlD = '/Delete.php';
 

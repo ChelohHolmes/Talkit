@@ -17,8 +17,8 @@ import { UpdateInfoComponent } from './update-info/update-info.component';
 import { VerifiedComponent } from './verified/verified.component';
 import { ChatComponent } from './chat/chat.component';
 import { VoiceRoomComponent } from './voice-room/voice-room.component';
-import { LobbyComponent } from "./lobby/lobby.component";
-import { FaqComponent } from "./faq/faq.component";
+import { LobbyComponent } from './lobby/lobby.component';
+import { FaqComponent } from './faq/faq.component';
 
 const routes: Routes = [
   { path: '', component: IndexComponent },

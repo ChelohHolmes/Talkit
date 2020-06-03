@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, HostListener} from '@angular/core';
+import {Component, OnInit, OnDestroy, HostListener, ViewChild} from '@angular/core';
 import {RandomService} from '../services/random.service';
 import {FriendsService} from '../services/friends.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -8,6 +8,7 @@ import {ChatService} from '../services/chat.service';
 import {Socket} from 'ngx-socket-io';
 import english from '../language/string_en.json';
 import spanish from '../language/string_es.json';
+import * as RecordRTC from 'recordrtc';
 
 @Component({
   selector: 'app-lobby',
@@ -46,6 +47,10 @@ export class LobbyComponent implements OnInit, OnDestroy {
   maxUsers: any;
   isCreator: boolean;
   randomTopics: boolean;
+  audioInterval;
+  @ViewChild('audio', {static: true}) audioElement: any;
+  audio: any;
+  recorder: any;
 
   constructor(private http: RandomService,
               private https: FriendsService,
@@ -57,7 +62,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
 
   message: any;
   Message: FormGroup;
-  private messages;
+  messages;
   noTopic: boolean;
   hasFixedTopic: boolean;
   hasFreeTopic: boolean;
@@ -123,6 +128,8 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.message = '';
     this.Message = this.formBuilder.group({Message: this.message});
     this.votes = 0;
+    this.audio = this.audioElement.nativeElement;
+    this.randomTopics = true;
     if (this.room) {
       this.user = sessionStorage.getItem('user');
       this.isOral = sessionStorage.getItem('type') === 'Oral';
@@ -137,6 +144,9 @@ export class LobbyComponent implements OnInit, OnDestroy {
       this.isOral = data[0].tipo_conv === 'Oral';
       this.maxUsers = data[0].participantes_cant;
       this.hasModerator = data[0].moderador === 't';
+      if (this.isOral) {
+        this.audio = this.audioElement.nativeElement;
+      }
       if (data[0].tema === 'random') {
         this.randomTopics = true;
         this.changeTopic();
@@ -208,6 +218,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
   changeTopic() {
     this.votes = 0;
     this.voted = false;
+    this.randomTopics = true;
     const topic = this.generateNumber();
     this.socket.emit('topic', topic);
   }
@@ -263,14 +274,16 @@ export class LobbyComponent implements OnInit, OnDestroy {
         if (this.mod && this.mod[0].username === this.user) {
           this.isMod = true;
           this.changeTopic();
+          clearInterval(this.audioInterval);
         }
-        // this.totalVotes = this.users.length - 1;
-        this.totalVotes = 2;
+        if (this.mod)
+        this.totalVotes = this.users.length - 1;
+        // this.totalVotes = 2;
         this.askedUsers = [];
         this.isLoaded = Promise.resolve(true);
         if (!this.mod) {
           this.changeTopic();
-          // sala libre
+          this.freeRoom();
         }
         if ((this.users.length <= 3 && !this.mod) || (this.users.length <= 1 && this.mod)) {
           this.deleteRoom();
@@ -321,10 +334,45 @@ export class LobbyComponent implements OnInit, OnDestroy {
       this.asked = false;
       this.startTimer();
       this.setFalse();
+      if (this.userTalking === this.user) {
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(async stream => {
+          this.recorder = new RecordRTC.StereoAudioRecorder(stream, {
+            type: 'audio',
+            mimeType: 'audio/webm'
+          });
+          this.recorder.record();
+          this.audioInterval = setInterval(() => {
+            this.recorder.stop(blob => {
+              this.socket.emit('stream', blob);
+            });
+            this.recorder.record();
+          }, 3000);
+         }).catch(error => {
+          console.log('Error: ' + error);
+         });
+      }
+    });
+    this.socket.on('stream', stream => {
+      if (this.userTalking !== this.user) {
+        const hi = new Blob([new Uint8Array(stream)]);
+        this.audio.src = URL.createObjectURL(hi);
+      }
+    });
+    this.socket.on('free', streams => {
+      if (!this.mod) {
+        const hi = new Blob([new Uint8Array(streams)]);
+        const audio = new Audio();
+        audio.src = URL.createObjectURL(hi);
+        audio.load();
+        audio.play();
+      }
     });
     this.socket.on('endTurn', () => {
       this.turn = false;
       // Stop audio connection
+      if (this.userTalking === this.user && this.isOral) {
+        clearInterval(this.audioInterval);
+      }
       this.userTalking = undefined;
     });
     this.socket.on('vote', () => {
@@ -457,6 +505,24 @@ export class LobbyComponent implements OnInit, OnDestroy {
     });
   }
 
+  freeRoom() {
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(async stream => {
+      this.recorder = new RecordRTC.StereoAudioRecorder(stream, {
+        type: 'audio',
+        mimeType: 'audio/webm'
+      });
+      this.recorder.record();
+      this.audioInterval = setInterval(() => {
+        this.recorder.stop(async blob => {
+          this.socket.emit('free', blob);
+        });
+        this.recorder.record();
+      }, 3000);
+     }).catch(error => {
+      console.log('Error: ' + error);
+     });
+  }
+
   isAskedUser(user) {
     for (const askedUser of this.askedUsers) {
       if (askedUser === user) {
@@ -469,7 +535,12 @@ export class LobbyComponent implements OnInit, OnDestroy {
   deleteRoom() {
     if (this.users.length <= 1 && this.mod) {
       if (this.isMod) {
-        let user = this.users[0].username;
+        let user;
+        if (this.user !== this.users[0].username) {
+          user = this.users[0].username;
+        } else {
+          user = this.users[1].username;
+        }
         const room = this.room;
         let form = JSON.stringify({user, room});
         this.http.postDelete(form).subscribe(data => {

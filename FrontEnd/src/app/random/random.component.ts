@@ -17,16 +17,16 @@ export class RandomComponent implements OnInit, OnDestroy {
 
   RandomQueue: FormGroup;
   languages: ISelect[] = [
-    {value: 'Español', viewValue: 'Español'},
-    {value: 'Inglés', viewValue: 'English'},
-    {value: 'Francés', viewValue: 'Français'},
-    {value: 'Alemán', viewValue: 'Deutsch'},
-    {value: 'Italiano', viewValue: 'Italiano'},
-    {value: 'Portugués', viewValue: 'Português'},
-    {value: 'Ruso', viewValue: 'русский'},
-    {value: 'Chino', viewValue: '中国'},
-    {value: 'Japonés', viewValue: '日本語'},
-    {value: 'Coreano', viewValue: '한국어'}
+    {value: 'es', viewValue: 'Español'},
+    {value: 'en', viewValue: 'English'},
+    {value: 'fr', viewValue: 'Français'},
+    {value: 'de', viewValue: 'Deutsch'},
+    {value: 'it', viewValue: 'Italiano'},
+    {value: 'pt', viewValue: 'Português'},
+    {value: 'ru', viewValue: 'русский'},
+    {value: 'zn', viewValue: '中国'},
+    {value: 'ja', viewValue: '日本語'},
+    {value: 'ko', viewValue: '한국어'}
   ];
   strings: any;
   numUsers: number;

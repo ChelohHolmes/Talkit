@@ -12,8 +12,9 @@ $id = pg_fetch_result($res, 0, 0);
 $query= "SELECT count(id_usuario) from public.ingreso_sa WHERE salaa = ". $data['room'];
 $res = pg_query($dataB, $query);
 if (pg_fetch_result($res, 0, 0) <= 1) {
-    $query = "DELETE from public.sala_aleatoria WHERE no_salaa = ". $data['room'];
-    $res = pg_query($dataB, $query);
+//    $query = "DELETE from public.sala_aleatoria WHERE no_salaa = ". $data['room'];
+//    $res = pg_query($dataB, $query);
+    $delete = true;
 } else {
     $query = "SELECT participantes from public.sala_aleatoria WHERE no_salaa = ". $data['room'];
     $res = pg_query($dataB, $query);
@@ -53,6 +54,10 @@ $res = pg_query($dataB, $query);
 $query = "DELETE from public.ingreso_sa WHERE id_usuario = ". $id ." AND salaa = ". $data['room'];
 try {
     $res = pg_query($dataB, $query);
+    if ($delete) {
+        $query = "DELETE from public.sala_aleatoria WHERE no_salaa = ". $data['room'];
+        $res = pg_query($dataB, $query);
+    }
     echo 1;
 } catch (Exception $e) {
     echo 0;

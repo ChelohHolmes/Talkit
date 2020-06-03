@@ -8,8 +8,6 @@ import {ToolbarService} from '../services/toolbar.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute} from '@angular/router';
 import {Socket} from 'ngx-socket-io';
-import * as wss from 'socket.io-stream';
-import * as RecordRTC from 'recordrtc';
 
 @Component({
   selector: 'app-home',
@@ -29,53 +27,62 @@ export class HomeComponent implements OnInit {
   recorder: any;
   interval: any;
 
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, private http: ToolbarService, private route: ActivatedRoute, private ws: Socket) { }
+  constructor(public dialog: MatDialog,
+              private snackBar: MatSnackBar,
+              private http: ToolbarService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.audio = this.audioElement.nativeElement;
-    navigator.mediaDevices.getUserMedia({ audio: true }).then(async stream => {
-      // this.audio.srcObject = stream;
-      // console.log(stream);
-      // this.ws.emit('message', stream);
-      // this.ws.on('message', streams => {
-      //   console.log(streams);
-      //   this.audio.srcObject = streams;
-      // });
-      this.recorder = new RecordRTC.StereoAudioRecorder(stream, {
-        type: 'audio',
-        mimeType: 'audio/webm'
-      });
-      this.recorder.record();
-      // setTimeout(() => {
-      //   console.log('recording');
-      // }, 5000);
-      // sleep(5000);
-      const sleep = m => new Promise(r => setTimeout(r, m));
-      await sleep(3000);
-
-      this.recorder.stop(blob => {
-        console.log(blob);
-        // const blob = this.recorder.getBlob();
-        // this.audio.src = URL.createObjectURL(blob);
-        this.ws.emit('message', blob);
-        this.ws.on('message', streams => {
-          console.log(streams);
-          this.audio.src = URL.createObjectURL(blob);
-        });
-      });
-      // this.recorder.stop(blob => {
-      //   console.log(blob);
-      // });
-
-    }).catch(error => {
-      console.log('Error: ' + error);
-    });
-
-    if (sessionStorage.getItem('lan') === 'es') {
+    if (localStorage.getItem('lan') === 'es') {
       this.strings = spanish;
     } else {
       this.strings = english;
     }
+    // this.audio = this.audioElement.nativeElement;
+    // navigator.mediaDevices.getUserMedia({ audio: true }).then(async stream => {
+    //   // this.audio.srcObject = stream;
+    //   // console.log(stream);
+    //   // this.ws.emit('message', stream);
+    //   // this.ws.on('message', streams => {
+    //   //   console.log(streams);
+    //   //   this.audio.srcObject = streams;
+    //   // });
+    //   this.recorder = new RecordRTC.StereoAudioRecorder(stream, {
+    //     type: 'audio',
+    //     mimeType: 'audio/webm'
+    //   });
+    //   // for (let times = 0; times < 9; times++) {
+    //     // console.log(times);
+    //     this.recorder.record();
+    //     // setTimeout(() => {
+    //     //   console.log('recording');
+    //     // }, 5000);
+    //     // sleep(5000);
+    //     const sleep = m => new Promise(r => setTimeout(r, m));
+    //     await sleep(3000);
+    //
+    //     this.recorder.stop(blob => {
+    //       console.log(blob);
+    //       // const blob = this.recorder.getBlob();
+    //       // this.audio.src = URL.createObjectURL(blob);
+    //       this.ws.emit('stream', blob);
+    //       this.ws.on('stream', streams => {
+    //         console.log(streams);
+    //         let hi = new Blob([new Uint8Array(streams)]);
+    //         this.audio.src = URL.createObjectURL(hi);
+    //         // this.audio.srcObject = blob;
+    //         console.log(hi);
+    //       });
+    //     });
+    //   // }
+    //   // this.recorder.stop(blob => {
+    //   //   console.log(blob);
+    //   // });
+    //
+    // }).catch(error => {
+    //   console.log('Error: ' + error);
+    // });
+
     let i;
     this.route.queryParams.subscribe(params => {
       i = params.i;

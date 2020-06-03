@@ -15,15 +15,15 @@ $res = pg_query($dataB, $query);
 $rooms = pg_fetch_result($res, 0, 0);
 if ($rooms < 1) {
     if ($data['Rol'] === 'Moderador') {
-        $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, tema, participantes) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', true, 'Viajes', 1) RETURNING no_salaa";
+        $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, participantes, status_sa) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', true, 1, true) RETURNING no_salaa";
         $res = pg_query($dataB, $query);
         $room = pg_fetch_result($res, 0, 0);
-        $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .")";
+        $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa, estatus_isa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .", true)";
     } else {
-        $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, tema, participantes) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', false, 'Viajes', 1) RETURNING no_salaa";
+        $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, participantes, status_sa) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', false, 1, true) RETURNING no_salaa";
         $res = pg_query($dataB, $query);
         $room = pg_fetch_result($res, 0, 0);
-        $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .")";
+        $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa, estatus_isa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .", true)";
     }
     $res = pg_query($dataB, $queryIn);
     $query = "UPDATE public.usuario SET estado = 'Aleatoria' WHERE id_usuario = ". $id;
@@ -48,9 +48,9 @@ if ($rooms < 1) {
             $query = "SELECT count(ingreso_sa) from public.ingreso_sa WHERE salaa = '". $room[$i]['no_salaa'] ."' AND id_usuario = '". $id ."'";
             $res = pg_query($dataB, $query);
             $already = pg_fetch_all($res);
-//            if (!$already && !$isThereMod) {
+           if (!$already && !$isThereMod) {
 //            if (!$isThereMod) {
-                $query = "INSERT into public.ingreso_sa (id_usuario, rol, salaa) VALUES (" . $id . ", '" . $data['Rol'] . "', " . $room[$i]['no_salaa'] . ")";
+                $query = "INSERT into public.ingreso_sa (id_usuario, rol, salaa, estatus_isa) VALUES (" . $id . ", '" . $data['Rol'] . "', " . $room[$i]['no_salaa'] . ", true)";
                 $res = pg_query($dataB, $query);
                 $newParticipants = $participants[$i]['participantes'] + 1;
                 if ($data['Rol'] == 'Moderador') {
@@ -63,21 +63,21 @@ if ($rooms < 1) {
                 $res = pg_query($dataB, $query);
                 $notNew = true;
                 break;
-//            }
+           }
         }
     }
-//    if (!$already) {
+   if (!$already) {
         if (!$notNew) {
             if ($data['Rol'] === 'Moderador') {
-                $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, tema, participantes) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', true, 'Viajes', 1) RETURNING no_salaa";
+                $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, participantes, status_sa) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', true, 1, true) RETURNING no_salaa";
                 $res = pg_query($dataB, $query);
                 $room = pg_fetch_result($res, 0, 0);
-                $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .")";
+                $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa, estatus_isa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .", true)";
             } else {
-                $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, tema, participantes) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', false, 'Viajes', 1) RETURNING no_salaa";
+                $query = "INSERT into public.sala_aleatoria (lengua, tipo_conv, moderador, participantes, status_sa) VALUES ('". $data['Language'] ."', '". $data['Type'] ."', false, 1, true) RETURNING no_salaa";
                 $res = pg_query($dataB, $query);
                 $room = pg_fetch_result($res, 0, 0);
-                $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .")";
+                $queryIn = "INSERT into public.ingreso_sa (id_usuario, rol, salaa, estatus_isa) VALUES (". $id .", '". $data['Rol'] ."', ". $room .", true)";
             }
             $res = pg_query($dataB, $queryIn);
             $query = "UPDATE public.usuario SET estado = 'Aleatoria' WHERE id_usuario = ". $id;
@@ -86,7 +86,7 @@ if ($rooms < 1) {
         } else {
             echo $room[$i]['no_salaa'];
         }
-//    } else {
-//        echo null;
-//    }
+   } else {
+       echo null;
+   }
 }

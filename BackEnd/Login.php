@@ -32,7 +32,8 @@ if ($valor == 0) {
             $date = date('Y-m-d H:i:s');
             if ($banDate > $date) {
                 echo 2;
-            } else {$query = "SELECT ultimo_login from public.usuario WHERE id_usuario = ". $id;
+            } else {
+                $query = "SELECT ultimo_login from public.usuario WHERE id_usuario = ". $id;
                 $res = pg_query($dataB, $query);
                 $date = pg_fetch_result($res, 0, 0);
                 $newDate = date('Y-m-d', strtotime($date. ' + 1 days'));

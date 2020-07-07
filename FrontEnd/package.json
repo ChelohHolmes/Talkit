@@ -28,7 +28,7 @@
     "core-js": "^3.6.4",
     "material-design-icons": "^3.0.1",
     "ngx-socket-io": "^3.0.1",
-    "npm": "^6.13.7",
+    "npm": "^6.14.6",
     "process": "^0.11.10",
     "readable-stream": "^3.6.0",
     "recordrtc": "^5.5.9",
